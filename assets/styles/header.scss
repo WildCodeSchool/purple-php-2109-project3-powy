@@ -13,9 +13,14 @@
             margin: 0;
         }
 
-        h1 {
-            font-size: 1.3rem;
-            margin: 0;
+        a {
+            color: $dark-background;
+            text-decoration: none;
+
+            h1 {
+                font-size: 1.3rem;
+                margin: 0;
+            }
         }
     }
 
@@ -39,8 +44,12 @@
 @media screen and (min-width: 768px) {
     .header-index {
         .logo {
-            h1 {
-                font-size: 1.6rem;
+
+            a {
+                
+                h1 {
+                    font-size: 1.6rem;
+                }
             }
 
             p {
