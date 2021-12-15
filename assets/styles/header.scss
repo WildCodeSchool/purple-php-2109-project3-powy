@@ -1,0 +1,32 @@
+.header-index {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    .logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+    }
+    .connexion-btn {
+        a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: $dark-background;
+            font-size: 0.8rem;
+            img {
+                width: 30px;
+            }
+        }
+    }
+}
