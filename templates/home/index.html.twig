@@ -4,41 +4,25 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-<style>
-    .pink-stripe {
-        height: 50vh;
-        width: 100%;
-        display: flex;
-        font-family: 'Varela Round', sans-serif;
-        font-size: 3rem;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .white-stripe {
-        background-color: white;
-        width: 100vw;
-        height: 50vh;
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
 {% endblock %}
 
 {% block body %}
-<div class="pink-stripe">
-    <h1>
-        Let's start coding &#129304;
-    </h1>
-</div>
-<div class="white-stripe ">
-    <img src="https://medinsoft.com/wp-content/uploads/2020/01/LOGO_WILDCODESCHOOL1000-1024x1024.png"
-        style="height:100%">
-</div>
+{% include 'components/_header.html.twig' %}
+<section class="powy-enter">
+    <h1>Bienvenue sur Powy</h1>
+    <a href="/">Étudiant &#x1F525;</a>
+    <a href="/">Mentor &#x1F48E;</a>
+    <div class="people-background"></div>
+</section>
+<section class="presentation-index">
+    <h2>Présentation</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed
+do eiusmod tempor ncididunt ut labore et dolore magna aliqua
+et dolore magna aliqua.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor ncididunt ut labore et dolore magna aliquaet dolore magna aliqua.</p>
+    <a href="/" class="inscription-btn">Je m'inscris</a>
+</section>
+<section class="faq-index">
+    <h2>FAQ</h2>
+</section>
+{% include 'components/_footer.html.twig' %}
 {% endblock %}
