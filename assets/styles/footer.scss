@@ -9,7 +9,7 @@ footer {
     align-items: center;
     background-color: $dark-background;
     bottom: 0;
-    color: white;
+    color: $white;
     display: flex;
     flex-direction: column;
     gap: .6rem;
@@ -18,7 +18,7 @@ footer {
     padding-top: .7rem;
     position: absolute;
     width: 100%;
-    
+
     a {
         color: $white;
         text-decoration: none;
@@ -30,8 +30,11 @@ footer {
         gap: .5rem;
     }
 
-    .footer-contact img {
-        width: 24px;
+    .footer-contact {
+
+        img {
+            width: 24px;
+        }
     }
 
     .footer-mentions {
@@ -41,8 +44,11 @@ footer {
         font-size: .8rem;
     }
 
-    .footer-mentions img {
-        width: 24px;
+    .footer-mentions {
+
+        img {
+            width: 24px;
+        }
     }
 
     p {
@@ -63,6 +69,7 @@ footer {
 
     footer {
         height: 120px;
+
         .footer-contact {
             flex-direction: column;
         }
