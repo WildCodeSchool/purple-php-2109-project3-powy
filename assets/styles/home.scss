@@ -30,8 +30,9 @@
             padding-left: 1rem;
             text-decoration: none;
             width: 10em;
-     
-            &:hover, &:focus {
+
+            &:hover,
+            &:focus {
                 box-shadow: 0 2px 4px $dark-background;
                 color: $white;
                 text-decoration: none;
@@ -40,7 +41,7 @@
     }
 
     .people-background {
-        background-image: url("../images/silhouettes-etudiants.png");
+        background-image: url('../images/silhouettes-etudiants.png');
         background-position: center bottom;
         background-repeat: no-repeat;
         background-size: contain;
@@ -76,7 +77,8 @@
         text-decoration: none;
         width: 10em;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             box-shadow: 0 2px 4px $dark-background;
         }
     }
