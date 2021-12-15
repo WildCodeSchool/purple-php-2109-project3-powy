@@ -30,3 +30,15 @@
         }
     }
 }
+@media screen and (min-width: 768px) {
+    .header-index {
+        .logo {
+            h1 {
+                font-size: 1.6rem;
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

@@ -51,25 +51,30 @@ footer {
 @media screen and (min-width: 768px) {
     .footer {
         flex-direction: row;
-        gap: 6rem;
+        gap: 20em;
     }
     footer {
         height: 120px;
-    }
-    .footer-contact {
-        flex-direction: column;
-    }
-    .footer-mentions {
-        
-        img {
-            align-self:flex-start;
+        .footer-contact {
+            flex-direction: column;
+        }
+        .footer-mentions {
+            align-items: flex-start;
         }
     }
-    
-    
-   
 }
 
 @media screen and (min-width: 1024px) {
-   
+    footer {
+        position:absolute;  
+        .footer-contact {
+            gap: 0;
+        }
+        .footer-mentions {
+            font-size: 1rem;
+        }
+    }
+    .footer {
+        gap: 30em;
+    }
 }
