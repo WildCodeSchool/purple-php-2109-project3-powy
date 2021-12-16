@@ -1,30 +1,30 @@
 .accordion {
-color: $dark-background;
+    color: $dark-background;
 }
 
 .accordion-header {
-font-family:$font-text;
-background-color: white;
+    font-family:$font-text;
+    background-color: white;
 }
 
 #collapseOne {
-font-family: $font-text;
-background-color: $light-background-primary;
+    font-family: $font-text;
+    background-color: $light-background-primary;
 }
 
 .accordion-button {
-font-family:$font-text!important;
-background-color: white!important;
-color:$dark-background!important;
+    font-family:$font-text!important;
+    background-color: white!important;
+    color:$dark-background!important;
 
 }
 
 .accordion-button::after {
-color:$dark-background!important;
+    color:$dark-background!important;
 }
 
 .accordion-button:not(.collapsed) {
-color: $dark-background!important;
+    color: $dark-background!important;
 }
 
 
