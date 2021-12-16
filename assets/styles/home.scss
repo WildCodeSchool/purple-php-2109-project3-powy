@@ -1,0 +1,127 @@
+.powy-enter {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 400px;
+    margin-top: 2rem;
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .infos-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        a {
+            align-items: center;
+            background-color: $dark-background;
+            border-radius: 10px;
+            color: $white;
+            display: flex;
+            font-size: 1.1rem;
+            font-weight: bold;
+            height: 3em;
+            justify-content: center;
+            padding-left: 1rem;
+            text-decoration: none;
+            width: 10em;
+
+            &:hover,
+            &:focus {
+                box-shadow: 0 2px 4px $dark-background;
+                color: $white;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .people-background {
+        background-image: url('../images/silhouettes-etudiants.png');
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 80%;
+        width: 100%;
+        z-index: -1;
+     }
+}
+
+.presentation-index {
+    align-items: center;
+    background-color: $light-background-primary;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+        padding-bottom: .7rem;
+        text-align: center;
+    }
+
+    .inscription-btn {
+        align-items: center;
+        background-color: $dark-background;
+        border-radius: 10px;
+        color: $white;
+        display: flex;
+        height: 3em;
+        justify-content: center;
+        text-decoration: none;
+        width: 10em;
+
+        &:hover,
+        &:focus {
+            box-shadow: 0 2px 4px $dark-background;
+        }
+    }
+}
+
+.faq-index {
+    padding: 1rem;
+
+    h2 {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .powy-enter {
+        gap: 5em;
+        height: 600px;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .infos-btn {
+            flex-direction: row;
+            gap: 5em;
+
+            a {
+                width: 15em;
+            }
+        }
+
+        .people-background {
+            height: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .powy-enter {
+
+        h1 {
+            font-size: 3rem;
+       }
+   }
+}
