@@ -1,0 +1,115 @@
+.img-user{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+
+    img{
+        width: 12rem;
+        height: 12rem;
+        background: $middle-background;
+        border-radius: 50%;
+        border: 1px solid $dark-background;
+    }
+}
+
+
+// FORMULAIRE
+.form-class {
+    display: flex;
+    justify-content: center;
+}
+
+input.email {
+    border: none;
+    border-bottom: 2px solid $dark-background;
+    background-image:url(/assets/images/mail.png);
+    background-position:left;
+    background-repeat:no-repeat;
+    padding-left:18px;
+    background-size: 50px 50px;
+    text-indent: 3rem;
+    width: 80%;
+    height: 3rem;
+    font-size: 1rem;
+    max-width: 500px;
+}
+
+input.email:focus {
+    outline:  none;
+}
+
+
+input.password {
+    border: none;
+    border-bottom: 2px solid black;
+    background-image:url(/assets/images/password.png);
+    background-position:left;
+    background-repeat:no-repeat;
+    padding-left:18px;
+    background-size: 50px 50px;
+    text-indent: 3rem;
+    width: 80%;
+    height: 3rem;
+    font-size: 1rem;
+    max-width: 500px;
+}
+
+input.password:focus {
+    outline:  none;
+}
+
+
+.submit{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.forgot{
+    a{
+        text-decoration: none;
+        color: $dark-background;
+    }
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.not-account{
+    a{
+        text-decoration: none;
+        color: $dark-background;
+    }
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+button.btn {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border-radius: 3em;
+    color: $dark-background;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: $middle-background;
+    border: none;
+    display: flex;
+}
+
+.error{
+    color: $alert;
+    text-align: center;
+    font-weight: bold;
+}
