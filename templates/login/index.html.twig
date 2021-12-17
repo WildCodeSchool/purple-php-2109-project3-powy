@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+   {{ include('components/_header.html.twig') }}
+    <div class="container">
+        <div class="img-user">
+            <img src="{{ asset('build/images/user.png') }}">
+        </div>
+        {% if error %}
+            <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form action="{{ path('login') }}" method="post">
+            <div class="form-class">
+                <input type="text" id="username" class="email" name="_username" placeholder="Adresse mail" value="{{ last_username }}"/>
+            </div>
+            <div class="form-class">
+                <input type="password" class="password" id="password" name="_password"/>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_target_path" value="/"/>
+
+            <div class="submit">
+                <button type="submit" class="btn login">Je me connecte</button>
+            </div>
+            <div class="forgot">
+                <a href="#"><p>Mot de passe oublié ?</p></a>
+            </div>
+            <div class="not-account">
+                <a href="#"><p>Vous n'avez pas de compte</p></a>
+            </div>
+        </form>
+    </div>
+
+    {{ include('components/_footer.html.twig') }}
+
+{% endblock %}
