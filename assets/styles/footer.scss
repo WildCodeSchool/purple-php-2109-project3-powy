@@ -13,7 +13,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: .6rem;
-    height: 170px;
+    height: 10.75rem;
     min-width: 300px;
     padding-top: .7rem;
     position: absolute;
@@ -62,23 +62,26 @@ footer {
     }
 
     footer {
-        height: 120px;
+        
+        padding-top: 1.5rem;
 
         .footer-contact {
             flex-direction: column;
+            gap: 0;
         }
 
         .footer-mentions {
             align-items: flex-start;
+        }
+
+        p {
+            margin-top: 1.5em;
         }
     }
 }
 
 @media screen and (min-width: 1024px) {
     footer {
-        .footer-contact {
-            gap: 0;
-        }
 
         .footer-mentions {
             font-size: 1rem;
