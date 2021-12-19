@@ -7,9 +7,28 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
-
+    <section class="register-form">
     {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.student.studyLevel) }}
+        <hr>
+        {{ form_row(registrationForm.student.school) }}
+        <hr>
+        {{ form_row(registrationForm.student.topic1) }}
+        {{ form_row(registrationForm.student.topic2) }}
+        {{ form_row(registrationForm.student.topic3) }}
+        <hr>
+        {{ form_row(registrationForm.student.professionalSector) }}
+        {{ form_row(registrationForm.student.dreamJob) }}
+        {{ form_row(registrationForm.student.dreamDescription) }}
+        <hr>
+        {{ form_row(registrationForm.student.scholarship) }}
+        <hr>
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.lastname) }}
+        {{ form_row(registrationForm.gender) }}
+        {{ form_row(registrationForm.age) }}
+        {{ form_row(registrationForm.phone) }}
+        <hr>
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
@@ -18,4 +37,5 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </section>
 {% endblock %}
