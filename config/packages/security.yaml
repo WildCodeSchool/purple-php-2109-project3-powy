@@ -1,4 +1,5 @@
 security:
+    enable_authenticator_manager: true
     password_hashers:
         App\Entity\User:
             algorithm: auto
@@ -15,13 +16,13 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
             provider: app_user_provider
             form_login:
                 # "login" is the name of the route
                 login_path: login
                 check_path: login
+                enable_csrf: true
             logout:
                 path: app_logout
             # activate different ways to authenticate
