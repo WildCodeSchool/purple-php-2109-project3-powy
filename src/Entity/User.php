@@ -57,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(
      *     message = "Le genre est obligatoire")
      */
@@ -80,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\NotBlank(
      *     message = "Le numéro de téléphone est obligatoire")
      * @Assert\Regex(
-     *     pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/",
+     *     pattern="/[0-9]{9}/",
      *     message = "Veuillez entrer un numéro de téléphone valide")
      */
     private string $phone;

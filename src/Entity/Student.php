@@ -19,12 +19,16 @@ class Student
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\NotBlank(
+     * message = "Veuillez nous préciser si vous êtes boursier")
      */
-    private ?string $scholarship;
+    private ?bool $scholarship;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     * message = "Veuillez nous préciser votre job de rêve")
      */
     private string $dreamJob;
 
@@ -35,16 +39,18 @@ class Student
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     * message = "Veuillez nous préciser votre job de rêve")
      */
     private int $topic1;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private int $topic2;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private int $topic3;
 
@@ -77,12 +83,12 @@ class Student
         return $this->id;
     }
 
-    public function getScholarship(): ?string
+    public function getScholarship(): ?bool
     {
         return $this->scholarship;
     }
 
-    public function setScholarship(?string $scholarship): self
+    public function setScholarship(?bool $scholarship): self
     {
         $this->scholarship = $scholarship;
 

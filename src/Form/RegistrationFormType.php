@@ -8,6 +8,7 @@ use App\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -27,7 +28,14 @@ class RegistrationFormType extends AbstractType
             // ->add('student', StudentType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('gender', TextType::class)
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Féminin' => 'female',
+                    'Masculin' => 'male',
+                    'Non binaire' => 'non binary',
+                    'Ne souhaite pas se prononcer' => null,
+                ]
+            ])
             ->add('age', NumberType::class)
             ->add('phone', TelType::class)
             ->add('email', EmailType::class)
