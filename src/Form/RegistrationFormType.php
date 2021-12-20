@@ -30,6 +30,7 @@ class RegistrationFormType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('gender', ChoiceType::class, [
                 'choices' => [
+                    '' => null,
                     'Féminin' => 'female',
                     'Masculin' => 'male',
                     'Non binaire' => 'non binary',

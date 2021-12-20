@@ -22,6 +22,7 @@ class StudentType extends AbstractType
         $builder
             ->add('scholarship', ChoiceType::class, [
                 'choices' => [
+                    '' => null,
                     'Oui' => true,
                     'Non' => false,
                     'Je ne sais pas' => null,
@@ -33,6 +34,7 @@ class StudentType extends AbstractType
                 ])
             ->add('topic1', ChoiceType::class, [
                 'choices' => [
+                    '' => null,
                     "M'immerger dans un métier" => 1,
                     'Me faire coacher' => 2,
                     'Réussir mes candidatures' => 3,

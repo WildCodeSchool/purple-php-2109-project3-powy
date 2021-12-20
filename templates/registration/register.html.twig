@@ -14,81 +14,64 @@
         {{ form_row(studentForm.studyLevel, {
             label: 'Quel est ton niveau actuel ?'
         }) }}
-        {{ form_errors(studentForm.studyLevel) }}
         <hr>
         {{ form_row(studentForm.school, {
             label: 'Ton parcours scolaire'
         }) }}
-        {{ form_errors(studentForm.school) }}
         <hr>
         <p>Sur quels points souhaites-tu t'améliorer ?</p>
         <small>Sélectionne 3 cases dans l'ordre d'importance.</small>
         {{ form_row(studentForm.topic1, {
             label: 'choix 1'
         }) }}
-        {{ form_errors(studentForm.topic1) }}
         {{ form_row(studentForm.topic2, {
             label: 'choix 2'
         }) }}
-        {{ form_errors(studentForm.topic2) }}
         {{ form_row(studentForm.topic3, {
             label: 'choix 3'
-        }) }}
-        {{ form_errors(studentForm.topic3) }}
+        }) }}}
         <hr>
         <p>On voudrait en savoir plus sur toi pour mieux t'accompagner.</p>
         {{ form_row(studentForm.professionalSector, {
             label: 'Secteur professionnel idéal'
         }) }}
-        {{ form_errors(studentForm.professionalSector) }}
         {{ form_row(studentForm.dreamJob, {
             label: 'Ton rêve professionnel'
         }) }}
-        {{ form_errors(studentForm.dreamJob) }}
         {{ form_row(studentForm.dreamDescription, {
             label: 'Précise en quelques mots'
         }) }}
-        {{ form_errors(studentForm.dreamDescription) }}
         <hr>
         {{ form_row(studentForm.scholarship, {
             label: 'Es-tu boursier ?'
         }) }}
-        {{ form_errors(studentForm.scholarship) }}
         <hr>
         <p>Dernière étape, il te suffit d'entrer tes coordonnées et c'est fini !</p>
         {{ form_row(registrationForm.firstname, {
             label: 'Prénom'
         }) }}
-        {{ form_errors(registrationForm.firstname) }}
         {{ form_row(registrationForm.lastname, {
             label: 'Nom'
         }) }}
-        {{ form_errors(registrationForm.lastname) }}
         {{ form_row(registrationForm.gender, {
             label: 'Genre'
         }) }}
-        {{ form_errors(registrationForm.gender) }}
         {{ form_row(registrationForm.age, {
             label: 'Âge'
         }) }}
-        {{ form_errors(registrationForm.age) }}
         {{ form_row(registrationForm.phone, {
             label: 'Téléphone'
         }) }}
-        {{ form_errors(registrationForm.phone) }}
         <hr>
         <p>Précise un email de connexion et ton mot de passe :</p>
         {{ form_row(registrationForm.email, {
             label: 'Email'
         }) }}
-        {{ form_errors(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-        {{ form_errors(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.'
-        }) }}
+        {{ form_widget(registrationForm.agreeTerms) }}
+        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
     </section>
