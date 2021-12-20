@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -10,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Un compte a déjà été créé avec l'adresse mail {{ value }}.")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -23,6 +24,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(
+     *     message = "Ce champs est obligatoire")
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas une adresse email valide.")
      */
     private string $email;
 
@@ -39,28 +44,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Le prénom est obligatoire")
      */
     private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Le nom de famille est obligatoire")
      */
     private string $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Le genre est obligatoire")
      */
     private string $gender;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *     message = "L'âge est obligatoire")
+     * @Assert\GreaterThan(
+     *     value = 17, message = "Vous devez être majeur.e pour bénéficier du service")
+     * @Assert\LessThan(
+     *      value = 25,
+     *      message = "Vous ne pouvez pas être âgé.e de plus de {{ compared_value }} pour bénéficier du service")
      */
     private int $age;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Le numéro de téléphone est obligatoire")
+     * @Assert\Regex(
+     *     pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/",
+     *     message = "Veuillez entrer un numéro de téléphone valide")
      */
-    private int $phone;
+    private string $phone;
 
     /**
      * @ORM\OneToOne(targetEntity=Student::class, mappedBy="user", cascade={"persist", "remove"})
@@ -209,12 +232,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 

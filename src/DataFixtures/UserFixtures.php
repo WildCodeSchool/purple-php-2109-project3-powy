@@ -22,6 +22,11 @@ class UserFixtures extends Fixture
         $student = new User();
         $student->setEmail('student@monsite.com');
         $student->setRoles(['ROLE_STUDENT']);
+        $student->setFirstname('Alice');
+        $student->setLastname('Martin');
+        $student->setGender('Féminin');
+        $student->setAge('22');
+        $student->setPhone('0234567890');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $student,
             'studentpassword'
@@ -37,6 +42,11 @@ class UserFixtures extends Fixture
             $mentor,
             'mentorpassword'
         );
+        $mentor->setFirstname('Héloïse');
+        $mentor->setLastname('Durand');
+        $mentor->setGender('Féminin');
+        $mentor->setAge('42');
+        $mentor->setPhone('0234567800');
         $mentor->setPassword($hashedPassword);
         $manager->persist($mentor);
 

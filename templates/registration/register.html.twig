@@ -9,19 +9,19 @@
 
     <section class="register-form">
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.student.studyLevel) }}
+        {{ form_row(studentForm.studyLevel) }}
         <hr>
-        {{ form_row(registrationForm.student.school) }}
+        {{ form_row(studentForm.school) }}
         <hr>
-        {{ form_row(registrationForm.student.topic1) }}
-        {{ form_row(registrationForm.student.topic2) }}
-        {{ form_row(registrationForm.student.topic3) }}
+        {{ form_row(studentForm.topic1) }}
+        {{ form_row(studentForm.topic2) }}
+        {{ form_row(studentForm.topic3) }}
         <hr>
-        {{ form_row(registrationForm.student.professionalSector) }}
-        {{ form_row(registrationForm.student.dreamJob) }}
-        {{ form_row(registrationForm.student.dreamDescription) }}
+        {{ form_row(studentForm.professionalSector) }}
+        {{ form_row(studentForm.dreamJob) }}
+        {{ form_row(studentForm.dreamDescription) }}
         <hr>
-        {{ form_row(registrationForm.student.scholarship) }}
+        {{ form_row(studentForm.scholarship) }}
         <hr>
         {{ form_row(registrationForm.firstname) }}
         {{ form_row(registrationForm.lastname) }}
@@ -34,8 +34,9 @@
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    {{ form_errors(registrationForm) }}
+    {{ form_errors(studentForm) }}
     </section>
 {% endblock %}
