@@ -20,8 +20,7 @@ class Student
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Assert\NotBlank(
-     * message = "Veuillez nous préciser si vous êtes boursier")
+     * @Assert\Choice({true, false, null})
      */
     private ?bool $scholarship;
 

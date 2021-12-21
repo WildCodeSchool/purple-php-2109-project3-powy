@@ -58,8 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(
-     *     message = "Le genre est obligatoire")
+     * @Assert\Choice({"female", "male", "non binary", null})
      */
     private string $gender;
 

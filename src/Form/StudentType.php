@@ -17,6 +17,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StudentType extends AbstractType
 {
+    private const TOPICS = [
+        "M'immerger dans un métier" => 1,
+        'Me faire coacher' => 2,
+        'Réussir mes candidatures' => 3,
+        'Développer mes compétences' => 4,
+        'Mieux communiquer' => 5,
+        'Mieux gérer les outils digitaux pro' => 6
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -33,37 +42,15 @@ class StudentType extends AbstractType
                 'required' => false
                 ])
             ->add('topic1', ChoiceType::class, [
-                'choices' => [
-                    '' => null,
-                    "M'immerger dans un métier" => 1,
-                    'Me faire coacher' => 2,
-                    'Réussir mes candidatures' => 3,
-                    'Développer mes compétences' => 4,
-                    'Mieux communiquer' => 5,
-                    'Mieux gérer les outils digitaux pro' => 6
-                ]
+                'choices' => self::TOPICS,
             ])
             ->add('topic2', ChoiceType::class, [
                 'required' => false,
-                'choices' => [
-                    "M'immerger dans un métier" => 1,
-                    'Me faire coacher' => 2,
-                    'Réussir mes candidatures' => 3,
-                    'Développer mes compétences' => 4,
-                    'Mieux communiquer' => 5,
-                    'Mieux gérer les outils digitaux pro' => 6
-                ]
+                'choices' => self::TOPICS,
                 ])
             ->add('topic3', ChoiceType::class, [
                 'required' => false,
-                'choices' => [
-                    "M'immerger dans un métier" => 1,
-                    'Me faire coacher' => 2,
-                    'Réussir mes candidatures' => 3,
-                    'Développer mes compétences' => 4,
-                    'Mieux communiquer' => 5,
-                    'Mieux gérer les outils digitaux pro' => 6
-                ]
+                'choices' => self::TOPICS,
                 ])
             ->add('professionalSector', EntityType::class, [
                 'class' => ProfessionalSector::class,
