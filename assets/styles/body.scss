@@ -2,6 +2,12 @@ body {
     box-sizing: border-box;
     font-family: $font-text;
     margin: 0;
-    padding-bottom: 10.75rem;
-    position: relative;
+   
+}
+
+main {
+    height: 100vh;
+    .container {
+        padding-bottom: 4.7rem;
+    }
 }

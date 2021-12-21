@@ -13,7 +13,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: .6rem;
-    height: 10.75rem;
+    height: 10.7rem;
     min-width: 300px;
     padding-top: .7rem;
     position: absolute;
@@ -22,6 +22,11 @@ footer {
     a {
         color: $white;
         text-decoration: none;
+
+        &:hover, &:focus {
+            color: $white;
+            font-weight: bold;
+        }
     }
 
     .footer-contact {
@@ -46,12 +51,7 @@ footer {
     }
 
     p {
-        font-size: .6rem;
-        text-align: center;
-
-        img {
-            vertical-align: middle;
-        }
+        font-size: .8em;
     }
 }
 
@@ -85,6 +85,10 @@ footer {
 
         .footer-mentions {
             font-size: 1rem;
+        }
+
+        p {
+            margin-top: .6em;
         }
     }
 
