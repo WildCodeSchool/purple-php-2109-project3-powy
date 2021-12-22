@@ -64,22 +64,8 @@
 
 {% include 'components/_footer.html.twig' %}
 
-<script>
-var acc = document.getElementsByClassName("accordion-howto");
-var i;
+<script src="{{ asset('build/js/index.js') }}">
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
 </script>
 
 {% endblock %}
