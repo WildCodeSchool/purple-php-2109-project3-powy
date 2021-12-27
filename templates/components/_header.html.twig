@@ -4,6 +4,11 @@
         <p>Le pouvoir de transmettre</p>
     </div>
     <div class="connexion-btn">
-        <a href="/login"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion">Mon compte</a>
+        {% if app.user %}
+            <a href="/profil"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion">Mon compte</a>
+            <a href="/logout">Deconnexion</a>
+        {% else %}
+            <a href="/login"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion">Mon compte</a>
+        {% endif %}
     </div>
 </header>

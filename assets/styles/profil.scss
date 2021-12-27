@@ -1,0 +1,69 @@
+.center{
+    text-align: center;
+}
+
+.card{
+    display: flex;
+    border: none;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.card-body{
+    width: 20rem;
+    height: 10rem;
+    background-color: $light-background-primary;
+    border-radius: 1rem;
+}
+
+.title-card{
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-information{
+    display: flex;
+}
+
+.email-profil{
+    margin-left: 1rem;
+    margin-top: 5px;
+}
+
+.phone-profil{
+    margin-left: 1rem;
+    margin-top: 8px;
+}
+
+.container-btn{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn a{
+    align-items: center;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    font-size: 1.1rem;
+    font-weight: bold;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 15em;
+    margin-bottom: 1rem;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .container-btn{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+}
