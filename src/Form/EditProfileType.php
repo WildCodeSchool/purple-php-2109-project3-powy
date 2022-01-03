@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +15,31 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('gender')
-            ->add('age')
-            ->add('phone')
+            ->add('firstname', TypeTextType::class, [
+                'attr' => [
+                    'class' => 'input-firstname'
+                ],
+            ])
+            ->add('lastname', TypeTextType::class, [
+                'attr' => [
+                    'class' => 'input-lastname'
+                ],
+            ])
+            ->add('gender', TypeTextType::class, [
+                'attr' => [
+                    'class' => 'input-gender'
+                ],
+            ])
+            ->add('age', IntegerType::class, [
+                'attr' => [
+                    'class' => 'input-age'
+                ],
+            ])
+            ->add('phone', IntegerType::class, [
+                'attr' => [
+                    'class' => 'input-age'
+                ],
+            ])
         ;
     }
 
