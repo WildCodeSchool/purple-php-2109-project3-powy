@@ -18,27 +18,28 @@
         <h4 class="center">{{ app.user.firstname }} {{ app.user.lastname }}</h4>
         <h6 class="center">{{ app.user.age }} ans</h6>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <p class="title-card">Tes informations de contact</p>
-            <div class="card-information">
+    <div class="card-profil">
+        <div class="card-body-profil">
+            <p class="title-card-profil">Tes informations de contact</p>
+            <div class="card-information-profil">
                 <img src="{{ asset('build/images/sendemail.png') }}" alt="email profil img">
                 <p class="email-profil">{{ app.user.email }}</p>
             </div>
-            <div class="card-information">
+            <div class="card-information-profil">
                 <img src="{{ asset('build/images/phone.png') }}" alt="phone profil img">
                 <p class="phone-profil">{{ app.user.phone }}</p>
             </div>
         </div>
     </div>
-    <div class="container-btn">
-        <div class="btn">
+    <p class="center red">Tu n'as pas encore de mentor</p>
+    <div class="container-btn-profil">
+        <div class="btn-profil">
             <a href="#">Modifier mon profil</a>
         </div>
-        <div class="btn">
+        <div class="btn-profil">
             <a href="#">Modifier mes choix</a>
         </div>
-        <div class="btn">
+        <div class="btn-profil">
             <a href="#">Supprimer mon compte</a>
         </div>
     </div>

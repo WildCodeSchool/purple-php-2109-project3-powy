@@ -2,47 +2,51 @@
     text-align: center;
 }
 
-.card{
+.card-profil{
     display: flex;
     border: none;
     align-items: center;
     margin-bottom: 3rem;
+    justify-content: center;
 }
 
-.card-body{
-    width: 20rem;
+.card-body-profil{
+    width: 30rem;
     height: 10rem;
     background-color: $light-background-primary;
     border-radius: 1rem;
+    border: 1px black solid;
 }
 
-.title-card{
-    text-align: center;
+.title-card-profil{
     font-weight: bold;
+    margin: 1rem;
 }
 
-.card-information{
+.card-information-profil{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .email-profil{
     margin-left: 1rem;
-    margin-top: 5px;
+    margin-top: 0.3rem;
 }
 
 .phone-profil{
     margin-left: 1rem;
-    margin-top: 8px;
+    margin-top: 0.5rem;
 }
 
-.container-btn{
+.container-btn-profil{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.btn a{
+.btn-profil a{
     align-items: center;
     background-color: #1c1c1c;
     border-radius: 10px;
@@ -55,11 +59,16 @@
     text-decoration: none;
     width: 15em;
     margin-bottom: 1rem;
+    margin-left: 1rem;
 }
 
+.red{
+    color: $alert;
+    font-weight: bold;
+}
 
 @media screen and (min-width: 1024px) {
-    .container-btn{
+    .container-btn-profil{
         display: flex;
         justify-content: center;
         flex-direction: row;
