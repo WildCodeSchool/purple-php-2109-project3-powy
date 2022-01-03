@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Update Profile</button>
+{{ form_end(form) }}
+{% endblock %}
