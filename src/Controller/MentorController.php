@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MentorController extends AbstractController
 {
     /**
-     * @Route("/mentor", name="mentor")
+     * @Route("/mentor", name="mentor_index")
      */
     public function index(): Response
     {
