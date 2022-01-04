@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.card-profil{
+.card-profile{
     display: flex;
     border: none;
     align-items: center;
@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-.card-body-profil{
+.card-body-profile{
     width: 30rem;
     height: 10rem;
     background-color: $light-background-primary;
@@ -18,35 +18,35 @@
     border: 1px black solid;
 }
 
-.title-card-profil{
+.title-card-profile{
     font-weight: bold;
     margin: 1rem;
 }
 
-.card-information-profil{
+.card-information-profile{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.email-profil{
+.email-profile{
     margin-left: 1rem;
     margin-top: 0.3rem;
 }
 
-.phone-profil{
+.phone-profile{
     margin-left: 1rem;
     margin-top: 0.5rem;
 }
 
-.container-btn-profil{
+.container-btn-profile{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.btn-profil a{
+.btn-profile a{
     align-items: center;
     background-color: #1c1c1c;
     border-radius: 10px;
@@ -67,8 +67,19 @@
     font-weight: bold;
 }
 
+.img-profile{
+    margin: 1rem;
+}
+
+.img-profile img{
+    background-color: $middle-background;
+    border-radius: 100%;
+    border: 1px black solid;
+
+}
+
 @media screen and (min-width: 1024px) {
-    .container-btn-profil{
+    .container-btn-profile{
         display: flex;
         justify-content: center;
         flex-direction: row;
