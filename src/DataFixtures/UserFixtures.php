@@ -32,6 +32,7 @@ class UserFixtures extends Fixture
             'studentpassword'
         );
         $student->setPassword($hashedPassword);
+        $this->addReference('student_1', $student);
         $manager->persist($student);
 
         //create an user with mentor role
