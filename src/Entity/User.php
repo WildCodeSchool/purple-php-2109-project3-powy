@@ -61,9 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Student::class, inversedBy="user", cascade={"persist", "remove"})
      */
-    private Student $student;
+    private ?Student $student;
 
     public function getId(): ?int
     {
@@ -219,13 +219,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->student;
     }
 
-    public function setStudent(Student $student): self
+    public function setStudent(?Student $student): self
     {
-        // set the owning side of the relation if necessary
-        if ($student->getUser() !== $this) {
-            $student->setUser($this);
-        }
-
         $this->student = $student;
 
         return $this;
