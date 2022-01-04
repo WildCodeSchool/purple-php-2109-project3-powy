@@ -12,7 +12,7 @@
         margin-top: 3rem;
         display: flex;
         flex-direction: column;
-        
+
         h2 {
             margin-bottom: 2rem;
             font-size: 1.5rem;
@@ -34,11 +34,10 @@
             justify-content: center;
             text-decoration: none;
             width: 10em;
-            
             margin-bottom: 4rem;
-            
+
             &:hover, &:focus {
-            box-shadow: 0 2px 4px $dark-background;
+                box-shadow: 0 2px 4px $dark-background;
             }
         }
     }
