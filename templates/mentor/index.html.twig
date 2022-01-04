@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations étudiants {% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="mentor-banner">
+        {% include "components/_header.html.twig" %}
+        <div class="mentor-presentation">
+            <h2>Tu es un professionnel et tu veux devenir mentor ?</h2>
+            <p> Parce que votre vécu et vos conseils sont une ressource précieuse. Powy met en relation professionnels et étudiants afin que vous partagiez vos connaissances en accompagnant nos jeunes dans leur parcours scolaire et professionnel. </p>
+            <a href="#">Je m'inscris</a>
+        </div>
+    </section>
+
+    <section class="mentor-howto">
+        <h2>Comment ça marche?</h2>
+    </section>
+
+    <section class="faq-index">
+        <h2>F.A.Q.</h2>
+        {% include "components/_faq.html.twig" %}
+    </section>
+
+{% include "components/_footer.html.twig" %}
+
+{% endblock %}
