@@ -50,23 +50,20 @@ class RegistrationController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
-        }
-
         // generate a signed url and email it to the user
-        $emailUser = $user->getEmail();
-        if (is_string($emailUser)) {
-            $this->emailVerifier->sendEmailConfirmation(
-                'app_verify_email',
-                $user,
-                (new TemplatedEmail())
+            $emailUser = $user->getEmail();
+            if (is_string($emailUser)) {
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('login');
+                );
+                    return $this->redirectToRoute('login');
+            }
         }
 
         return $this->render('registration/register.html.twig', [
