@@ -30,12 +30,13 @@
             align-items: center;
             color: $dark-background;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             font-size: .8rem;
             text-decoration: none;
+            gap: .5rem;
 
             img {
-                width: 30px;
+                width: 25px;
             }
         }
     }
