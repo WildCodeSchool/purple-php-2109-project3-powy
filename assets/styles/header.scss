@@ -25,6 +25,9 @@
     }
 
     .connexion-btn {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
 
         a {
             align-items: center;
@@ -33,7 +36,11 @@
             flex-direction: row;
             font-size: .8rem;
             text-decoration: none;
-            gap: .5rem;
+            gap: .7rem;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
 
             img {
                 width: 25px;
