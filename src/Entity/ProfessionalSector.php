@@ -32,9 +32,15 @@ class ProfessionalSector
      */
     private Collection $students;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Mentor::class, mappedBy="professionalSector")
+     */
+    private Collection $mentors;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
+        $this->mentors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,6 +84,36 @@ class ProfessionalSector
             // set the owning side to null (unless already changed)
             if ($student->getProfessionalSector() === $this) {
                 $student->setProfessionalSector(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Mentor[]
+     */
+    public function getMentors(): Collection
+    {
+        return $this->mentors;
+    }
+
+    public function addMentor(Mentor $mentor): self
+    {
+        if (!$this->mentors->contains($mentor)) {
+            $this->mentors[] = $mentor;
+            $mentor->setProfessionalSector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMentor(Mentor $mentor): self
+    {
+        if ($this->mentors->removeElement($mentor)) {
+            // set the owning side to null (unless already changed)
+            if ($mentor->getProfessionalSector() === $this) {
+                $mentor->setProfessionalSector(null);
             }
         }
 

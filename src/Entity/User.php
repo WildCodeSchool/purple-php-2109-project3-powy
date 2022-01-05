@@ -65,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?Student $student;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private ?Mentor $mentor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +227,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStudent(?Student $student): self
     {
         $this->student = $student;
+
+        return $this;
+    }
+
+    public function getMentor(): ?Mentor
+    {
+        return $this->mentor;
+    }
+
+    public function setMentor(?Mentor $mentor): self
+    {
+        $this->mentor = $mentor;
 
         return $this;
     }
