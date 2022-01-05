@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
-  
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -169,8 +169,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+        return $this;
     }
-  
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
