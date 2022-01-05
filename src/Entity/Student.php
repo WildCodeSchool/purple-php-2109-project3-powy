@@ -153,7 +153,7 @@ class Student
 
         return $this;
     }
-
+    //solve proxy error message at user connexion
     public function __sleep()
     {
         return [];

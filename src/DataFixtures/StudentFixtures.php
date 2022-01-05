@@ -31,7 +31,6 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            //UserFixtures::class,
             ProfessionalSectorFixtures::class,
             SchoolFixtures::class,
             StudyLevelFixtures::class,
