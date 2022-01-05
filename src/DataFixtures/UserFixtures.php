@@ -22,17 +22,28 @@ class UserFixtures extends Fixture
         $student = new User();
         $student->setEmail('student@monsite.com');
         $student->setRoles(['ROLE_STUDENT']);
+        $student->setFirstname('Alice');
+        $student->setLastname('Martin');
+        $student->setGender('Féminin');
+        $student->setAge('22');
+        $student->setPhone('0234567890');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $student,
             'studentpassword'
         );
         $student->setPassword($hashedPassword);
+        $this->addReference('student_1', $student);
         $manager->persist($student);
 
         //create an user with mentor role
         $mentor = new User();
         $mentor->setEmail('mentor@monsite.com');
         $mentor->setRoles(['ROLE_MENTOR']);
+        $mentor->setFirstname('Héloïse');
+        $mentor->setLastname('Durand');
+        $mentor->setGender('Féminin');
+        $mentor->setAge('42');
+        $mentor->setPhone('0234567800');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $mentor,
             'mentorpassword'
