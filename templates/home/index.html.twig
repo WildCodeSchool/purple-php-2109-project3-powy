@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Powy - Le pouvoir de transmettre{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -11,8 +11,8 @@
 <section class="powy-enter">
     <h1>Bienvenue sur Powy</h1>
     <div class="infos-btn">
-        <a href="/">Étudiant &#x1F525;</a>
-        <a href="/">Mentor &#x1F48E;</a>
+        <a href="{{ path('student_index') }}">Étudiant &#x1F525;</a>
+        <a href="{{ path('mentor_index') }}">Mentor &#x1F48E;</a>
     </div>
     <div class="people-background"></div>
 </section>
