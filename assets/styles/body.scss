@@ -5,3 +5,30 @@ body {
     padding-bottom: 10.75rem;
     position: relative;
 }
+
+.dark-submit-button {
+    align-items: center;
+    background-color: $dark-background;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    font-weight: bold;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 15em;
+    margin: auto;
+}
+
+.alert-submit-button {
+    align-items: center;
+    background-color: $alert;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    font-weight: bold;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 15em;
+}

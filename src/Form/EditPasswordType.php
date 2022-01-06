@@ -22,22 +22,22 @@ class EditPasswordType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Merci de saisir un nouveau de mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit avoir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
-                'label' => 'New password',
+                'label' => 'Nouveau mot de passe',
             ],
             'second_options' => [
                 'attr' => ['autocomplete' => 'new-password'],
-                'label' => 'Repeat Password',
+                'label' => 'Répéter nouveau mot de passe',
             ],
-            'invalid_message' => 'The password fields must match.',
+            'invalid_message' => 'Les deux mots de passe doivent être identiques',
             // Instead of being set onto the object directly,
             // this is read and encoded in the controller
             'mapped' => false,

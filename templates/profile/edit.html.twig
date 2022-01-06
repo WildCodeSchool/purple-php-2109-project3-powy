@@ -3,47 +3,76 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block body %}
+
 {{ include('components/_header.html.twig') }}
-<div class="card-edit-profil">
-    {{ form_start(form) }}
-        <div class="gender">
-            <label for="gender">Genre</label>
-            {{ form_widget(form.gender) }}
-        </div>
-        <div class="firstname">
-            <label for="firstname">Nom</label>
-            {{ form_widget(form.firstname) }}
-        </div>
-        <div class="lastname">
-            <label for="lastname">Prénom</label>
-            {{ form_widget(form.lastname) }}
-        </div>
-        <div class="age">
-            <label for="age">Age</label>
-            {{ form_widget(form.age) }}
-        </div>
-        <div class="phone">
-            <label for="phone">Phone</label>
-            {{ form_widget(form.phone) }}
-        </div>
-        <div class="mail">
-            <label for="email">Adresse Mail</label>
-            {{ form_widget(form.email) }}
-        </div>
-        <button type="submit">Update Profile</button>
-    {{ form_end(form) }}
-</div>
-<br>
-<div class="card-edit-password">
-    {{ form_start(formpassword) }}
-        {{ form_widget(formpassword) }}
-        <button type="submit">Update Password</button>
-    {{ form_end(formpassword) }}
-</div>
+<main class="container-profile">
+    <h2>Modifier ou supprimer mon profil</h1>
+    <div class="card-picture-profile">
+        <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
+        <a href="#">Télécharger une photo</a>
+    </div>
 
+    <div class="card-edit-profile">
+        {{ form_start(form) }}
+        <div class="card-edit-profile-part1">
+            <div class="field">
+                <label for="gender" class="col-sm-2 col-form-label">Genre</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.gender) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="firstname" class="col-sm-2 col-form-label">Prénom</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.firstname) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="lastname" class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.lastname) }}
+                </div>
+            </div>
+        </div>
+        <div class="card-edit-profile-part2">
+            <div class="field">
+                <label for="age" class="col-sm-2 col-form-label">Age</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.age) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.phone) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <button type="submit" class="dark-submit-button">Modifier</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
+    <div class="card-edit-password">
+        {{ form_start(formpassword) }}
+        <div class="field">
+            <div class="col-sm-10">
+                    {{ form_widget(formpassword) }}
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="dark-submit-button">Modifier</button>
+        </div>
+    </div>
 
+    <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
 
-{{ include('components/_footer.html.twig') }}
-
+</main>
 {% endblock %}
