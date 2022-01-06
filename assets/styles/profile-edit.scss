@@ -9,7 +9,7 @@
         font-size: 1.8rem;
         text-align: center;
     }
-    
+
     .card-picture-profile {
         align-items: center;
         border: 2px $dark-background dotted;
@@ -49,16 +49,18 @@
 
         .card-edit-profile, .card-edit-password {
             width: 60em;
-           
+        
             .card-edit-profile-part1, .card-edit-profile-part2 {
                 display: flex;
                 justify-content: space-around;
             }
+        
             .password-fields-profile {
                 display: flex;
                 justify-content: space-around;
                 flex-direction: row;
             }
+        
             .field {
                 padding: 1.5em;
             }
