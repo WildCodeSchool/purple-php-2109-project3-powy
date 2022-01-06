@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ProfileController extends AbstractController
 {
@@ -66,5 +67,22 @@ class ProfileController extends AbstractController
             'form' => $form,
             'formpassword' => $formpassword
         ]);
+    }
+
+    /**
+     * @Route("/profile/delete", name="profile_delete")
+     */
+    public function delete(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $user = $this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
+        if ($user != null) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $session = new Session();
+            $session->invalidate();
+        }
+
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
     }
 }
