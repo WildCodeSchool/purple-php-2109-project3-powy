@@ -9,11 +9,7 @@
     {% endfor %}
 
     <h1>Formulaire d'inscription étudiant</h1>
-    {% if error %}
-        <div class="error">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
-    {% endif %}
+    {{ form_errors(registrationForm) }}
     {{ form_start(registrationForm) }}
         <small>Sélectionne la case correspondant à ta situation.</small>
         {{ form_row(registrationForm.student.studyLevel, {

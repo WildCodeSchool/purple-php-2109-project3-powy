@@ -35,6 +35,8 @@ class RegistrationController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         $user = new User();
+        $student = new Student();
+        $user->setStudent($student);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -48,31 +50,10 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
-                $student = new Student();
-                $studentData = [$form->get('student')->getNormData()];
-                // dd($studentData);
-                // exit;
-                if (
-                    $studentData[0] instanceof Student &&
-                    is_string($studentData[0]->getDreamJob()) &&
-                    is_int($studentData[0]->getTopic1())
-                ) {
-                    $student->setScholarship($studentData[0]->getScholarship());
-                    $student->setDreamJob($studentData[0]->getDreamJob());
-                    $student->setDreamDescription($studentData[0]->getDreamDescription());
-                    $student->setProfessionalSector($studentData[0]->getProfessionalSector());
-                    $student->setSchool($studentData[0]->getSchool());
-                    $student->setStudyLevel($studentData[0]->getStudyLevel());
-                    $student->setTopic1($studentData[0]->getTopic1());
-                    $student->setTopic2($studentData[0]->getTopic2());
-                    $student->setTopic3($studentData[0]->getTopic3());
-                    $user->setStudent($student);
-                    $student->setUser($user);
-                    $user->setRoles(['ROLE_STUDENT']);
-                    $entityManager->persist($user);
-                    $entityManager->persist($student);
-                    $entityManager->flush();
-                }
+                $user->setRoles(['ROLE_STUDENT']);
+                $entityManager->persist($user);
+                $entityManager->persist($student);
+                $entityManager->flush();
             }
         // generate a signed url and email it to the user
             $emailUser = $user->getEmail();
