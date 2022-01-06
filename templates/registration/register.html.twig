@@ -9,7 +9,11 @@
     {% endfor %}
 
     <h1>Formulaire d'inscription étudiant</h1>
-
+    {% if error %}
+        <div class="error">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
     {{ form_start(registrationForm) }}
         <small>Sélectionne la case correspondant à ta situation.</small>
         {{ form_row(registrationForm.student.studyLevel, {
@@ -18,6 +22,15 @@
         <hr>
         <p>Sur quels points souhaites-tu t'améliorer ?</p>
         <small>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</small>
+        {{ form_row(registrationForm.student.topic1, {
+            label: 'choix 1'
+        }) }}
+        {{ form_row(registrationForm.student.topic2, {
+            label: 'choix 2'
+        }) }}
+        {{ form_row(registrationForm.student.topic3, {
+            label: 'choix 3'
+        }) }}
         <hr>
         <p>On voudrait en savoir plus sur toi pour mieux t'accompagner.</p>
         {{ form_row(registrationForm.student.school, {
