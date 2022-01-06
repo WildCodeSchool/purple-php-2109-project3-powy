@@ -25,17 +25,25 @@
     }
 
     .connexion-btn {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
 
         a {
             align-items: center;
             color: $dark-background;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             font-size: .8rem;
             text-decoration: none;
+            gap: .7rem;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
 
             img {
-                width: 30px;
+                width: 25px;
             }
         }
     }
