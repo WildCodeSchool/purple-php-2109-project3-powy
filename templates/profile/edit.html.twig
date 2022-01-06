@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+{{ include('components/_header.html.twig') }}
+<div class="card-edit-profil">
+    {{ form_start(form) }}
+        <div class="gender">
+            <label for="gender">Genre</label>
+            {{ form_widget(form.gender) }}
+        </div>
+        <div class="firstname">
+            <label for="firstname">Nom</label>
+            {{ form_widget(form.firstname) }}
+        </div>
+        <div class="lastname">
+            <label for="lastname">Prénom</label>
+            {{ form_widget(form.lastname) }}
+        </div>
+        <div class="age">
+            <label for="age">Age</label>
+            {{ form_widget(form.age) }}
+        </div>
+        <div class="phone">
+            <label for="phone">Phone</label>
+            {{ form_widget(form.phone) }}
+        </div>
+        <div class="mail">
+            <label for="email">Adresse Mail</label>
+            {{ form_widget(form.email) }}
+        </div>
+        <button type="submit">Update Profile</button>
+    {{ form_end(form) }}
+</div>
+<br>
+<div class="card-edit-password">
+    {{ form_start(formpassword) }}
+        {{ form_widget(formpassword) }}
+        <button type="submit">Update Password</button>
+    {{ form_end(formpassword) }}
+</div>
+
+
+
+
+{{ include('components/_footer.html.twig') }}
+
+{% endblock %}

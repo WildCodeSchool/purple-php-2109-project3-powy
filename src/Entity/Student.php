@@ -33,12 +33,6 @@ class Student
     private ?string $dreamDescription;
 
     /**
-     * @ORM\OneToOne(targetEntity=user::class, inversedBy="student", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private User $user;
-
-    /**
      * @ORM\ManyToOne(targetEntity=ProfessionalSector::class, inversedBy="students")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -55,6 +49,11 @@ class Student
      * @ORM\JoinColumn(nullable=false)
      */
     private StudyLevel $studyLevel;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="student", cascade={"persist", "remove"})
+     */
+    private ?User $user;
 
     public function getId(): ?int
     {
@@ -97,18 +96,6 @@ class Student
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getProfessionalSector(): ?ProfessionalSector
     {
         return $this->professionalSector;
@@ -143,5 +130,32 @@ class Student
         $this->studyLevel = $studyLevel;
 
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setStudent(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getStudent() !== $this) {
+            $user->setStudent($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+    //solve proxy error message at user connexion
+    public function __sleep()
+    {
+        return [];
     }
 }

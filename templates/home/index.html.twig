@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Powy - Le pouvoir de transmettre{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -12,7 +12,7 @@
     <h1>Bienvenue sur Powy</h1>
     <div class="infos-btn">
         <a href="{{ path('student_index') }}">Étudiant &#x1F525;</a>
-        <a href="/">Mentor &#x1F48E;</a>
+        <a href="{{ path('mentor_index') }}">Mentor &#x1F48E;</a>
     </div>
     <div class="people-background"></div>
 </section>
@@ -21,11 +21,8 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed
 do eiusmod tempor ncididunt ut labore et dolore magna aliqua
 et dolore magna aliqua.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor ncididunt ut labore et dolore magna aliquaet dolore magna aliqua.</p>
-    <a href="/" class="inscription-btn">Je m'inscris</a>
 </section>
 <section class="faq-index">
     <h2>F.A.Q.</h2>
-    {% include 'components/_faq.html.twig' %}
 </section>
-{% include 'components/_footer.html.twig' %}
 {% endblock %}

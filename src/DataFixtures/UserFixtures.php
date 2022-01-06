@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -32,7 +33,7 @@ class UserFixtures extends Fixture
             'studentpassword'
         );
         $student->setPassword($hashedPassword);
-        $this->addReference('student_1', $student);
+        $student->setStudent($this->getReference('student_1'));
         $manager->persist($student);
 
         //create an user with mentor role
@@ -53,5 +54,12 @@ class UserFixtures extends Fixture
 
         //save all users
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            StudentFixtures::class
+        ];
     }
 }
