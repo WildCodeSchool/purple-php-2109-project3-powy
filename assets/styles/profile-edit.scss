@@ -9,23 +9,19 @@
         font-size: 1.8rem;
         text-align: center;
     }
-
+    
     .card-picture-profile {
         align-items: center;
         border: 2px $dark-background dotted;
         border-radius: 5px;
+        color: $dark-background;
         display: flex;
         flex-direction: column;
+        font-size: 0.8rem;
         justify-content: space-around;
         margin: 2em 0 2em 0;
         width: 15em;
-        height: 10em;
-
-        a {
-            color: $dark-background;
-            font-size: 0.8rem;
-            text-decoration: none;
-        }
+        height: 10em;s
     }
 
     .card-edit-profile, .card-edit-password{

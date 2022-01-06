@@ -7,10 +7,10 @@
 {{ include('components/_header.html.twig') }}
 <main class="container-profile">
     <h2>Modifier ou supprimer mon profil</h1>
-    <div class="card-picture-profile">
+    <a href="" class="card-picture-profile">
         <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
-        <a href="#">Télécharger une photo</a>
-    </div>
+        <p>Télécharger une photo</p>
+    </a>
 
     <div class="card-edit-profile">
         {{ form_start(form) }}
@@ -64,7 +64,7 @@
         {{ form_start(formpassword) }}
         <div class="field">
             <div class="col-sm-10">
-                    {{ form_widget(formpassword) }}
+                {{ form_widget(formpassword) }}
             </div>
         </div>
         <div>
