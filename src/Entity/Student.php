@@ -55,6 +55,21 @@ class Student
      */
     private ?User $user;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $topic1;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $topic2;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $topic3;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,5 +172,41 @@ class Student
     public function __sleep()
     {
         return [];
+    }
+
+    public function getTopic1(): ?int
+    {
+        return $this->topic1;
+    }
+
+    public function setTopic1(int $topic1): self
+    {
+        $this->topic1 = $topic1;
+
+        return $this;
+    }
+
+    public function getTopic2(): ?int
+    {
+        return $this->topic2;
+    }
+
+    public function setTopic2(?int $topic2): self
+    {
+        $this->topic2 = $topic2;
+
+        return $this;
+    }
+
+    public function getTopic3(): ?int
+    {
+        return $this->topic3;
+    }
+
+    public function setTopic3(?int $topic3): self
+    {
+        $this->topic3 = $topic3;
+
+        return $this;
     }
 }

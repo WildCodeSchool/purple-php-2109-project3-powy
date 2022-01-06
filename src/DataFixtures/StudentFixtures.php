@@ -13,6 +13,7 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
     {
         //create one student for Student Entity testing
         $student = new Student();
+        $student->setTopic1(1);
         $student->setScholarship(false);
         $student->setDreamJob("Développeur");
         $student->setDreamDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 

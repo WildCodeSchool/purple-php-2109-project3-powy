@@ -3,19 +3,65 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+    {% include "components/_header.html.twig" %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Inscription</h1>
+    <h1>Formulaire d'inscription étudiant</h1>
 
     {{ form_start(registrationForm) }}
+        <small>Sélectionne la case correspondant à ta situation.</small>
+        {{ form_row(registrationForm.student.studyLevel, {
+            label: 'Quel est ton niveau actuel ?'
+        }) }}
+        <hr>
+        <p>Sur quels points souhaites-tu t'améliorer ?</p>
+        <small>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</small>
+        <hr>
+        <p>On voudrait en savoir plus sur toi pour mieux t'accompagner.</p>
+        {{ form_row(registrationForm.student.school, {
+            label: 'Renseigne ton établissement scolaire :'
+        }) }}
+        {{ form_row(registrationForm.student.professionalSector, {
+            label: 'Secteur professionnel idéal'
+        }) }}
+        {{ form_row(registrationForm.student.dreamJob, {
+            label: 'Ton rêve professionnel :'
+        }) }}
+        {{ form_row(registrationForm.student.dreamDescription, {
+            label: 'Précise en quelques mots :'
+        }) }}
+        <hr>
+        {{ form_row(registrationForm.student.scholarship, {
+            label: 'Es-tu boursier ?'
+        }) }}
+        <hr>
+        <p>Qui es-tu ?</p>
+        <small>Ces informations seront communiquées à tes futurs mentors.</small>
+        {{ form_row(registrationForm.firstname, {
+            label: 'Prénom'
+        }) }}
+        {{ form_row(registrationForm.lastname, {
+            label: 'Nom'
+        }) }}
+        {{ form_row(registrationForm.gender, {
+            label: 'Genre'
+        }) }}
+        {{ form_row(registrationForm.age, {
+            label: 'Âge'
+        }) }}
+        {{ form_row(registrationForm.phone, {
+            label: 'Téléphone'
+        }) }}
+        <hr>
+        <p>Dernière étape : il te suffit de rentrer tes informations de connexion et c'est fini !</p>
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
+        {{ form_widget(registrationForm.agreeTerms) }}
+        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
         <button type="submit" class="btn">s'inscrire</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
