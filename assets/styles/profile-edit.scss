@@ -21,7 +21,7 @@
         justify-content: space-around;
         margin: 2em 0 2em 0;
         width: 15em;
-        height: 10em;s
+        height: 10em;
     }
 
     .card-edit-profile, .card-edit-password{
@@ -32,26 +32,33 @@
         display: flex;
         height: auto;
         justify-content: center;
-        min-width: 20em;
+        width: 20em;
         padding: 1em;
 
-        .field {
-            padding: 0.5em;
+        .input {
+            background-color: $white;
+            border-radius: 5px;
+            width: 15em;
+            padding: 0.2em;
         }
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
     .container-profile {
 
         .card-edit-profile, .card-edit-password {
-            min-width: 60em;
-
+            width: 60em;
+           
             .card-edit-profile-part1, .card-edit-profile-part2 {
                 display: flex;
                 justify-content: space-around;
             }
-
+            .password-fields-profile {
+                display: flex;
+                justify-content: space-around;
+                flex-direction: row;
+            }
             .field {
                 padding: 1.5em;
             }

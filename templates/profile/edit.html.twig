@@ -62,9 +62,16 @@
 
     <div class="card-edit-password">
         {{ form_start(formpassword) }}
-        <div class="field">
-            <div class="col-sm-10">
-                {{ form_widget(formpassword) }}
+        <div class="password-fields-profile">
+            <div class="field">
+                <div class="col-sm-10">
+                    {{ form_row(formpassword.plainPassword.first) }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="col-sm-10">
+                    {{ form_row(formpassword.plainPassword.second) }}
+                </div>
             </div>
         </div>
         <div>

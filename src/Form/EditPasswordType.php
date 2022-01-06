@@ -19,7 +19,9 @@ class EditPasswordType extends AbstractType
         ->add('plainPassword', RepeatedType::class, [
             'type' => PasswordType::class,
             'first_options' => [
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['
+                    autocomplete' => 'new-password',
+                    'class' => 'input'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de saisir un nouveau de mot de passe',
@@ -34,8 +36,10 @@ class EditPasswordType extends AbstractType
                 'label' => 'Nouveau mot de passe',
             ],
             'second_options' => [
-                'attr' => ['autocomplete' => 'new-password'],
-                'label' => 'Répéter nouveau mot de passe',
+                'attr' => ['
+                    autocomplete' => 'new-password',
+                    'class' => 'input'],
+                'label' => 'Répéter mot de passe',
             ],
             'invalid_message' => 'Les deux mots de passe doivent être identiques',
             // Instead of being set onto the object directly,

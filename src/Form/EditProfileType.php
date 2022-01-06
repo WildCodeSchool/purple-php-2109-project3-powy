@@ -4,8 +4,9 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,30 +15,40 @@ class EditProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('firstname', TypeTextType::class, [
+            ->add('email', TextType::class, [
                 'attr' => [
-                    'class' => 'input-firstname'
+                    'class' => 'input'
                 ],
             ])
-            ->add('lastname', TypeTextType::class, [
+            ->add('firstname', TextType::class, [
                 'attr' => [
-                    'class' => 'input-lastname'
+                    'class' => 'input'
                 ],
             ])
-            ->add('gender', TypeTextType::class, [
+            ->add('lastname', TextType::class, [
                 'attr' => [
-                    'class' => 'input-gender'
+                    'class' => 'input'
                 ],
+            ])
+            ->add('gender', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'input'
+                ],
+                'choices' => [
+                    'Féminin' => 'female',
+                    'Masculin' => 'male',
+                    'Non binaire' => 'non binary',
+                    'Ne souhaite pas se prononcer' => null,
+                ]
             ])
             ->add('age', IntegerType::class, [
                 'attr' => [
-                    'class' => 'input-age'
+                    'class' => 'input'
                 ],
             ])
             ->add('phone', IntegerType::class, [
                 'attr' => [
-                    'class' => 'input-age'
+                    'class' => 'input'
                 ],
             ])
         ;
