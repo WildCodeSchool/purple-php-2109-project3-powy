@@ -5,6 +5,7 @@ body {
     padding-bottom: 10.75rem;
     position: relative;
 }
+
 /*
 buttons available for all pages.
 thoses classes should be used everywhere
@@ -23,11 +24,11 @@ thoses classes should be used everywhere
     width: 15em;
     margin: auto;
 
-        &:hover,
-        &:focus {
-            box-shadow: 0 2px 4px $dark-background;
-            text-decoration: none;
-        }
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+        text-decoration: none;
+    }
 }
 
 .alert-submit-button {
