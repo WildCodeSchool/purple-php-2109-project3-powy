@@ -69,6 +69,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $picture = null;
+  
+    /**
+     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private ?Mentor $mentor;
 
     public function getId(): ?int
     {
@@ -239,7 +244,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+    }
+  
+    public function getMentor(): ?Mentor
+    {
+        return $this->mentor;
+    }
 
+    public function setMentor(?Mentor $mentor): self
+    {
+        $this->mentor = $mentor;
+      
         return $this;
     }
 }
