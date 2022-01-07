@@ -4,8 +4,17 @@
 
 {% block body %}
 {{ include('components/_header.html.twig') }}
+<img src="/upload/pictures/{{ app.user.picture }} " alt="">
+
+
 <div class="card-edit-profil">
     {{ form_start(form) }}
+
+        <div class="picture">
+            <label for="picture">Photo de profil</label>
+            {{ form_widget(form.picture) }}
+        </div>
+
         <div class="gender">
             <label for="gender">Genre</label>
             {{ form_widget(form.gender) }}

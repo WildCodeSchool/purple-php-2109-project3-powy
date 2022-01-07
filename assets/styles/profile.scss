@@ -80,10 +80,9 @@
 }
 
 .img-profile img{
-    background-color: $middle-background;
     border-radius: 100%;
-    border: 1px black solid;
-
+    width: 15rem;
+    height: 15rem;
 }
 
 @media screen and (min-width: 1024px) {
