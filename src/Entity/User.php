@@ -104,7 +104,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?string $picture = null;
 
-
     public function getId(): ?int
     {
         return $this->id;
