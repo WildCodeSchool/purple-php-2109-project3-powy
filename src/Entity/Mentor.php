@@ -44,6 +44,11 @@ class Mentor
      */
     private ?User $user;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Mentoring::class, mappedBy="mentor", cascade={"persist", "remove"})
+     */
+    private ?Mentoring $mentoring;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -115,6 +120,28 @@ class Mentor
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMentoring(): ?Mentoring
+    {
+        return $this->mentoring;
+    }
+
+    public function setMentoring(?Mentoring $mentoring): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($mentoring === null && $this->mentoring !== null) {
+            $this->mentoring->setMentor(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($mentoring !== null && $mentoring->getMentor() !== $this) {
+            $mentoring->setMentor($this);
+        }
+
+        $this->mentoring = $mentoring;
 
         return $this;
     }
