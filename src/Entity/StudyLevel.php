@@ -21,7 +21,7 @@ class StudyLevel
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     * message = "Veuillez choisir votre niveau scolaire.")
+     *      message = "Veuillez choisir votre niveau scolaire.")
      */
     private string $name;
 
