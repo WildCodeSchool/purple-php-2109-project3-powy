@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -79,7 +80,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify/email", name="app_verify_email")
      */
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
@@ -91,10 +92,7 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_register');
         }
-
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
-
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('login');
     }
 }

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Blank;
 
 class StudentType extends AbstractType
 {
@@ -40,7 +41,9 @@ class StudentType extends AbstractType
                 ]
             ])
             ->add('dreamJob', TextType::class)
-            ->add('dreamDescription', TextareaType::class)
+            ->add('dreamDescription', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('topic1', ChoiceType::class, [
                 'choices' => self::TOPICS,
             ])
@@ -60,7 +63,6 @@ class StudentType extends AbstractType
             ->add('studyLevel', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
-                'expanded' => true,
             ])
         ;
     }

@@ -74,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\GreaterThan(
      *     value = 17, message = "Vous devez être majeur.e pour bénéficier du service.")
      * @Assert\LessThan(
-     *      value = 25,
+     *      value = 26,
      *      message = "Vous ne pouvez pas être âgé.e de plus de {{ compared_value }} pour bénéficier du service.")
      */
     private int $age;
@@ -84,9 +84,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\NotBlank(
      *      message = "Le numéro de téléphone est obligatoire.")
      * @Assert\Regex(
-     *      pattern =
-     *      "/^(?:(?:+|00)33[\s.-]{0,3}(?:(0)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
-     *      message = "Veuillez entrer un numéro de téléphone valide.")
+     *      pattern ="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
+     *      message = "Merci d'entrer un numéro de téléphone valide.")
      */
     private string $phone;
 
