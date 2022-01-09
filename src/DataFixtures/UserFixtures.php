@@ -10,6 +10,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const USERSNUMBERFIXTURES = 10;
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -19,38 +20,45 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        //create an user with student role
-        $student = new User();
-        $student->setEmail('student@monsite.com');
-        $student->setRoles(['ROLE_STUDENT']);
-        $student->setFirstname('Alice');
-        $student->setLastname('Martin');
-        $student->setGender('Féminin');
-        $student->setAge('22');
-        $student->setPhone('0234567890');
-        $hashedPassword = $this->passwordHasher->hashPassword(
-            $student,
-            'studentpassword'
-        );
-        $student->setPassword($hashedPassword);
-        $student->setStudent($this->getReference('student_1'));
-        $manager->persist($student);
+        //create 10 users with student role
+        for ($i = 0; $i < self::USERSNUMBERFIXTURES; $i++) {
+            $student = new User();
+            //ex : student_0@monsite.com
+            $student->setEmail('student' . $i . '@monsite.com');
+            $student->setRoles(['ROLE_STUDENT']);
+            $student->setFirstname('Alice' . $i);
+            $student->setLastname('Inwonderland' . $i);
+            $student->setGender('Féminin');
+            $student->setAge('22');
+            $student->setPhone('0234567890');
+            $hashedPassword = $this->passwordHasher->hashPassword(
+                $student,
+                'studentpassword'
+            );
+            $student->setPassword($hashedPassword);
+            $student->setStudent($this->getReference('student_' . $i));
+            $manager->persist($student);
+        }
 
-        //create an user with mentor role
-        $mentor = new User();
-        $mentor->setEmail('mentor@monsite.com');
-        $mentor->setRoles(['ROLE_MENTOR']);
-        $mentor->setFirstname('Héloïse');
-        $mentor->setLastname('Durand');
-        $mentor->setGender('Féminin');
-        $mentor->setAge('42');
-        $mentor->setPhone('0234567800');
-        $hashedPassword = $this->passwordHasher->hashPassword(
-            $mentor,
-            'mentorpassword'
-        );
-        $mentor->setPassword($hashedPassword);
-        $manager->persist($mentor);
+        //create 10 users with mentor role
+        for ($i = 0; $i < self::USERSNUMBERFIXTURES; $i++) {
+            $mentor = new User();
+            //ex : mentor_0@monsite.com
+            $mentor->setEmail('mentor_' . $i . '@monsite.com');
+            $mentor->setRoles(['ROLE_MENTOR']);
+            $mentor->setFirstname('Jane ' . $i);
+            $mentor->setLastname('Doe' . $i);
+            $mentor->setGender('Féminin');
+            $mentor->setAge('42');
+            $mentor->setPhone('0234567800');
+            $hashedPassword = $this->passwordHasher->hashPassword(
+                $mentor,
+                'mentorpassword'
+            );
+            $mentor->setPassword($hashedPassword);
+            $mentor->setMentor($this->getReference('mentor_' . $i));
+            $manager->persist($mentor);
+        }
 
         //save all users
         $manager->flush();
@@ -59,7 +67,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            StudentFixtures::class
+            StudentFixtures::class,
+            MentorFixtures::class
         ];
     }
 }
