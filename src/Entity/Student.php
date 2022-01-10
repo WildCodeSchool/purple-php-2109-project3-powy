@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
@@ -19,11 +20,14 @@ class Student
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\Choice({true, false, null})
      */
     private ?bool $scholarship;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "Veuillez nous préciser votre job de rêve.")
      */
     private string $dreamJob;
 
@@ -59,6 +63,27 @@ class Student
      * @ORM\OneToOne(targetEntity=Mentoring::class, mappedBy="student", cascade={"persist", "remove"})
      */
     private ?Mentoring $mentoring;
+
+     /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *      message = "Merci de choisir au moins un sujet de mentorat.")
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9})
+     */
+
+    private int $topic1;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
+     */
+    private ?int $topic2;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
+     */
+    private ?int $topic3;
 
     public function getId(): ?int
     {
@@ -169,7 +194,7 @@ class Student
         return $this->mentoring;
     }
 
-    public function setMentoring(?Mentoring $mentoring): self
+    public function setMentoring(?Mentoring $mentoring): void
     {
         // unset the owning side of the relation if necessary
         if ($mentoring === null && $this->mentoring !== null) {
@@ -182,6 +207,40 @@ class Student
         }
 
         $this->mentoring = $mentoring;
+    }
+
+    public function getTopic1(): ?int
+    {
+        return $this->topic1;
+    }
+
+    public function setTopic1(int $topic1): self
+    {
+        $this->topic1 = $topic1;
+
+        return $this;
+    }
+
+    public function getTopic2(): ?int
+    {
+        return $this->topic2;
+    }
+
+    public function setTopic2(?int $topic2): self
+    {
+        $this->topic2 = $topic2;
+
+        return $this;
+    }
+
+    public function getTopic3(): ?int
+    {
+        return $this->topic3;
+    }
+
+    public function setTopic3(?int $topic3): self
+    {
+        $this->topic3 = $topic3;
 
         return $this;
     }

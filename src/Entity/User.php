@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="il y a déjà un compte avec cet email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -21,6 +24,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(
+     *      message = "Ce champ est obligatoire.")
+     * @Assert\Email(
+     *      message = "'{{ value }}' n'est pas une adresse email valide.")
      */
     private string $email;
 
@@ -36,27 +43,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isVerified = false;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "Le prénom est obligatoire.")
      */
     private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "Le nom de famille est obligatoire.")
      */
     private string $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Choice({"female", "male", "non binary", null})
      */
     private ?string $gender;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *     message = "L'âge est obligatoire")
+     * @Assert\GreaterThan(
+     *     value = 17, message = "Vous devez être majeur.e pour bénéficier du service.")
+     * @Assert\LessThan(
+     *      value = 26,
+     *      message = "Vous ne pouvez pas être âgé.e de plus de 25 ans pour bénéficier du service.")
      */
     private int $age;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "Le numéro de téléphone est obligatoire.")
+     * @Assert\Regex(
+     *      pattern ="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
+     *      message = "Merci d'entrer un numéro de téléphone valide.")
      */
     private string $phone;
 
@@ -157,6 +186,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+        return $this;
     }
 
     public function getFirstname(): ?string
