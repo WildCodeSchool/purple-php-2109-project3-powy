@@ -10,6 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class MentoringFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const MATCHDURATION = 4;
 
     public function load(ObjectManager $manager)
     {
@@ -19,12 +20,10 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
          */
 
         //mentoring relationship 1
-        $startingDate = new DateTime();
-        $startingDate->setDate(2022, 01, 01);
-        $startingDate->setTime(9, 30);
+        $startingDate = new DateTime('2022-01-01 9:30:0');
 
         $endingDate = clone $startingDate;
-        $endingDate = $endingDate->modify('+4 months');
+        $endingDate = $endingDate->modify('+' . self::MATCHDURATION . ' months');
 
         $mentoring = new Mentoring();
         $mentoring->setStartingDate($startingDate);
@@ -34,12 +33,10 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($mentoring);
 
         //mentoring relationship 2
-        $startingDate = new DateTime();
-        $startingDate->setDate(2022, 01, 06);
-        $startingDate->setTime(12, 30);
+        $startingDate = new DateTime('2022-01-06 12:30:0');
 
         $endingDate = clone $startingDate;
-        $endingDate = $endingDate->modify('+4 months');
+        $endingDate = $endingDate->modify('+' . self::MATCHDURATION . ' months');
 
         $mentoring = new Mentoring();
         $mentoring->setStartingDate($startingDate);
