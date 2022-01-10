@@ -70,7 +70,7 @@ class RegistrationController extends AbstractController
                 );
                     $this->addFlash(
                         'warning',
-                        'Vous allez recevoir un message vous permettant de confirmer votre inscription.'
+                        'Un email va vous être envoyé afin de finaliser votre inscription.'
                     );
                     return $this->redirectToRoute('login');
             }
