@@ -99,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?Mentor $mentor;
 
-    /** 
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $picture = null;
@@ -295,7 +295,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPicture(?string $picture): self
     {
-       $this->picture = $picture;
+        $this->picture = $picture;
         return $this;
     }
 }
