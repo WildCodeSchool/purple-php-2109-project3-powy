@@ -9,10 +9,12 @@
     <h2>Modifier ou supprimer mon profil</h1>
     <div class="card-edit-profile">
         {{ form_start(form) }}
-        <a href="" class="card-picture-profile">
-            <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
-            {{ form_widget(form.picture) }}
-        </a>
+        <div class="profil-upload">
+            <a href="" class="card-picture-profile">
+                <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
+                {{ form_widget(form.picture) }}
+            </a>
+        </div>
         <div class="card-edit-profile-part1">
             <div class="field">
                 <label for="gender" class="col-sm-2 col-form-label">Genre</label>
