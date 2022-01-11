@@ -51,8 +51,6 @@ class ProfileController extends AbstractController
                 $user->setPicture($pictureFileName);
             }
 
-
-
             $entityManager->flush();
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
