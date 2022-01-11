@@ -12,7 +12,8 @@
         <div class="profil-upload">
             <a href="" class="card-picture-profile">
                 <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
-                {{ form_widget(form.picture) }}
+                <span class="d-none">{{ form_widget(form.picture) }}</span>
+                <label for="edit_profile_picture">Télécharger une photo</label>
             </a>
         </div>
         <div class="card-edit-profile-part1">
@@ -85,4 +86,9 @@
     <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
 
 </main>
+
+<script src="{{ asset('build/js/index.js') }}">
+
+</script>
+
 {% endblock %}
