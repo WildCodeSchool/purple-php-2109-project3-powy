@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProfileController extends AbstractController
 {
@@ -71,18 +72,21 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/delete", name="profile_delete")
+     * @IsGranted("ROLE_USER")
      */
-    public function delete(EntityManagerInterface $entityManager, Request $request): Response
-    {
+    public function delete(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        TokenStorageInterface $tokenStorage
+    ): Response {
         $user = $this->getUser();
-        $entityManager = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
         if ($user != null) {
             $entityManager->remove($user);
             $entityManager->flush();
-            $session = new Session();
+            $tokenStorage->setToken(null);
             $session->invalidate();
         }
-
-        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('home');
     }
 }
