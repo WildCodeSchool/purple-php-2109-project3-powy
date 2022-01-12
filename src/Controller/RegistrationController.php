@@ -28,9 +28,9 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register/student", name="register_student")
      */
-    public function register(
+    public function registerStudent(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager
@@ -76,9 +76,17 @@ class RegistrationController extends AbstractController
             }
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('registration/register_student.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/register/mentor", name="register_mentor")
+     */
+    public function registerMentor(): Response
+    {
+        return $this->render('registration/register_mentor.html.twig');
     }
 
     /**
