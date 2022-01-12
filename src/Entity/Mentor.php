@@ -50,6 +50,7 @@ class Mentor
     private ?User $user;
 
     /**
+<<<<<<< HEAD
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(
      *      message = "Merci de choisir au moins un sujet de mentorat.")
@@ -69,6 +70,8 @@ class Mentor
     private ?int $topic3;
     
     /**
+=======
+>>>>>>> made mentoring entity and relations with student and mentor entities
      * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist", "remove"})
      */
     private ?Mentoring $mentoring;
