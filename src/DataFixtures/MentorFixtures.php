@@ -27,7 +27,7 @@ class MentorFixtures extends Fixture implements DependentFixtureInterface
             voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
             //23 professional sectors set in ProfessionalSectorfixtures
-            $mentor->setProfessionalSector($this->getReference('sector_' . $i));
+            $mentor->setProfessionalSector($this->getReference('sector_13'));
             //20 companies set in CompanyFixtures
             $mentor->setCompany($this->getReference('company_' . $i));
             $this->addReference('mentor_' . $i, $mentor);
