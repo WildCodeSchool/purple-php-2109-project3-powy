@@ -1,11 +1,9 @@
-{% extends 'base-email.html.twig' %}
-{% block body %}
-    <h1>Un clic et c'est tout</h1>
+<h1>Un clic et c'est tout</h1>
 
-    <p>
-        Merci de confirmer ton adresse électronique en cliquant sur le lien suivant :
-        <br>
-        <a href="{{ signedUrl }}">Confirmer mon Email</a>.
-    </p>
-    <p><strong>Attention, ce lien expirera dans 1 heure.</strong></p>
-{% endblock %}
+<p>
+    Merci de confirmer ton adresse électronique en cliquant sur le lien suivant :
+    <br>
+    <a href="{{ signedUrl }}">Confirmer mon Email</a>.
+</p>
+<p><strong>Attention, ce lien expirera dans 1 heure.</strong></p>
+
