@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationForm' => $form->createView()
         ]);
     }
 
@@ -137,7 +137,7 @@ class RegistrationController extends AbstractController
             $email->from(new Address('noreply@powy.io', 'powy-registration'));
             $email->to($emailUser);
             $email->subject('Inscription validée 🥳 !');
-            $email->htmlTemplate('registration/registration-email.html.twig');
+            $email->htmlTemplate('registration/registration_email.html.twig');
             $email->context(['user' => $user]);
             $this->mailer->send($email);
         }
