@@ -72,8 +72,9 @@ class RegistrationController extends AbstractController
                     $emailUser,
                     ['id' => $user->getId()]
                 );
+                //send email to verify user's email
                 $email = new TemplatedEmail();
-                $email->from('send@example.com');
+                $email->from(new Address('noreply@powy.io', 'powy-registration'));
                 $email->to($emailUser);
                 $email->subject('Confirme ton inscription 🙌');
                 $email->htmlTemplate('registration/confirmation_email.html.twig');
@@ -133,7 +134,7 @@ class RegistrationController extends AbstractController
         $emailUser = $user->getEmail();
         if (is_string($emailUser)) {
             $email = new TemplatedEmail();
-            $email->from('send@example.com');
+            $email->from(new Address('noreply@powy.io', 'powy-registration'));
             $email->to($emailUser);
             $email->subject('Inscription validée 🥳 !');
             $email->htmlTemplate('registration/registration-email.html.twig');
