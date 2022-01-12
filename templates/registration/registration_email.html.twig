@@ -1,14 +1,19 @@
-<h1>Bravo {{ user.firstname }}, vous faites maintenant partie de Powy !</h1>
+<div style="text-align: center; margin-top: 2rem;">
+    <h1>Bravo {{ user.firstname }},<br>tu fais maintenant partie de Powy !</h1>
 
-<p>Ton adresse {{ user.email }} a bien été enregistrée &#128170;</p>
+    <p>Ton adresse {{ user.email }} a bien été enregistrée &#128170;</p>
 
-{% if user.mentor is defined and user.mentor is not null %}
-    <p>Tu attends un étudiant à mentorer.</p>
-{% endif %}
+    {% if user.mentor is defined and user.mentor is not null %}
+        <p>Tu attends un étudiant à mentorer.</p>
+    {% endif %}
 
-{% if user.student is defined and user.student is not null %}
-    <p>Tu attends un mentor.</p>
-{% endif %}
+    {% if user.student is defined and user.student is not null %}
+        <p>Tu attends un mentor.</p>
+    {% endif %}
 
-<p>Connecte-toi à ton compte sur Powy pour consulter et/ou modifier tes informations.</p>
+    <p>Connecte-toi à ton compte sur Powy pour consulter et/ou modifier tes informations.</p>
+
+    <a href="mailto:hello@powy.io">hello@powy.io</a>
+</div>
+
 
