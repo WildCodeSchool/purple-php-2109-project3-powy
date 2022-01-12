@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Mentor;
 use App\Entity\Mentoring;
 use App\Entity\Student;
 use App\Repository\MentorRepository;
