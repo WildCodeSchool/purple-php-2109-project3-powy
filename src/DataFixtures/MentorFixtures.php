@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class MentorFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const MENTORNUMBERS = 10;
+    public const AVAILABLEMENTORS = 10;
 
     public function load(ObjectManager $manager): void
     {
@@ -18,7 +18,7 @@ class MentorFixtures extends Fixture implements DependentFixtureInterface
          * with only one topic active (number 1 for all of them)
          * with same professionnal sector
          */
-        for ($i = 0; $i < self::MENTORNUMBERS; $i++) {
+        for ($i = 0; $i < self::AVAILABLEMENTORS; $i++) {
             $mentor = new Mentor();
             $mentor->setJobTitle("job_" . $i);
             $mentor->setCareerDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
