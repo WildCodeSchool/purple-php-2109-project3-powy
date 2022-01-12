@@ -1,12 +1,16 @@
-<h1>Bravo {{ user.firstname }}, vous faites partie de Powy !</h1>
+{% extends 'base-email.html.twig' %}
+{% block body %}
+    <h1>Bravo {{ user.firstname }}, vous faites maintenant partie de Powy !</h1>
 
-<p>Ton adresse email a bien été enregistrée &#128170;</p>
+    <p>Ton adresse email a bien été enregistrée &#128170;</p>
 
-{% if user.mentor is defined and user.mentor is not null %}
-    <p>Tu attends un étudiant à mentorer.</p>
-{% endif %}
+    {% if user.mentor is defined and user.mentor is not null %}
+        <p>Tu attends un étudiant à mentorer.</p>
+    {% endif %}
 
-{% if user.student is defined and user.student is not null %}
-    <p>Tu attends un mentor pour {{ user.student.topic1 }}.</p>
-{% endif %}
+    {% if user.student is defined and user.student is not null %}
+        <p>Tu attends un mentor.</p>
+    {% endif %}
 
+    <p><a href="{path('login')}">Connecte-toi à ton compte</a> pour consulter et/ou modifier tes informations.</p>
+{% endblock %}

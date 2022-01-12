@@ -1,11 +1,11 @@
-<h1>Bonjour, veuillez confirmer votre adresse e-mail !</h1>
+{% extends 'base-email.html.twig' %}
+{% block body %}
+    <h1>Un clic et c'est tout</h1>
 
-<p>
-    Veuillez confirmer votre adresse électronique en cliquant sur le lien suivant : <br><br>
-    <a href="{{ signedUrl }}">Confirmer mon Email</a>.
-    Ce lien expirera dans 1 heure.
-</p>
-
-<p>
-    Félicitation!
-</p>
+    <p>
+        Merci de confirmer ton adresse électronique en cliquant sur le lien suivant :
+        <br>
+        <a href="{{ signedUrl }}">Confirmer mon Email</a>.
+    </p>
+    <p><strong>Attention, ce lien expirera dans 1 heure.</strong></p>
+{% endblock %}

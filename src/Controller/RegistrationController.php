@@ -142,7 +142,10 @@ class RegistrationController extends AbstractController
             $this->mailer->send($email);
         }
 
-        $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
+        $this->addFlash(
+            'success',
+            'Votre adresse a bien été vérifiée. Vous pouvez maintenant vous connecter.'
+        );
 
         return $this->redirectToRoute('login');
     }
