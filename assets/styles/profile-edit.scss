@@ -4,6 +4,7 @@
     flex-direction: column;
     font-size: 1rem;
     gap: 2rem;
+    height: 100%;
 
     h2 {
         font-size: 1.8rem;
@@ -41,6 +42,19 @@
             width: 15em;
             padding: 0.2em;
         }
+    }
+
+    .profil-upload{
+        display: flex;
+        justify-content: center;
+    }
+
+    .card-edit-profile-part2{
+        margin-bottom: 2rem;
+    }
+
+    .password-fields-profile{
+        margin-bottom: 2rem;
     }
 }
 
