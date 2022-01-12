@@ -67,6 +67,11 @@ class Mentor
      * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
      */
     private ?int $topic3;
+    
+    /**
+     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist", "remove"})
+     */
+    private ?Mentoring $mentoring;
 
     public function getId(): ?int
     {
@@ -165,6 +170,18 @@ class Mentor
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMentoring(): ?Mentoring
+    {
+        return $this->mentoring;
+    }
+
+    public function setMentoring(?Mentoring $mentoring): self
+    {
+        $this->mentoring = $mentoring;
 
         return $this;
     }

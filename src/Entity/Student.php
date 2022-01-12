@@ -79,6 +79,11 @@ class Student
      */
     private ?int $topic3;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="student", cascade={"persist", "remove"})
+     */
+    private ?Mentoring $mentoring;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +211,18 @@ class Student
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMentoring(): ?Mentoring
+    {
+        return $this->mentoring;
+    }
+
+    public function setMentoring(?Mentoring $mentoring): self
+    {
+        $this->mentoring = $mentoring;
 
         return $this;
     }
