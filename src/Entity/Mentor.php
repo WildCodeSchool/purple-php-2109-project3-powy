@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MentorRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MentorRepository::class)
@@ -19,6 +20,8 @@ class Mentor
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "Veuillez nous préciser votre dernier poste occupé.")
      */
     private string $jobTitle;
 
@@ -46,16 +49,20 @@ class Mentor
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *      message = "Merci de choisir au moins un sujet de mentorat.")
      */
     private int $topic1;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
      */
     private ?int $topic2;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
      */
     private ?int $topic3;
 
