@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileController extends AbstractController
 {
@@ -21,8 +23,20 @@ class ProfileController extends AbstractController
      * @Route("/profile", name="profile_index")
      * @IsGranted("ROLE_USER")
      */
-    public function profile(): Response
+    public function profile(UserRepository $userRepository): Response
     {
+        if ($this->getUser() instanceof UserInterface) {
+            $userEmail = $this->getUser()->getUserIdentifier();
+            $user = $userRepository->findOneBy(['email' => $userEmail]);
+            if ($user === null || ($user !== null && !$user->getIsVerified())) {
+                $this->addFlash(
+                    'warning',
+                    "Votre adresse email n'a pas encore été confirmée. Mer
+                    ci de cliquer sur le lien que vous avez reçu pour valider votre inscription."
+                );
+                return $this->redirectToRoute('home');
+            }
+        }
         return $this->render('profile/index.html.twig');
     }
 

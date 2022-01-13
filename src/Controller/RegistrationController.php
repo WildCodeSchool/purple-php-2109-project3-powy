@@ -152,15 +152,26 @@ class RegistrationController extends AbstractController
      */
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
+        $id = $request->get('id');
+
+        if (null === $id) {
+            return $this->redirectToRoute('home');
+        }
+
+        $user = $userRepository->find($id);
+
+        if (null === $user) {
+            return $this->redirectToRoute('home');
+        }
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            if ($this->getUser() instanceof UserInterface) {
-                $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            if ($user instanceof User) {
+                $this->emailVerifier->handleEmailConfirmation($request, $user);
             }
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('error', $exception->getReason());
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('home');
         }
         $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
         return $this->redirectToRoute('login');
