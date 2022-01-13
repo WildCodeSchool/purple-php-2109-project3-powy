@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\MentorRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MentorRepository::class)
@@ -39,13 +38,6 @@ class Mentor
     /**
      * @ORM\ManyToOne(targetEntity=Company::class)
      * @ORM\JoinColumn(nullable=false)
-<<<<<<< HEAD
-     * * @Assert\NotBlank(
-     *      message = "Veuillez nous préciser le nom de votre entreprise.")
-=======
-     * @Assert\NotBlank(
-     *      message = "Veuillez préciser votre entreprise actuelle.")
->>>>>>> added assert not blank on company
      */
     private ?Company $company;
 
