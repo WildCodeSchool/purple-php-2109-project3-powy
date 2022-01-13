@@ -73,9 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *     message = "L'âge est obligatoire")
      * @Assert\GreaterThan(
      *     value = 17, message = "Vous devez être majeur.e pour bénéficier du service.")
-     * @Assert\LessThan(
-     *      value = 26,
-     *      message = "Vous ne pouvez pas être âgé.e de plus de 25 ans pour bénéficier du service.")
      */
     private int $age;
 
