@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Mentor;
 use App\Entity\Student;
 use App\Entity\User;
+use App\Form\MentorType;
 use App\Form\RegistrationFormType;
+use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -35,10 +39,10 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager
     ): Response {
-        $user = new User();
         $student = new Student();
-        $user->setStudent($student);
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $user = new User();
+        $student->setUser($user);
+        $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,8 +56,8 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(['ROLE_STUDENT']);
-                $entityManager->persist($user);
                 $entityManager->persist($student);
+                $entityManager->persist($user);
                 $entityManager->flush();
             }
         // generate a signed url and email it to the user
@@ -77,16 +81,62 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register_student.html.twig', [
-            'registrationForm' => $form->createView(),
+            'studentRegistrationForm' => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/register/mentor", name="register_mentor")
      */
-    public function registerMentor(): Response
-    {
-        return $this->render('registration/register_mentor.html.twig');
+    public function registerMentor(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $mentor = new Mentor();
+        $user = new User();
+        $mentor->setUser($user);
+        $form = $this->createForm(MentorType::class, $mentor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        // encode the plain password
+            $plainPassword = $form->get('plainPassword')->getData();
+            if (is_string($plainPassword)) {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $plainPassword,
+                    )
+                );
+                $user->setRoles(['ROLE_STUDENT']);
+                $entityManager->persist($mentor);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+        // generate a signed url and email it to the user
+            $emailUser = $user->getEmail();
+            if (is_string($emailUser)) {
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
+                    ->from(new Address('noreply@powy.io', 'powy-registration'))
+                    ->to($emailUser)
+                    ->subject('Merci de confirmer votre adresse mail pour terminer votre inscription.')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+                $this->addFlash(
+                    'warning',
+                    'Un email va vous être envoyé afin de finaliser votre inscription.'
+                );
+                return $this->redirectToRoute('login');
+            }
+        }
+
+        return $this->render('registration/register_mentor.html.twig', [
+            'mentorRegistrationForm' => $form->createView(),
+        ]);
     }
 
     /**
