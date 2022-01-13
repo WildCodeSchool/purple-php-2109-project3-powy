@@ -39,6 +39,8 @@ class Mentor
     /**
      * @ORM\ManyToOne(targetEntity=Company::class)
      * @ORM\JoinColumn(nullable=false)
+     * * @Assert\NotBlank(
+     *      message = "Veuillez nous préciser le nom de votre entreprise.")
      */
     private ?Company $company;
 
