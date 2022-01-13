@@ -55,7 +55,7 @@ class Student
     private StudyLevel $studyLevel;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="student", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="student", cascade={"persist", "remove"})
      */
     private ?User $user;
 
@@ -156,27 +156,6 @@ class Student
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setStudent(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getStudent() !== $this) {
-            $user->setStudent($this);
-        }
-
-        $this->user = $user;
-
-        return $this;
-    }
     //solve proxy error message at user connexion
     public function __sleep()
     {
@@ -215,6 +194,18 @@ class Student
     public function setTopic3(?int $topic3): self
     {
         $this->topic3 = $topic3;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
