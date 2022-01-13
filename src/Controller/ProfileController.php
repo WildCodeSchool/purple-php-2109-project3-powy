@@ -14,6 +14,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProfileController extends AbstractController
 {
@@ -77,5 +79,25 @@ class ProfileController extends AbstractController
             'form' => $form,
             'formpassword' => $formpassword,
         ]);
+    }
+
+    /**
+     * @Route("/profile/delete", name="profile_delete")
+     * @IsGranted("ROLE_USER")
+     */
+    public function delete(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        TokenStorageInterface $tokenStorage
+    ): Response {
+        $user = $this->getUser();
+        $session = $request->getSession();
+        if ($user != null) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $tokenStorage->setToken(null);
+            $session->invalidate();
+        }
+        return $this->redirectToRoute('home');
     }
 }
