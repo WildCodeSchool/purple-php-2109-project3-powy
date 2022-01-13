@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
     ): Response {
         $login = $this->getUser();
         if ($login) {
-            return $this->redirect($this->generateUrl('profile_index'));
+            return $this->redirectToRoute('profile_index');
         }
 
         $user = new User();

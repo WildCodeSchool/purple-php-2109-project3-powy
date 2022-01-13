@@ -19,7 +19,7 @@ class LoginController extends AbstractController
 
         $user = $this->getUser();
         if ($user) {
-            return $this->redirect($this->generateUrl('profile_index'));
+            return $this->redirectToRoute('profile_index');
         }
 
          // get the login error if there is one
