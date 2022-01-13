@@ -94,6 +94,10 @@
     }
 }
 
+a:hover{
+    color: $middle-background;
+}
+
 @media screen and (min-width: 768px) {
     .powy-enter {
         gap: 5em;
