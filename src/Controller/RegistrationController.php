@@ -35,6 +35,11 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager
     ): Response {
+        $login = $this->getUser();
+        if ($login) {
+            return $this->redirectToRoute('profile_index');
+        }
+
         $user = new User();
         $student = new Student();
         $user->setStudent($student);
