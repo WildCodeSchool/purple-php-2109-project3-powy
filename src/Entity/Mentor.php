@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MentorRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MentorRepository::class)
@@ -64,7 +65,7 @@ class Mentor
      * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
      */
     private ?int $topic3;
-    
+
     /**
      * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist", "remove"})
      */

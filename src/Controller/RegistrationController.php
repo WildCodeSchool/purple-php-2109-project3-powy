@@ -117,7 +117,7 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
-                $user->setRoles(['ROLE_STUDENT']);
+                $user->setRoles(['ROLE_MENTOR']);
                 $entityManager->persist($mentor);
                 $entityManager->persist($user);
                 $entityManager->flush();
