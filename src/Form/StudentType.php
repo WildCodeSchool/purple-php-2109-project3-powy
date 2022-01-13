@@ -2,18 +2,21 @@
 
 namespace App\Form;
 
-use App\Entity\ProfessionalSector;
 use App\Entity\School;
 use App\Entity\Student;
 use App\Entity\StudyLevel;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\ProfessionalSector;
+use App\Form\RegistrationFormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Blank;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class StudentType extends AbstractType
 {
@@ -64,6 +67,24 @@ class StudentType extends AbstractType
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
             ])
+            ->add('plainPassword', PasswordType::class, [
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de renseigner un mot de passe.',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caratères.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('user', RegistrationFormType::class)
         ;
     }
 
