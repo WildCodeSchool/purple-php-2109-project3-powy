@@ -25,9 +25,11 @@ class ProfileController extends AbstractController
      */
     public function profile(UserRepository $userRepository): Response
     {
+        // Fetch UserEmail to get the property IsVerfied
         if ($this->getUser() instanceof UserInterface) {
             $userEmail = $this->getUser()->getUserIdentifier();
             $user = $userRepository->findOneBy(['email' => $userEmail]);
+            // if it's not verified yet, we redirect the user to home with a flash message
             if ($user === null || ($user !== null && !$user->getIsVerified())) {
                 $this->addFlash(
                     'warning',

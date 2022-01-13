@@ -16,7 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -73,7 +75,7 @@ class RegistrationController extends AbstractController
                     (new TemplatedEmail())
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
-                    ->subject('Merci de confirmer votre adresse mail pour terminer votre inscription.')
+                    ->subject('Confirme ton inscription 🙌')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
                 $this->addFlash(
@@ -131,7 +133,7 @@ class RegistrationController extends AbstractController
                     (new TemplatedEmail())
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
-                    ->subject('Merci de confirmer votre adresse mail pour terminer votre inscription.')
+                    ->subject('Confirme ton inscription 🙌')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
                 $this->addFlash(
@@ -150,14 +152,18 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify/email", name="app_verify_email")
      */
-    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
-    {
+    public function verifyUserEmail(
+        Request $request,
+        UserRepository $userRepository,
+        MailerInterface $mailerInterface
+    ): Response {
+        // get id from the link clicked by the user to confirm his or her address
         $id = $request->get('id');
 
         if (null === $id) {
             return $this->redirectToRoute('home');
         }
-
+        //fetch user by his/her id
         $user = $userRepository->find($id);
 
         if (null === $user) {
@@ -167,13 +173,22 @@ class RegistrationController extends AbstractController
         try {
             if ($user instanceof User) {
                 $this->emailVerifier->handleEmailConfirmation($request, $user);
+                $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
+                $emailUser = $user->getEmail();
+                if (is_string($emailUser)) {
+                    $email = (new Email())
+                    ->from(new Address('noreply@powy.io', 'powy-registration'))
+                    ->to($emailUser)
+                    ->subject('Inscription validée 🥳 !')
+                    ->html($this->renderView('registration/registration_email.html.twig', ['user' => $user]));
+                    $mailerInterface->send($email);
+                }
             }
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('error', $exception->getReason());
 
             return $this->redirectToRoute('home');
         }
-        $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
         return $this->redirectToRoute('login');
     }
 }
