@@ -30,7 +30,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $student->setPhone('0234567890');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $student,
-            'studentpassword'
+            'Studentpassword1'
         );
         $student->setPassword($hashedPassword);
         $student->setStudent($this->getReference('student_1'));
@@ -47,7 +47,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $mentor->setPhone('0234567800');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $mentor,
-            'mentorpassword'
+            'Mentorpassword1'
         );
         $mentor->setPassword($hashedPassword);
         $manager->persist($mentor);
