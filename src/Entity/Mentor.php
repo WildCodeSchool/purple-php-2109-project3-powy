@@ -39,8 +39,13 @@ class Mentor
     /**
      * @ORM\ManyToOne(targetEntity=Company::class)
      * @ORM\JoinColumn(nullable=false)
+<<<<<<< HEAD
      * * @Assert\NotBlank(
      *      message = "Veuillez nous préciser le nom de votre entreprise.")
+=======
+     * @Assert\NotBlank(
+     *      message = "Veuillez préciser votre entreprise actuelle.")
+>>>>>>> added assert not blank on company
      */
     private ?Company $company;
 
@@ -50,7 +55,6 @@ class Mentor
     private ?User $user;
 
     /**
-<<<<<<< HEAD
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(
      *      message = "Merci de choisir au moins un sujet de mentorat.")
@@ -70,8 +74,6 @@ class Mentor
     private ?int $topic3;
     
     /**
-=======
->>>>>>> made mentoring entity and relations with student and mentor entities
      * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist", "remove"})
      */
     private ?Mentoring $mentoring;
