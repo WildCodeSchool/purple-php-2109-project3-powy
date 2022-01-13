@@ -40,7 +40,7 @@ class Mentor
     private ?Company $company;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="mentor", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="mentor", cascade={"persist", "remove"})
      */
     private ?User $user;
 
@@ -112,28 +112,6 @@ class Mentor
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setMentor(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getMentor() !== $this) {
-            $user->setMentor($this);
-        }
-
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getTopic1(): ?int
     {
         return $this->topic1;
@@ -166,6 +144,18 @@ class Mentor
     public function setTopic3(?int $topic3): self
     {
         $this->topic3 = $topic3;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
