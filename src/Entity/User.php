@@ -90,12 +90,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity=Student::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Student $student;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Mentor $mentor;
 
@@ -259,6 +259,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
     public function getStudent(): ?Student
     {
         return $this->student;
@@ -266,6 +271,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setStudent(?Student $student): self
     {
+        // unset the owning side of the relation if necessary
+        if ($student === null && $this->student !== null) {
+            $this->student->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($student !== null && $student->getUser() !== $this) {
+            $student->setUser($this);
+        }
+
         $this->student = $student;
 
         return $this;
@@ -278,6 +293,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setMentor(?Mentor $mentor): self
     {
+        // unset the owning side of the relation if necessary
+        if ($mentor === null && $this->mentor !== null) {
+            $this->mentor->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($mentor !== null && $mentor->getUser() !== $this) {
+            $mentor->setUser($this);
+        }
+
         $this->mentor = $mentor;
 
         return $this;
