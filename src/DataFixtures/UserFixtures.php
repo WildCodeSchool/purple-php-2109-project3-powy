@@ -59,6 +59,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $mentor->setMentor($this->getReference('mentor_' . $i));
             $manager->persist($mentor);
         }
+
+        //flush all users
+        $manager->flush();
     }
 
     public function getDependencies()
