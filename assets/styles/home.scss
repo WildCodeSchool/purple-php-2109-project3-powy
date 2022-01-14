@@ -41,12 +41,12 @@
     }
 
     .people-background {
-        background-image: url('../images/silhouettes-etudiants.png');
-        background-position: center bottom;
+        background-image: url('../images/groupe-personne.png');
+        background-position: center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
         height: 80%;
-        width: 100%;
+        width: 80%;
         z-index: -1;
      }
 }
@@ -57,12 +57,13 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    padding-bottom: 2rem;
 
     h2 {
         font-size: 1.5rem;
         font-weight: bold;
         margin: 0;
-        padding-bottom: .7rem;
+        padding-bottom: 2rem;
         text-align: center;
     }
 
@@ -91,6 +92,10 @@
         margin: 0;
         text-align: center;
     }
+}
+
+a:hover{
+    color: $middle-background;
 }
 
 @media screen and (min-width: 768px) {

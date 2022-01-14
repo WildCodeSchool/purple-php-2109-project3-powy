@@ -5,3 +5,48 @@ body {
     padding-bottom: 10.75rem;
     position: relative;
 }
+
+/*
+buttons available for all pages.
+thoses classes should be used everywhere
+*/
+.dark-submit-button {
+    align-items: center;
+    background-color: $dark-background;
+    border: none;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    font-weight: bold;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 15em;
+    margin: auto;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+        text-decoration: none;
+    }
+}
+
+.alert-submit-button {
+    align-items: center;
+    background-color: $alert;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    font-weight: bold;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 15em;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+        text-decoration: none;
+    }
+}

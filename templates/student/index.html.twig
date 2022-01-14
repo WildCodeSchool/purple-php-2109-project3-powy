@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Powy - Le pouvoir de transmettre{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<section class="section-1-student">
+    {% include "components/_header.html.twig" %}
+    <div class="text-header-student">
+        <h1 class="text-center title-header bold">Tu es étudiant(e) et tu cherches à te révéler ?</h1>
+        <p class="sub-title-header">Étudiant(e), alternant(e), peu importe ton cursus, ta filière ou ton niveau, notre programme est gratuit et pensé pour tous les profils.
+        Nous sommes là pour te présenter le <span>Mentor</span> qui te comprend et qui saura
+        t’accompagner dans ta réussite.</p>
+        <div class="inscription-btn-section">
+            <a href="{{ path('register_student') }}" class="inscription-btn">Je m'inscris</a>
+        </div>
+    </div>
+</section>
+<main>
+    <br>
+    <h4 class="text-center bold ">Comment ça marche ?</h4>
+    <div class="howto">
+        <div class="step1">
+            <button class="accordion-howto"><img src="{{ asset('build/images/num1.png') }}" alt="num 3"> Je renseigne mes informations</button>
+            <div class="panel">
+                <p>Tout au long de votre mission, nous sommes à vos côtés pour répondre à vos questions et résoudre vos problèmes.</p>
+            </div>
+
+            <button class="accordion-howto"><img src="{{ asset('build/images/num2.png') }}" alt="num 3"> Je valide mon inscription</button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+
+        <div class="step2">
+            <button class="accordion-howto"><img src="{{ asset('build/images/num3.png') }}" alt="num 3"> Powy te trouve un mentor</button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+
+            <button class="accordion-howto"><img src="{{ asset('build/images/num4.png') }}" alt="num 3"> Tu débutes ton mentorat</button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<section class="faq-index">
+    <h2>F.A.Q.</h2>
+    {% include 'components/_faq.html.twig' %}
+</section>
+
+<script src="{{ asset('build/js/index.js') }}">
+
+</script>
+
+{% endblock %}
+
+
+
