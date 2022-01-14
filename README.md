@@ -32,6 +32,9 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
+5. Create a file .env.local in root (copy of .env file)
+6. Configure your database in .env.local
+5. Configure your favorite smtp in .env.local
 
 ### Working
 
