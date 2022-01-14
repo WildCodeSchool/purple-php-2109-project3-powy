@@ -73,9 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *     message = "L'âge est obligatoire")
      * @Assert\GreaterThan(
      *     value = 17, message = "Vous devez être majeur.e pour bénéficier du service.")
-     * @Assert\LessThan(
-     *      value = 26,
-     *      message = "Vous ne pouvez pas être âgé.e de plus de 25 ans pour bénéficier du service.")
      */
     private int $age;
 
@@ -90,14 +87,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity=Student::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Student $student;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Mentor $mentor;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $picture = null;
 
     public function getId(): ?int
     {
@@ -259,6 +261,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
     public function getStudent(): ?Student
     {
         return $this->student;
@@ -266,6 +273,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setStudent(?Student $student): self
     {
+        // unset the owning side of the relation if necessary
+        if ($student === null && $this->student !== null) {
+            $this->student->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($student !== null && $student->getUser() !== $this) {
+            $student->setUser($this);
+        }
+
         $this->student = $student;
 
         return $this;
@@ -278,7 +295,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setMentor(?Mentor $mentor): self
     {
+        // unset the owning side of the relation if necessary
+        if ($mentor === null && $this->mentor !== null) {
+            $this->mentor->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($mentor !== null && $mentor->getUser() !== $this) {
+            $mentor->setUser($this);
+        }
+
         $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
