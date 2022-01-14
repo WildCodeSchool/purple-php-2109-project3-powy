@@ -5,6 +5,7 @@
     font-size: 1rem;
     gap: 2rem;
     margin-bottom: 3rem;
+    height: 100%;
 
     h2 {
         font-size: 1.8rem;
@@ -42,6 +43,11 @@
             width: 15em;
             padding: 0.2em;
         }
+    }
+
+    .profil-upload{
+        display: flex;
+        justify-content: center;
     }
 
     .card-edit-profile-part2{
