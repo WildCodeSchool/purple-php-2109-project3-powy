@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
 use App\Repository\UserRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,17 +51,26 @@ class ProfileController extends AbstractController
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        FileUploader $fileUploader
     ): Response {
         $user = $this->getUser();
 
-        //Modification form user information
+        if (!($user instanceof User)) {
+            throw $this->createAccessDeniedException();
+        }
+        //Modification form user information & Upload Picture profil
         $form = $this->createForm(EditProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile instanceof UploadedFile) {
+                $pictureFileName = $fileUploader->upload($pictureFile);
+                $user->setPicture($pictureFileName);
+            }
 
+            $entityManager->flush();
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,7 +93,7 @@ class ProfileController extends AbstractController
 
         return $this->renderForm('profile/edit.html.twig', [
             'form' => $form,
-            'formpassword' => $formpassword
+            'formpassword' => $formpassword,
         ]);
     }
 

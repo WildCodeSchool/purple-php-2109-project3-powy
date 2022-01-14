@@ -9,11 +9,15 @@
 {% block body %}
 {% include 'components/_header.html.twig' %}
 {% include "components/_flashmessages.html.twig" %}
-<main class="container-footer">
+<main>
     <div class="container">
         <h1 class="center">Mon profil</h1>
         <div class="img-profile center">
-            <img src="{{ asset('build/images/user.png') }}" alt="img profile">
+            {% if app.user.picture == null %}
+                <img src="/upload/pictures/user.png" alt="img profile">
+            {% else %}
+                <img src="/upload/pictures/{{ app.user.picture }}" alt="img profile">
+            {% endif %}
         </div>
         <h4 class="center">{{ app.user.firstname }} {{ app.user.lastname }}</h4>
         <h6 class="center">{{ app.user.age }} ans</h6>
@@ -34,7 +38,7 @@
     <p class="center red">Tu n'as pas encore de mentor</p>
     <div class="container-btn-profile">
         <div class="btn-profile">
-            <a href="#">Modifier mon profil</a>
+            <a href="{{ path('profile_edit') }}">Modifier mon profil</a>
         </div>
         <div class="btn-profile">
             <a href="#">Modifier mes choix</a>
