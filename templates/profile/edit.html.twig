@@ -7,13 +7,15 @@
 {{ include('components/_header.html.twig') }}
 <main class="container-profile">
     <h2>Modifier ou supprimer mon profil</h1>
-    <a href="" class="card-picture-profile">
-        <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
-        <p>Télécharger une photo</p>
-    </a>
-
     <div class="card-edit-profile">
         {{ form_start(form) }}
+        <div class="profil-upload">
+            <a href="" class="card-picture-profile">
+                <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
+                <span class="d-none">{{ form_widget(form.picture) }}</span>
+                <label for="edit_profile_picture">Télécharger une photo</label>
+            </a>
+        </div>
         <div class="card-edit-profile-part1">
             <div class="field">
                 <label for="gender" class="col-sm-2 col-form-label">Genre</label>
@@ -68,6 +70,7 @@
                     {{ form_row(formpassword.plainPassword.first) }}
                 </div>
             </div>
+            {{ form_row(formpassword._token) }}
             <div class="field">
                 <div class="col-sm-10">
                     {{ form_row(formpassword.plainPassword.second) }}
@@ -83,4 +86,8 @@
     <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
 
 </main>
+
+<script src="{{ asset('build/js/index.js') }}">
+</script>
+
 {% endblock %}
