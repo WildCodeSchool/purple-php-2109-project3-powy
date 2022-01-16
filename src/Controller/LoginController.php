@@ -70,6 +70,7 @@ class LoginController extends AbstractController
                 );
                 $this->redirectToRoute('reset_password');
             } elseif ($user !== null && is_string($emailUser)) {
+                //send an email with a link that will redirect the user on a form to change his/her password
                 $emailVerifier->sendEmailConfirmation(
                     'change_password',
                     $user,
@@ -81,7 +82,7 @@ class LoginController extends AbstractController
                 );
                 $this->addFlash(
                     'success',
-                    "Vous allez recevoir un mail à votre adresse afin de modifier votre mot de passe."
+                    "Tu vas recevoir un message à ton adresse mail afin de modifier ton mot de passe."
                 );
                 $this->redirectToRoute('login');
             }
@@ -98,7 +99,8 @@ class LoginController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        MailerInterface $mailerInterface
     ): Response {
         // get id from the link clicked by the user in the email
         $id = $request->get('id');
@@ -115,17 +117,29 @@ class LoginController extends AbstractController
         //Modification form password user
         $formpassword = $this->createForm(EditPasswordType::class, $user);
         $formpassword->handleRequest($request);
-
+        //check if there's a form to handle
         if ($formpassword->isSubmitted() && $formpassword->isValid()) {
+            //get the user email
+            $emailUser = $user->getEmail();
+            //get the password
             $plaintextPassword = $formpassword['plainPassword']->getData();
-            if (is_string($plaintextPassword)) {
+            if (is_string($plaintextPassword) && is_string($emailUser)) {
+                //hash the password to add it in the database
                 $hashedPassword = $passwordHasher->hashPassword(
                     $user,
                     $plaintextPassword
                 );
                 $user->setPassword($hashedPassword);
                 $entityManager->flush();
-                return $this->redirectToRoute('profile_index');
+                //send an email to confirm the changes
+                $email = (new Email())
+                ->from(new Address('noreply@powy.io', 'Powy'))
+                ->to($emailUser)
+                ->subject('Changement de mot de passe')
+                ->html($this->renderView('profile/password_changed.html.twig', ['user' => $user]));
+                $mailerInterface->send($email);
+                $this->addFlash("success", "Ton nouveau mot de passe a bien été enregistré.");
+                return $this->redirectToRoute('login');
             }
         }
 
