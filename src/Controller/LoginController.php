@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\EditPasswordType;
 use App\Form\EmailFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -91,8 +94,43 @@ class LoginController extends AbstractController
     /**
      * @Route("/login/password" ,name="change_password")
      */
-    public function resetPassword(): Response
-    {
-        return $this->redirectToRoute('login');
+    public function resetPassword(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher,
+        UserRepository $userRepository
+    ): Response {
+        // get id from the link clicked by the user in the email
+        $id = $request->get('id');
+
+        if (null === $id) {
+            return $this->redirectToRoute('home');
+        }
+        //fetch user by his/her id
+        $user = $userRepository->find($id);
+
+        if (null === $user) {
+            return $this->redirectToRoute('home');
+        }
+        //Modification form password user
+        $formpassword = $this->createForm(EditPasswordType::class, $user);
+        $formpassword->handleRequest($request);
+
+        if ($formpassword->isSubmitted() && $formpassword->isValid()) {
+            $plaintextPassword = $formpassword['plainPassword']->getData();
+            if (is_string($plaintextPassword)) {
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $plaintextPassword
+                );
+                $user->setPassword($hashedPassword);
+                $entityManager->flush();
+                return $this->redirectToRoute('profile_index');
+            }
+        }
+
+        return $this->renderForm('login/change_password.html.twig', [
+            'formpassword' => $formpassword,
+        ]);
     }
 }
