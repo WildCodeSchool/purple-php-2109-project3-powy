@@ -211,28 +211,28 @@ input {
     margin-bottom:3rem;
 
     .col-sm-10 {
-        flex-direction:column;
+            flex-direction:column;
         }
+}
+
+    /* title question bold desktop*/
+    .question-text {
+            font-size: 1.5em;
     }
 
-/* title question bold desktop*/
-.question-text {
-    font-size: 1.5em;
-}
+    /*scroll button desktop*/
+    .scroll-btn-section {
+            justify-content: right;
+    }
 
-/*scroll button desktop*/
-.scroll-btn-section {
-    justify-content: right;
-}
+    .scroll-btn {
+            height: 3em;
+            width: 10em;
+    }
 
-.scroll-btn {
-    height: 3em;
-    width: 10em;
-}
-
-/* register button end of form register desktop*/
-.register-btn {
-    align-items: right;
-    justify-content: right;
-}
+    /* register button end of form register desktop*/
+    .register-btn {
+            align-items: right;
+            justify-content: right;
+    }
 }
