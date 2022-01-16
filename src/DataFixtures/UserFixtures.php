@@ -30,6 +30,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $student->setGender('Female');
             $student->setAge('22');
             $student->setPhone('0234567890');
+            $student->setIsVerified(true);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $student,
                 'Studentpassword!' . $i
@@ -50,6 +51,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $mentor->setGender('Female');
             $mentor->setAge('42');
             $mentor->setPhone('0234567800');
+            $mentor->setIsVerified(true);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $mentor,
                 'Mentorpassword!' . $i
