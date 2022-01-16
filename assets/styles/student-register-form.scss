@@ -108,14 +108,14 @@ h1 {
     .col-sm-10 {
         margin: auto;
 
-            select , input {
-                background-color: $white;
-                border-radius: 5px;
-                width: 15em;
-                padding: 0.2em;
-            }
+        select , input {
+            background-color: $white;
+            border-radius: 5px;
+            width: 15em;
+            padding: 0.2em;
         }
     }
+}
 
 /* step 6 of form register */
 .form-6 {
@@ -170,12 +170,13 @@ input {
     margin:auto;
     margin-bottom: 2em;
 }
+
 /* CGU section */
 .CGU {
     margin:auto;
 }
-/* step 3 of form register desktop*/
 
+/* step 3 of form register desktop*/
 .form-3 {
     justify-content: flex-start;
     align-content:stretch;
@@ -195,6 +196,7 @@ input {
        width : 23em; 
     }
 }
+
 /* step 5 of form register desktop*/
 .form-5 {
     display:grid;
@@ -215,15 +217,17 @@ input {
 .question-text {
     font-size: 1.5em;
 }
+
 /*scroll button desktop*/
 .scroll-btn-section {
     justify-content: right;
-    }
+}
 
 .scroll-btn {
     height: 3em;
     width: 10em;
 }
+
 /* register button end of form register desktop*/
 .register-btn {
     align-items: right;
