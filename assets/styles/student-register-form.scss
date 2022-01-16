@@ -49,8 +49,8 @@ h1 {
     text-decoration: none;
     width: 5em;
         
-    &:hover,&:focus {
-    box-shadow: 0 2px 4px $dark-background;
+    &:hover, &:focus {
+        box-shadow: 0 2px 4px $dark-background;
     }
 }
 
@@ -164,40 +164,40 @@ input {
 }
 
 @media screen and (min-width: 1024px) {
-/* step 6 of form register desktop*/
-.form-6 {
-    justify-content: center;
-    align-self:center;
-    max-width: 25em;
-    margin:auto;
-    margin-bottom: 2em;
-}
-
-/* CGU section */
-.CGU {
-    margin:auto;
-}
-
-/* step 3 of form register desktop*/
-.form-3 {
-    justify-content: flex-start;
-    align-content:stretch;
-    margin:auto;
-    margin-bottom:4em;
-    margin-top: 4em;
-
-    .field {
-        align-self:flex-start;
-        margin-left:5em;
-
-        .col-sm-10 {
-            margin-left:0em;
-        }
-    }   
-    textarea {
-       width : 23em; 
+    /* step 6 of form register desktop*/
+    .form-6 {
+        justify-content: center;
+        align-self:center;
+        max-width: 25em;
+        margin:auto;
+        margin-bottom: 2em;
     }
-}
+
+    /* CGU section */
+    .CGU {
+        margin:auto;
+    }
+
+    /* step 3 of form register desktop*/
+    .form-3 {
+        justify-content: flex-start;
+        align-content:stretch;
+        margin:auto;
+        margin-bottom:4em;
+        margin-top: 4em;
+
+        .field {
+            align-self:flex-start;
+            margin-left:5em;
+
+            .col-sm-10 {
+                margin-left:0em;
+            }
+        }   
+        textarea {
+            width : 23em; 
+        }
+    }
 
 /* step 5 of form register desktop*/
 .form-5 {
