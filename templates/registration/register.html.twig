@@ -9,8 +9,6 @@
 {% block body %}
     {% include "components/_header.html.twig" %}
     {% include "components/_flashmessages.html.twig" %}
-        
-
             <h1 class="inscription-title">Formulaire d'inscription étudiant</h1>
             {{ form_start(registrationForm) }}
             {{ form_errors(registrationForm) }}
@@ -20,7 +18,7 @@
             </div>
         {# question 1#}
             <p class="question-text">Quel est ton niveau actuel ?</p>
-        {# indication 1#}    
+        {# indication 1#}
             <div class="indications">
                 <p>Sélectionne la case correspondant à ta situation.</p>
             </div>
@@ -72,7 +70,7 @@
             <p class="question-text">On voudrait en savoir plus sur toi pour mieux t'accompagner.</p>
         {# form 3#}
             <div class="form-3">
-                <div class="question-field">   
+                <div class="question-field">
                     <p class="question-text"> Ton parcours scolaire : </p>
                 </div>
                     <div class="field">
@@ -157,7 +155,7 @@
                 </div>
                 <div class="col-sm-10">
                         {{ form_row(registrationForm.firstname, {
-                            label: 'Prénom'      
+                            label: 'Prénom'
                         }) }}
                 </div>
                 <div class="col-sm-10">
@@ -191,22 +189,22 @@
                     <div class="col-sm-10">
                         <div class="field">
                             {{ form_row(registrationForm.email, {
-                                label:'Email'
+                                label: 'Email'
                             }) }}
                         </div>
-                        <div class="field">    
+                        <div class="field">
                             {{ form_row(registrationForm.plainPassword, {
                                 label: 'Mot de passe'
                             }) }}
                         </div>
                     </div>
                 </div>
-            </div>  
-                <div class="CGU">  
+            </div>
+                <div class="CGU">
                     {{ form_widget(registrationForm.agreeTerms) }}
                     {{ form_label(registrationForm.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
                 </div>
-        {# register-btn #}    
+        {# register-btn #}
             <div class="register-btn">
                 <button type="submit" class="inscription-btn">s'inscrire</button>
             <div>
