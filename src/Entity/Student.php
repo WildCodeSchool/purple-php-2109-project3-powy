@@ -66,10 +66,9 @@ class Student
     private ?Mentoring $mentoring;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Topic::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity=Topic::class, mappedBy="student", cascade={"persist", "remove"})
      */
-    private ?Topic $topics;
+    private ?Topic $topic;
 
     public function getId(): ?int
     {
@@ -178,14 +177,24 @@ class Student
         return $this;
     }
 
-    public function getTopics(): ?Topic
+    public function getTopic(): ?Topic
     {
-        return $this->topics;
+        return $this->topic;
     }
 
-    public function setTopics(?Topic $topics): self
+    public function setTopic(?Topic $topic): self
     {
-        $this->topics = $topics;
+        // unset the owning side of the relation if necessary
+        if ($topic === null && $this->topic !== null) {
+            $this->topic->setStudent(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($topic !== null && $topic->getStudent() !== $this) {
+            $topic->setStudent($this);
+        }
+
+        $this->topic = $topic;
 
         return $this;
     }

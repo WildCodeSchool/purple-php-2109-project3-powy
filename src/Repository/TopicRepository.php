@@ -22,19 +22,18 @@ class TopicRepository extends ServiceEntityRepository
     // /**
     //  * @return Topic[] Returns an array of Topic objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByTopic(int $topic): mixed
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
+            ->where('t.student is null')
+            ->andWhere('t.topic1 = :topic OR t.topic2 = :topic OR t.topic3 = :topic')
+            ->setParameter('topic', $topic)
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Topic

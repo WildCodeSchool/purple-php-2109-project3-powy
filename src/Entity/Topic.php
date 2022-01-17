@@ -55,6 +55,16 @@ class Topic
      */
     private ?int $topic3;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Student::class, inversedBy="topic", cascade={"persist", "remove"})
+     */
+    private ?Student $student;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="topic", cascade={"persist", "remove"})
+     */
+    private ?Mentor $mentor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,5 +110,29 @@ class Topic
     public function __sleep()
     {
         return [];
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
+
+        return $this;
+    }
+
+    public function getMentor(): ?Mentor
+    {
+        return $this->mentor;
+    }
+
+    public function setMentor(?Mentor $mentor): self
+    {
+        $this->mentor = $mentor;
+
+        return $this;
     }
 }
