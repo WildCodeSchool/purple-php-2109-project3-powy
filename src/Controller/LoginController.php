@@ -18,9 +18,16 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class LoginController extends AbstractController
 {
+    private EmailVerifier $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
     /**
      * @Route("/login", name="login")
      */
@@ -50,9 +57,7 @@ class LoginController extends AbstractController
      */
     public function askEmailForResetPassword(
         Request $request,
-        UserRepository $userRepository,
-        MailerInterface $mailerInterface,
-        EmailVerifier $emailVerifier
+        UserRepository $userRepository
     ): Response {
         $form = $this->createForm(EmailFormType::class);
         $form->handleRequest($request);
@@ -63,7 +68,7 @@ class LoginController extends AbstractController
             //verify if there's a user registered with the email
             $user = $userRepository->findOneBy(['email' => $emailUser]);
             //if there's not user, notify the person
-            if ($user === null) {
+            if (($user !== null && !$user->getIsVerified()) || $user === null) {
                 $this->addFlash(
                     'warning',
                     "Aucun utilisateur n'est enregistré à cette adresse mail."
@@ -71,7 +76,7 @@ class LoginController extends AbstractController
                 $this->redirectToRoute('reset_password');
             } elseif ($user !== null && is_string($emailUser)) {
                 //send an email with a link that will redirect the user on a form to change his/her password
-                $emailVerifier->sendEmailConfirmation(
+                $this->emailVerifier->sendEmailConfirmation(
                     'change_password',
                     $user,
                     (new TemplatedEmail())
@@ -117,6 +122,12 @@ class LoginController extends AbstractController
         //Modification form password user
         $formpassword = $this->createForm(EditPasswordType::class, $user);
         $formpassword->handleRequest($request);
+        try {
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
+        } catch (VerifyEmailExceptionInterface $exception) {
+            $this->addFlash('error', $exception->getReason());
+            return $this->redirectToRoute('home');
+        }
         //check if there's a form to handle
         if ($formpassword->isSubmitted() && $formpassword->isValid()) {
             //get the user email
