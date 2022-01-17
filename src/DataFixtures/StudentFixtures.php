@@ -20,7 +20,6 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
          */
         for ($i = 0; $i < self::AVAILABLESTUDENTS; $i++) {
             $student = new Student();
-            $student->setTopic1(1);
             $student->setScholarship(false);
             $student->setDreamJob("Job_" . $i);
             $student->setDreamDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
@@ -31,6 +30,7 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
             $student->setProfessionalSector($this->getReference('sector_13'));
             $student->setSchool($this->getReference('school_3'));
             $student->setStudyLevel($this->getReference('study_2'));
+            $student->setTopics($this->getReference('topics_' . $i));
             $this->addReference('student_' . $i, $student);
             $manager->persist($student);
         }
@@ -45,6 +45,7 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
             ProfessionalSectorFixtures::class,
             SchoolFixtures::class,
             StudyLevelFixtures::class,
+            TopicFixtures::class,
         ];
     }
 }

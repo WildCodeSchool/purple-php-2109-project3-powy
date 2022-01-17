@@ -20,7 +20,6 @@ class MentorFixtures extends Fixture implements DependentFixtureInterface
          */
         for ($i = 0; $i < self::AVAILABLEMENTORS; $i++) {
             $mentor = new Mentor();
-            $mentor->setTopic1(1);
             $mentor->setJobTitle("job_" . $i);
             $mentor->setCareerDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
@@ -32,6 +31,7 @@ class MentorFixtures extends Fixture implements DependentFixtureInterface
             //20 companies set in CompanyFixtures
             $mentor->setCompany($this->getReference('company_' . $i));
             $this->addReference('mentor_' . $i, $mentor);
+            $mentor->setTopics($this->getReference('topics_' . $i));
             $manager->persist($mentor);
         }
 
