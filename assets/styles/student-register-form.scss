@@ -49,14 +49,11 @@ h1 {
     text-decoration: none;
     width: 5em;
         
-    &:hover {
-        box-shadow: 0 2px 4px $dark-background;
-    }
-
+    &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
     }
-    
+
 }
 
 /* register button end of form register */
