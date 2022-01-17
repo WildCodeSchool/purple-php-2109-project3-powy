@@ -6,6 +6,7 @@ use App\Entity\School;
 use App\Entity\Student;
 use App\Entity\StudyLevel;
 use App\Entity\ProfessionalSector;
+use App\Entity\Topic;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,18 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class StudentType extends AbstractType
 {
-    private const TOPICS = [
-        "M'immerger dans un métier" => 1,
-        'Me faire coacher' => 2,
-        'Réussir mes candidatures' => 3,
-        'Développer mes compétences' => 4,
-        'Mieux gérer les outils digitaux pro' => 5,
-        'Mieux communiquer en français' => 6,
-        'Mieux communiquer en anglais' => 7,
-        'Mieux communiquer en espagnol' => 8,
-        'Mieux communiquer en allemand' => 9,
 
-    ];
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -47,17 +37,6 @@ class StudentType extends AbstractType
             ->add('dreamDescription', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('topic1', ChoiceType::class, [
-                'choices' => self::TOPICS,
-            ])
-            ->add('topic2', ChoiceType::class, [
-                'required' => false,
-                'choices' => self::TOPICS,
-                ])
-            ->add('topic3', ChoiceType::class, [
-                'required' => false,
-                'choices' => self::TOPICS,
-                ])
             ->add('professionalSector', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => ProfessionalSector::class
@@ -84,6 +63,7 @@ class StudentType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('topics', TopicType::class)
             ->add('user', RegistrationFormType::class)
         ;
     }
