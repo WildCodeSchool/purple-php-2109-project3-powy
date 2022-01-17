@@ -30,7 +30,7 @@ class StudentFixtures extends Fixture implements DependentFixtureInterface
             $student->setProfessionalSector($this->getReference('sector_13'));
             $student->setSchool($this->getReference('school_3'));
             $student->setStudyLevel($this->getReference('study_2'));
-            $student->setTopics($this->getReference('topics_' . $i));
+            $student->setTopic($this->getReference('student_topic_' . $i));
             $this->addReference('student_' . $i, $student);
             $manager->persist($student);
         }

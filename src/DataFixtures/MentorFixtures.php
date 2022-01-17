@@ -31,7 +31,7 @@ class MentorFixtures extends Fixture implements DependentFixtureInterface
             //20 companies set in CompanyFixtures
             $mentor->setCompany($this->getReference('company_' . $i));
             $this->addReference('mentor_' . $i, $mentor);
-            $mentor->setTopics($this->getReference('topics_' . $i));
+            $mentor->setTopic($this->getReference('mentor_topic_' . $i));
             $manager->persist($mentor);
         }
 
