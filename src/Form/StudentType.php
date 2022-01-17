@@ -69,7 +69,7 @@ class StudentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('topics', TopicType::class)
+            ->add('topic', TopicType::class)
             ->add('user', RegistrationFormType::class)
         ;
     }
