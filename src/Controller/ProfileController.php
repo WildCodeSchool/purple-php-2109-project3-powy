@@ -35,8 +35,8 @@ class ProfileController extends AbstractController
             if ($user === null || ($user !== null && !$user->getIsVerified())) {
                 $this->addFlash(
                     'warning',
-                    "Votre adresse email n'a pas encore été confirmée. Mer
-                    ci de cliquer sur le lien que vous avez reçu pour valider votre inscription."
+                    "Votre adresse email n'a pas encore été confirmée.
+                     Merci de cliquer sur le lien que vous avez reçu pour valider votre inscription."
                 );
                 return $this->redirectToRoute('home');
             }
