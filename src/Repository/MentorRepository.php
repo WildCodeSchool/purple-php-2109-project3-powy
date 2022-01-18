@@ -22,12 +22,13 @@ class MentorRepository extends ServiceEntityRepository
      * Ignored php stan message "should return array but returns mixed."
      * function return an array
      */
-    public function findMentorsByTopic(int $topic): array
+    public function findMentorsByTopic(?int $topic): array
     {
         // @phpstan-ignore-next-line
         return $this->createQueryBuilder('m')
             ->join('App\Entity\Topic', 't')
             ->where('t.topic1 = :topic OR t.topic2 = :topic OR t.topic3 = :topic')
+            ->andWhere('m.mentoring is null')
             ->setParameter('topic', $topic)
             ->getQuery()
             ->getResult()
