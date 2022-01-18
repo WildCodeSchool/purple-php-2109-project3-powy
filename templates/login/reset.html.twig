@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+
+   {{ include('components/_header.html.twig') }}
+   {{ include('components/_flashmessages.html.twig') }}
+   {{ form_start(EmailFormType) }}
+   {{ form_errors(EmailFormType) }}
+   {{ form_row(EmailFormType.email, {
+       label: 'Quelle est ton adresse mail ?'
+   }) }}
+   <button type="submit" class="btn">Ok</button>
+    {{ form_end(EmailFormType) }}
+{% endblock %}

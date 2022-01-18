@@ -155,7 +155,8 @@ class RegistrationController extends AbstractController
     public function verifyUserEmail(
         Request $request,
         UserRepository $userRepository,
-        MailerInterface $mailerInterface
+        MailerInterface $mailerInterface,
+        EntityManagerInterface $entityManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
         $id = $request->get('id');
@@ -173,6 +174,9 @@ class RegistrationController extends AbstractController
         try {
             if ($user instanceof User) {
                 $this->emailVerifier->handleEmailConfirmation($request, $user);
+                $user->setIsVerified(true);
+                $entityManager->persist($user);
+                $entityManager->flush();
                 $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
                 $emailUser = $user->getEmail();
                 if (is_string($emailUser)) {
