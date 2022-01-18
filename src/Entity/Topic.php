@@ -56,12 +56,12 @@ class Topic
     private ?int $topic3;
 
     /**
-     * @ORM\OneToOne(targetEntity=Student::class, inversedBy="topic", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="topic", cascade={"persist", "remove"})
      */
     private ?Student $student;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentor::class, inversedBy="topic", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="topic", cascade={"persist", "remove"})
      */
     private ?Mentor $mentor;
 
@@ -119,6 +119,16 @@ class Topic
 
     public function setStudent(?Student $student): self
     {
+        // unset the owning side of the relation if necessary
+        if ($student === null && $this->student !== null) {
+            $this->student->setTopic(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($student !== null && $student->getTopic() !== $this) {
+            $student->setTopic($this);
+        }
+
         $this->student = $student;
 
         return $this;
@@ -131,6 +141,16 @@ class Topic
 
     public function setMentor(?Mentor $mentor): self
     {
+        // unset the owning side of the relation if necessary
+        if ($mentor === null && $this->mentor !== null) {
+            $this->mentor->setTopic(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($mentor !== null && $mentor->getTopic() !== $this) {
+            $mentor->setTopic($this);
+        }
+
         $this->mentor = $mentor;
 
         return $this;

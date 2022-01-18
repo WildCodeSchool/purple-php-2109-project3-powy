@@ -55,7 +55,7 @@ class Mentor
     private ?Mentoring $mentoring;
 
     /**
-     * @ORM\OneToOne(targetEntity=Topic::class, mappedBy="mentor", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Topic::class, inversedBy="mentor", cascade={"persist", "remove"})
      */
     private ?Topic $topic;
 
@@ -143,16 +143,6 @@ class Mentor
 
     public function setTopic(?Topic $topic): self
     {
-        // unset the owning side of the relation if necessary
-        if ($topic === null && $this->topic !== null) {
-            $this->topic->setMentor(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($topic !== null && $topic->getMentor() !== $this) {
-            $topic->setMentor($this);
-        }
-
         $this->topic = $topic;
 
         return $this;
