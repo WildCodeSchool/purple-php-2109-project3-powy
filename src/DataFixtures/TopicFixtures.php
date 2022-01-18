@@ -27,8 +27,8 @@ class TopicFixtures extends Fixture
         for ($i = 0; $i < self::LISTSOFTOPICS; $i++) {
             $topics = new Topic();
             $topics->setTopic1(4);
-            $topics->setTopic2(2);
-            $topics->setTopic3(7);
+            $topics->setTopic2(7);
+            $topics->setTopic3(3);
             $this->addReference('mentor_topic_' . $i, $topics);
             $manager->persist($topics);
         }
