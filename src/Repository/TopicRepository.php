@@ -19,22 +19,6 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
-    // /**
-    //  * @return Topic[] Returns an array of Topic objects
-    //  */
-
-    public function findByTopic(int $topic): mixed
-    {
-        return $this->createQueryBuilder('t')
-            ->where('t.student is null')
-            ->andWhere('t.topic1 = :topic OR t.topic2 = :topic OR t.topic3 = :topic')
-            ->setParameter('topic', $topic)
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     /*
     public function findOneBySomeField($value): ?Topic
     {
