@@ -1,10 +1,6 @@
-/* base form flex */
-form {
-    display: flex;
+.step-1 , .step-2 , .step-3 , .step-4 , .step-5 , .step-6 {
+    display:flex;
     flex-direction: column;
-    font-size: 1rem;
-    margin: 2rem;
-    align-self:center
 }
 
 h1 {
@@ -18,6 +14,9 @@ h1 {
     background-color: white;
     border:solid;
     border-width:0.1px;
+    margin-left: 1em;
+    margin-right:1em;
+
 }
 
 .progress-bar {
@@ -27,16 +26,28 @@ h1 {
 /* title question bold */
 .question-text {
     font-weight: bolder;
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-top:0.3em;
+    margin-right:2em;
+    margin-left:2em;
 }
 
-/*scroll button */
+.indications {
+    margin-left: 2em;
+    margin-right:2em;
+}
+
+.logo-powy {
+    margin-left: 2em;
+    margin-right:2em;
+}
+
+/* scroll button */ 
 .scroll-btn-section {
-    margin-top:2rem;
-    margin-bottom: 2rem;
+    margin:2em;
     display: flex;
-    justify-content: center;
-    }
+    justify-content: right;
+}
 
 .scroll-btn {
     align-items: center;
@@ -44,199 +55,236 @@ h1 {
     border-radius: 10px;
     color: $white;
     display: flex;
-    height: 2em;
+    height: 3em;
     justify-content: center;
     text-decoration: none;
-    width: 5em;
+    width: 8em;
 
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
     }
-
 }
 
-/* register button end of form register */
+/* register btn */
 .register-btn {
-    margin-top:1rem;
-    margin-bottom: 1rem;
+    margin:2em;
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
-.form-3 {
+.registration-btn {
+    align-items: center;
+    background-color: $dark-background;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 8em;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+    }
+}
+
+input , select , textarea {
+    background-color: $white;
+    border-radius: 5px;
+    padding: 0.1em;   
+    margin:0.5em;
+}
+
+.form-6 , .form-3 , .form-5 {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+.fields-3 , .fields-5 , .fields-6 {
     background-color: $light-background-secondary;
     border: 0.1px solid lightgray;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    padding: 1em;
+}
+
+/*step-3 of form */
+
+.fields-3 {
     display:flex;
+    height:auto;
     flex-direction:column;
-    align-items:center;
-    margin:0em;
-    margin-bottom:3em;
-    margin-top: 3em;
+    justify-content: center;
+    width:50em;
+    padding:2em;
+    margin:3em;
+    min-width:28em;
 
     .question-field {
-        align-self:flex-start;
+        margin-top:0.5em;   
+    }
+    
+    .form-label {
+        margin-left : 3em;
+        margin-top: 1em;
     }
 
-    .field {
-        margin-bottom:1em;
-    }
-
-    input , select , textarea {
+    select , input {
         background-color: $white;
         border-radius: 5px;
-        padding: 0.1em;
-        width: 17em;
+        padding: 0.2em;
+        margin-left: 3em;
+        max-width:25em;
     }
 
+    textarea {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        height: 8em;
+    }
 }
 
-/* step 5 of form register */
+/*step-5 of form */
+.fields-5 {
+        display: grid;
+        margin: 2em;
+        padding:2em;
+        max-width:50em;
+        grid-template-columns: auto; 
+        grid-template-rows: auto;
+        grid-auto-flow:column; 
+        gap: 3em 1.5em; 
+        grid-template-areas: 
+            "gender lastname firstname"
+            "age phone ."; 
+        grid-area: fields-5; 
+}
 
-.form-5 {
-    background-color: $light-background-secondary;
-    border: 0.1px solid lightgray;
-    border-radius: 5px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:2em;
-    margin:0em;
-    margin-bottom:3em;
-    margin-top: 2em;
-
-    .col-sm-10 {
-        margin: auto;
-
-        select , input {
+.gender {
+    grid-area: gender;
+              
+        select {
             background-color: $white;
             border-radius: 5px;
-            width: 15em;
             padding: 0.2em;
+            max-width:25em;
+            height: 2em;
         }
-    }
 }
 
-/* step 6 of form register */
-.form-6 {
-    background-color: $light-background-secondary;
-    border: 0.1px solid lightgray;
-    border-radius: 5px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+.lastname { 
+    grid-area: lastname;
+              
+        input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+}
+
+.firstname {
+    grid-area: firstname;
+               
+        input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+}
+
+.age {
+    grid-area: age;
+               
+        .form-label {
+            margin-right: 0.5em;
+        }
+               
+        input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+}
+          
+.phone { 
+    grid-area: phone;
+              
+        input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+}
+
+/*step-6 of form */
+
+.fields-6 {
     display:flex;
+    height:auto;
     flex-direction:column;
-    align-items:center;
-    margin:0em;
-    margin-bottom:1em;
-    margin-top: 2em;
-}
+    justify-content: center;
+    width:30em;
+    padding:3em;
+    margin:2em;
 
-.field-email-password {
-    padding: 2em;
-    flex-direction:column;
-}
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
 
-.col-sm-10 {
-
-    margin:auto;
-}
-
-.field {
-    padding-bottom:1em;
+    .form-label {
+        margin-top:0.5em;
+    }
 }
 
 .CGU {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items:center;
-    max-width: 25em;
+    align-self:center;
+    max-width: 40em;
+    margin-bottom:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 1em;
+        margin-right:1em;
+    }
 }
 
-input {
-    margin-right:1em;
-    background-color: $white;
-    border-radius: 5px;
-    width: 15em;
-    padding: 0.2em;
-}
+@media (max-width: 800px) {
 
-@media screen and (min-width: 1024px) {
-    /* step 6 of form register desktop*/
-    .form-6 {
-        justify-content: center;
-        align-self:center;
-        max-width: 25em;
-        margin:auto;
-        margin-bottom: 2em;
+    /*step-5 of form for tablet and phone */
+    .fields-5 {
+        grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
+        grid-template-columns: 15em;
     }
+    
+    .gender , .lastname , .firstname , .age , .phone {
+        display:flex;
+        flex-direction:column;
 
-    /* CGU section */
-    .CGU {
-        margin:auto;
-    }
-
-    /* step 3 of form register desktop*/
-    .form-3 {
-        justify-content: flex-start;
-        align-content:stretch;
-        margin:auto;
-        margin-bottom:4em;
-        margin-top: 4em;
-
-        .field {
-            align-self:flex-start;
-            margin-left:5em;
-
-            .col-sm-10 {
-                margin-left:0em;
-            }
-        }
-
-        textarea {
-            width : 23em; 
+        select , input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
         }
     }
+}      
 
-    /* step 5 of form register desktop*/
-    .form-5 {
-        display:grid;
-        grid-auto-columns: 5em;
-        grid-auto-rows: 5em;
-        grid-template-columns:18em 18em 18em;
-        grid-template-rows: 6em 6em;
-        gap:1em;
-        margin-bottom:3rem;
-        margin-top:2rem;
-        
 
-        .col-sm-10 {
-            flex-direction:column;
-        }
-}
 
-    /* title question bold desktop*/
-    .question-text {
-        font-size: 1.5em;
-    }
-
-    /*scroll button desktop*/
-    .scroll-btn-section {
-        justify-content: right;
-    }
-
-    .scroll-btn {
-        height: 3em;
-        width: 10em;
-    }
-
-    /* register button end of form register desktop*/
-    .register-btn {
-        align-items: right;
-        justify-content: right;
-    }
-}
