@@ -125,7 +125,7 @@ input , select , textarea {
     .question-field {
         margin-top:0.5em;   
     }
-    
+
     .form-label {
         margin-left : 3em;
         margin-top: 1em;
@@ -150,78 +150,78 @@ input , select , textarea {
 
 /*step-5 of form */
 .fields-5 {
-        display: grid;
-        margin: 2em;
-        padding:2em;
-        max-width:50em;
-        grid-template-columns: auto; 
-        grid-template-rows: auto;
-        grid-auto-flow:column; 
-        gap: 3em 1.5em; 
-        grid-template-areas: 
-            "gender lastname firstname"
-            "age phone ."; 
-        grid-area: fields-5; 
+    display: grid;
+    margin: 2em;
+    padding:2em;
+    max-width:50em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-auto-flow:column;
+    gap: 3em 1.5em;
+    grid-template-areas:
+    "gender lastname firstname"
+    "age phone .";
+    grid-area: fields-5;
 }
 
 .gender {
     grid-area: gender;
-              
-        select {
-            background-color: $white;
-            border-radius: 5px;
-            padding: 0.2em;
-            max-width:25em;
-            height: 2em;
-        }
+
+    select {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+        height: 2em;
+    }
 }
 
-.lastname { 
+.lastname {
     grid-area: lastname;
-              
-        input {
-            background-color: $white;
-            border-radius: 5px;
-            padding: 0.2em;
-            max-width:25em;
-        }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
 }
 
 .firstname {
     grid-area: firstname;
-               
-        input {
-            background-color: $white;
-            border-radius: 5px;
-            padding: 0.2em;
-            max-width:25em;
-        }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
 }
 
 .age {
     grid-area: age;
-               
-        .form-label {
-            margin-right: 0.5em;
-        }
-               
-        input {
-            background-color: $white;
-            border-radius: 5px;
-            padding: 0.2em;
-            max-width:25em;
-        }
+
+    .form-label {
+        margin-right: 0.5em;
+    }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
 }
-          
-.phone { 
+
+.phone {
     grid-area: phone;
-              
-        input {
-            background-color: $white;
-            border-radius: 5px;
-            padding: 0.2em;
-            max-width:25em;
-        }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
 }
 
 /*step-6 of form */
@@ -272,7 +272,7 @@ input , select , textarea {
         grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
         grid-template-columns: 15em;
     }
-    
+
     .gender , .lastname , .firstname , .age , .phone {
         display:flex;
         flex-direction:column;
@@ -284,7 +284,6 @@ input , select , textarea {
             max-width:25em;
         }
     }
-}      
-
+}
 
 
