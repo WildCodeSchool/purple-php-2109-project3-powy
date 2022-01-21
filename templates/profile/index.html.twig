@@ -36,20 +36,31 @@
         </div>
     </div>
     {# if the user is a student #}
-    {% if app.user.student is defined and app.user.student is not null %}
-        {% if app.user.student.mentoring is defined and app.user.student.mentoring is null %}
-            <p class="center red">Tu n'as pas encore de mentor.</p>
-        {% elseif app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
-            <p>Chat avec ton mentor {{ app.user.student.mentoring.mentor.user.firstname }} !</p>
+    <div class='d-flex flex-column align-items-center'>
+        {% if app.user.student is defined and app.user.student is not null %}
+            {% if app.user.student.mentoring is defined and app.user.student.mentoring is null %}
+                <p class="center red">Tu n'as pas encore de mentor.</p>
+            {% elseif app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
+                <h2>Ton mentor</h2>
+                {% if app.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
+                {% endif %}
+                <a href="{{ path("chat") }}" class="btn btn-secondary">Chat avec ton mentor {{ app.user.student.mentoring.mentor.user.firstname }} !</a>
+            {% endif %}
+        {# if the user is a mentor #}
+        {% elseif app.user.mentor is defined and app.user.mentor is not null %}
+            {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null %}
+                <p class="center red">Tu n'as pas encore d'étudiant à mentorer.</p>
+            {% else %}
+                <h2>Votre étudiant :</h2>
+                {% if app.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="img profile">
+                {% endif %}
+                <p>{{ app.user.mentor.mentoring.student.user.firstname }} <span class="fw-bold">{{ app.user.mentor.mentoring.student.user.lastname }}</span></p>
+                <a href="{{ path("chat") }}" class="btn btn-secondary">Discutez avec votre étudiant.</a>
+            {% endif %}
         {% endif %}
-    {# if the user is a mentor #}
-    {% elseif app.user.mentor is defined and app.user.mentor is not null %}
-        {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null %}
-            <p class="center red">Tu n'as pas encore d'étudiant à mentorer.</p>
-        {% else %}
-        <p>Discutez avec votre étudiant {{ app.user.mentor.mentoring.student.user.firstname }}.</p>
-        {% endif %}
-    {% endif %}
+    </div>
     <div class="container-btn-profile">
         <div class="btn-profile">
             <a href="{{ path('profile_edit') }}">Modifier mon profil</a>
