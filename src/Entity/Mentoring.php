@@ -126,7 +126,7 @@ class Mentoring
     /**
      * @return Collection|Message[]
      */
-    public function getMessages(): Collection
+    public function getMessages(): ?Collection
     {
         return $this->messages;
     }
