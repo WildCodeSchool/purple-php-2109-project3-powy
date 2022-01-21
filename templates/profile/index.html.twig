@@ -45,7 +45,7 @@
                 {% if app.user.picture is not null %}
                     <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
                 {% endif %}
-                <a href="{{ path("chat") }}" class="btn btn-secondary">Chat avec ton mentor {{ app.user.student.mentoring.mentor.user.firstname }} !</a>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary">Chat avec ton mentor {{ app.user.student.mentoring.mentor.user.firstname }} !</a>
             {% endif %}
         {# if the user is a mentor #}
         {% elseif app.user.mentor is defined and app.user.mentor is not null %}
@@ -57,7 +57,7 @@
                     <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="img profile">
                 {% endif %}
                 <p>{{ app.user.mentor.mentoring.student.user.firstname }} <span class="fw-bold">{{ app.user.mentor.mentoring.student.user.lastname }}</span></p>
-                <a href="{{ path("chat") }}" class="btn btn-secondary">Discutez avec votre étudiant.</a>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary">Discutez avec votre étudiant.</a>
             {% endif %}
         {% endif %}
     </div>
