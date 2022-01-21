@@ -26,6 +26,7 @@ class ChatController extends AbstractController
                 $mentoring = $user->getStudent()->getMentoring();
             }
         } else {
+            //Had to initialized $mentoring as an empty array to make phpstan happy
             $mentoring = [];
         }
 
