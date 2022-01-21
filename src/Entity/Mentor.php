@@ -50,28 +50,14 @@ class Mentor
     private ?User $user;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(
-     *      message = "Merci de choisir au moins un sujet de mentorat.")
-     */
-    private int $topic1;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
-     */
-    private ?int $topic2;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Choice ({1,2,3,4,5,6,7,8,9, null})
-     */
-    private ?int $topic3;
-
-    /**
      * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist", "remove"})
      */
     private ?Mentoring $mentoring;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Topic::class, inversedBy="mentor", cascade={"persist", "remove"})
+     */
+    private ?Topic $topic;
 
     public function getId(): ?int
     {
@@ -126,42 +112,6 @@ class Mentor
         return $this;
     }
 
-    public function getTopic1(): ?int
-    {
-        return $this->topic1;
-    }
-
-    public function setTopic1(int $topic1): self
-    {
-        $this->topic1 = $topic1;
-
-        return $this;
-    }
-
-    public function getTopic2(): ?int
-    {
-        return $this->topic2;
-    }
-
-    public function setTopic2(?int $topic2): self
-    {
-        $this->topic2 = $topic2;
-
-        return $this;
-    }
-
-    public function getTopic3(): ?int
-    {
-        return $this->topic3;
-    }
-
-    public function setTopic3(?int $topic3): self
-    {
-        $this->topic3 = $topic3;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -182,6 +132,18 @@ class Mentor
     public function setMentoring(?Mentoring $mentoring): self
     {
         $this->mentoring = $mentoring;
+
+        return $this;
+    }
+
+    public function getTopic(): ?Topic
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?Topic $topic): self
+    {
+        $this->topic = $topic;
 
         return $this;
     }

@@ -48,13 +48,13 @@
                 <p>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</p>
             </div>
         {# form 2 #}
-                {{ form_row(studentRegistrationForm.topic1, {
+                {{ form_row(studentRegistrationForm.topic.topic1, {
                     label: 'choix 1'
                 }) }}
-                {{ form_row(studentRegistrationForm.topic2, {
+                {{ form_row(studentRegistrationForm.topic.topic2, {
                     label: 'choix 2'
                 }) }}
-                {{ form_row(studentRegistrationForm.topic3, {
+                {{ form_row(studentRegistrationForm.topic.topic3, {
                     label: 'choix 3'
                 }) }}
         {# scroll-btn 2 #}
@@ -197,4 +197,3 @@
         </div>
     {{ form_end(studentRegistrationForm) }}
 {% endblock %}
-
