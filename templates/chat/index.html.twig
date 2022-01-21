@@ -11,11 +11,20 @@
         {% if mentoring.messages is empty %}
             <p class="text-center">Vous n'avez échangé aucun message pour le moment :(</p>
         {% else %}
-            {# {% for message in mentoring.messages %}
+            {% for message in mentoring.messages %}
                 <div>
-                    <p>{{ mentoring.message.sender }}</p>
+                    <p>{{ message.sender }}</p>
                 </div>
-            {% endfor %} #}
+            {% endfor %}
         {% endif %}
+    </section>
+    <section>
+        {{ form_start(messageForm) }}
+        {{ form_errors(messageForm) }}
+        {{ form_row(messageForm.messageText, {
+            label: 'Message :'
+        }) }}
+        <button type="submit" class="btn btn-secondary">></button>
+        {{ form_end(messageForm) }}
     </section>
 {% endblock %}
