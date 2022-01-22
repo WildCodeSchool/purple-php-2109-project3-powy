@@ -21,14 +21,16 @@
                 {% endif %}
             </div>
             {% if mentoring.messages is empty %}
-                <p class="text-center">Vous n'avez échangé aucun message pour le moment :(</p>
+                <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
             {% else %}
-                {% for message in mentoring.messages %}
-                    <div {% if message.sender.student is not null %} class="message-student align-self-start" {% else %} class="message-mentor align-self-end" {% endif %}>
-                        <p>Envoyé par {{ message.sender.firstname }} - le {{ message.createdAt|date }}</p>
-                        <p>{{ message.messageText }}</p>
-                    </div>
-                {% endfor %}
+                <div class="d-flex flex-column m-5 gap-3">
+                    {% for message in mentoring.messages %}
+                        <div {% if message.sender.student is not null %} class="message-student align-self-end bg-info" {% else %} class="message-mentor align-self-start bg-warning" {% endif %}>
+                            <p>{{ message.messageText }}</p>
+                            <p>Envoyé par {{ message.sender.firstname }} - le {{ message.createdAt|date }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
         </section>
         <section class="d-flex flex-row">
