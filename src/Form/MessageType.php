@@ -13,7 +13,11 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('messageText', TextareaType::class);
+            ->add('messageText', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => 'Ton message',
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

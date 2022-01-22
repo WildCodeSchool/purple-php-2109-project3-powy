@@ -6,23 +6,24 @@
 {% include 'components/_header.html.twig' %}
 <hr>
 {% include 'components/_flashmessages.html.twig' %}
-    <section>
+    <section class="d-flex flex-column justify-content-center">
         <h1 class="mb-5">Chat entre {{ mentoring.student.user.firstname }} et {{ mentoring.mentor.user.firstname }}</h1>
         {% if mentoring.messages is empty %}
             <p class="text-center">Vous n'avez échangé aucun message pour le moment :(</p>
         {% else %}
             {% for message in mentoring.messages %}
-                <div>
-                    <p>{{ message.sender }}</p>
+                <div {% if message.sender.student is not null %} class="message-student align-self-start" {% else %} class="message-mentor align-self-end" {% endif %}>
+                    <p>Envoyé par {{ message.sender.firstname }} - le {{ message.createdAt|date }}</p>
+                    <p>{{ message.messageText }}</p>
                 </div>
             {% endfor %}
         {% endif %}
     </section>
-    <section>
+    <section class="d-flex flex-row">
         {{ form_start(messageForm) }}
         {{ form_errors(messageForm) }}
         {{ form_row(messageForm.messageText, {
-            label: 'Message :'
+            label: ' ',
         }) }}
         <button type="submit" class="btn btn-secondary">></button>
         {{ form_end(messageForm) }}
