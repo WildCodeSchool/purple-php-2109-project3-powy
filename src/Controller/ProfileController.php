@@ -101,23 +101,33 @@ class ProfileController extends AbstractController
      * @Route("/profile/edit/choices/{id}", name="edit_choices", requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
-    public function editChoice(int $id, Request $request, UserRepository $userRepository): Response
-    {
+    public function editChoice(
+        int $id,
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        //fetch the user and initialize $topic at null
         $user = $userRepository->find($id);
         $topic = null;
         if (is_null($user)) {
             throw $this->createNotFoundException("No user found with id $id.");
         }
-
+        //check if the user is a mentor or a student and get the topic for her/him
         if ($user->getMentor() !== null) {
             $topic = $user->getMentor()->getTopic();
         } elseif ($user->getStudent() !== null) {
             $topic = $user->getStudent()->getTopic();
         }
-
+        //create the topic form
         $topicForm = $this->createForm(TopicType::class, $topic);
+        //handle form request
         $topicForm->handleRequest($request);
-
+        if ($topicForm->isSubmitted() && $topicForm->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute("profile_index");
+        }
+        //if we didn't get any topics, throw an exception
         if (is_null($topic)) {
             throw $this->createNotFoundException("Topics not found for user with the id $id.");
         }
