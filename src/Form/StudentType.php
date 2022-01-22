@@ -46,6 +46,10 @@ class StudentType extends AbstractType
             ->add('studyLevel', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'studyLevel',
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
