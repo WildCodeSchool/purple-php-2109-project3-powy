@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Mentoring;
+use App\Entity\Topic;
 use App\Entity\User;
 use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
@@ -22,16 +24,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileController extends AbstractController
 {
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * @Route("/profile", name="profile_index")
      * @IsGranted("ROLE_USER")
      */
-    public function profile(UserRepository $userRepository): Response
+    public function profile(): Response
     {
         // Fetch UserEmail to get the property IsVerfied
         if ($this->getUser() instanceof UserInterface) {
             $userEmail = $this->getUser()->getUserIdentifier();
-            $user = $userRepository->findOneBy(['email' => $userEmail]);
+            $user = $this->userRepository->findOneBy(['email' => $userEmail]);
             // if it's not verified yet, we redirect the user to home with a flash message
             if ($user === null || ($user !== null && !$user->getIsVerified())) {
                 $this->addFlash(
@@ -105,21 +114,20 @@ class ProfileController extends AbstractController
     public function editChoice(
         int $id,
         Request $request,
-        UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         MatchManager $matchManager
     ): Response {
-        //fetch the user and initialize $topic at null
-        $user = $userRepository->find($id);
-        $topic = null;
-        if (is_null($user)) {
-            throw $this->createNotFoundException("No user found with id $id.");
-        }
-        //check if the user is a mentor or a student and get the topic for her/him
-        if ($user->getMentor() !== null) {
-            $topic = $user->getMentor()->getTopic();
-        } elseif ($user->getStudent() !== null) {
-            $topic = $user->getStudent()->getTopic();
+        //fetch the user, the topic and the mentoring
+        $user = $this->checkUser($id);
+        $topic = $this->checkTopic($user);
+        $mentoring = $this->checkMentoring($user);
+
+        if ($mentoring  !== null) {
+            $this->addFlash(
+                "danger",
+                "Le mentorat est en cours. À la fin de celui-ci, vous pourrez modifier vos choix."
+            );
+            return $this->redirectToRoute("profile_index");
         }
         //create the topic form
         $topicForm = $this->createForm(TopicType::class, $topic);
@@ -128,10 +136,8 @@ class ProfileController extends AbstractController
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
             $entityManager->flush();
             $student = $user->getStudent();
-            if ($student !== null) {
-                if ($student->getMentoring() === null) {
-                    $matchManager->matchByTopic($student);
-                }
+            if ($student !== null && $student->getMentoring() === null) {
+                $matchManager->matchByTopic($student);
             }
             $this->addFlash("success", "Les modifications ont bien été enregistrées.");
             return $this->redirectToRoute("profile_index");
@@ -164,5 +170,45 @@ class ProfileController extends AbstractController
             $session->invalidate();
         }
         return $this->redirectToRoute('home');
+    }
+
+    //function to verify is User is null or not
+    public function checkUser(int $id): User
+    {
+        $user = $this->userRepository->find($id);
+        if (is_null($user)) {
+            throw $this->createNotFoundException("No user found with id $id.");
+        }
+        return $user;
+    }
+
+    //function to fetch topic depending if user is a mentor or a student
+    public function checkTopic(User $user): ?Topic
+    {
+        $topic = null;
+        if ($user->getMentor() === null && $user->getStudent() === null) {
+            throw $this->createNotFoundException('User is neither a student or a mentor.');
+        }
+        if ($user->getMentor() !== null) {
+            $topic = $user->getMentor()->getTopic();
+        } elseif ($user->getStudent() !== null) {
+            $topic = $user->getStudent()->getTopic();
+        }
+        return $topic;
+    }
+
+    //function to check if a mentoring is already active
+    public function checkMentoring(User $user): ?Mentoring
+    {
+        $mentoring = null;
+        if ($user->getMentor() === null && $user->getStudent() === null) {
+            throw $this->createNotFoundException('User is neither a student or a mentor.');
+        }
+        if ($user->getMentor() !== null) {
+            $mentoring = $user->getMentor()->getMentoring();
+        } elseif ($user->getStudent() !== null) {
+            $mentoring = $user->getStudent()->getMentoring();
+        }
+        return $mentoring;
     }
 }
