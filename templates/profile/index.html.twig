@@ -41,7 +41,7 @@
             <a href="{{ path('profile_edit') }}">Modifier mon profil</a>
         </div>
         <div class="btn-profile">
-            <a href="#">Modifier mes choix</a>
+            <a href="{{ path('edit_choices', {id: app.user.id}) }}">Modifier mes choix</a>
         </div>
         <div class="btn-profile">
             {% include 'profile/_delete_form.html.twig' %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
+use App\Form\TopicType;
 use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +16,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -94,6 +94,36 @@ class ProfileController extends AbstractController
         return $this->renderForm('profile/edit.html.twig', [
             'form' => $form,
             'formpassword' => $formpassword,
+        ]);
+    }
+
+    /**
+     * @Route("/profile/edit/choices/{id}", name="edit_choices", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function editChoice(int $id, Request $request, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        $topic = null;
+        if (is_null($user)) {
+            throw $this->createNotFoundException("No user found with id $id.");
+        }
+
+        if ($user->getMentor() !== null) {
+            $topic = $user->getMentor()->getTopic();
+        } elseif ($user->getStudent() !== null) {
+            $topic = $user->getStudent()->getTopic();
+        }
+
+        $topicForm = $this->createForm(TopicType::class, $topic);
+        $topicForm->handleRequest($request);
+
+        if (is_null($topic)) {
+            throw $this->createNotFoundException("Topics not found for user with the id $id.");
+        }
+
+        return $this->renderForm('profile/choices.html.twig', [
+            'topicForm' => $topicForm
         ]);
     }
 
