@@ -5,7 +5,7 @@
 }
 
 .chat-messages {
-    margin: 0 1rem 2rem 1rem;
+    margin: 0 1rem 1rem 1rem;
     padding: 2rem;
     border-radius: 10px;
     background-color: $chat-background;
@@ -30,7 +30,7 @@
     margin: 0 0 3rem 0;
 
     textarea {
-        padding: 0.3em;
+        padding: 0 1rem 0 2rem;
         outline: none;
         border: none;
         display: inline-block;
