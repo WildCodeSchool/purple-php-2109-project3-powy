@@ -61,6 +61,11 @@
     width: 13em;
     padding: 0.5rem;
     border: none;
+
+    &:hover, &:focus {
+
+        color: $middle-background;
+    }
 }
 
 .red{
@@ -81,7 +86,8 @@
 .delete-btn {
 
     &:hover, &:focus {
-        color: $middle-background;
+        background-color: $alert;
+        color: $white;
     }
 
 }
