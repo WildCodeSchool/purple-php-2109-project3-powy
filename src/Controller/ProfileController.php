@@ -122,6 +122,7 @@ class ProfileController extends AbstractController
         $topic = $this->checkTopic($user);
         $mentoring = $this->checkMentoring($user);
 
+        //if there is already a mentoring we prevent the user to change hes/hic choices before the end of it.
         if ($mentoring  !== null) {
             $this->addFlash(
                 "danger",
@@ -129,8 +130,10 @@ class ProfileController extends AbstractController
             );
             return $this->redirectToRoute("profile_index");
         }
+
         //create the topic form
         $topicForm = $this->createForm(TopicType::class, $topic);
+
         //handle form request
         $topicForm->handleRequest($request);
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
@@ -142,6 +145,7 @@ class ProfileController extends AbstractController
             $this->addFlash("success", "Les modifications ont bien été enregistrées.");
             return $this->redirectToRoute("profile_index");
         }
+
         //if we didn't get any topics, throw an exception
         if (is_null($topic)) {
             throw $this->createNotFoundException("Topics not found for user with the id $id.");
