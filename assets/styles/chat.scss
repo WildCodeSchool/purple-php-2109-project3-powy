@@ -1,5 +1,19 @@
+.picture-chat {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+
+.chat-messages {
+    margin: 0 1rem 2rem 1rem;
+    padding: 2rem;
+    border-radius: 10px 10px 0 0;
+    // border: 1px solid $dark-background;
+    background-color: $chat-background;
+}
+
 .message-student, .message-mentor {
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 4px 4px #c4c4c4;
 }
 
@@ -9,4 +23,31 @@
 
 .bg-grey {
     background-color: $chat-user2;
+}
+
+.form-message {
+    background-color: $white;
+    border-radius: 10px;
+    textarea {
+        outline: none;
+        border: none;
+    }
+}
+
+.send-message {
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+    .chat-messages {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .chat-messages {
+        margin-left: 8rem;
+        margin-right: 8rem;
+    }
 }
