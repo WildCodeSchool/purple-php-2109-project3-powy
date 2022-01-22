@@ -9,7 +9,9 @@
 {% block body %}
 {% include 'components/_header.html.twig' %}
 {% include "components/_flashmessages.html.twig" %}
-<main>
+<main class="d-flex  flex-column justify-content-center">
+    <section class="d-flex flex-column">
+    {# profile picture, name and age #}
     <div class="container">
         <h2 class="center">Mon profil</h2>
         <div class="img-profile center">
@@ -22,6 +24,7 @@
         <h5 class="center">{{ app.user.firstname }} {{ app.user.lastname }}</h5>
         <h6 class="center">{{ app.user.age }} ans</h6>
     </div>
+    {# profile informations #}
     <div class="card-profile">
         <div class="card-body-profile">
             <p class="title-card-profile">Tes informations de contact</p>
@@ -35,32 +38,7 @@
             </div>
         </div>
     </div>
-    {# if the user is a student #}
-    <div class='d-flex flex-column align-items-center'>
-        {% if app.user.student is defined and app.user.student is not null %}
-            {% if app.user.student.mentoring is defined and app.user.student.mentoring is null %}
-                <p class="center red">Tu n'as pas encore de mentor.</p>
-            {% elseif app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
-                <h2>Ton mentor</h2>
-                {% if app.user.picture is not null %}
-                    <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
-                {% endif %}
-                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary">Chat avec ton mentor {{ app.user.student.mentoring.mentor.user.firstname }} !</a>
-            {% endif %}
-        {# if the user is a mentor #}
-        {% elseif app.user.mentor is defined and app.user.mentor is not null %}
-            {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null %}
-                <p class="center red">Tu n'as pas encore d'étudiant à mentorer.</p>
-            {% else %}
-                <h2>Votre étudiant :</h2>
-                {% if app.user.picture is not null %}
-                    <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="img profile">
-                {% endif %}
-                <p>{{ app.user.mentor.mentoring.student.user.firstname }} <span class="fw-bold">{{ app.user.mentor.mentoring.student.user.lastname }}</span></p>
-                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary">Discutez avec votre étudiant.</a>
-            {% endif %}
-        {% endif %}
-    </div>
+    {# buttons profile edition #}
     <div class="container-btn-profile">
         <div class="btn-profile">
             <a href="{{ path('profile_edit') }}">Modifier mon profil</a>
@@ -71,6 +49,43 @@
         <div class="btn-profile">
             {% include 'profile/_delete_form.html.twig' %}
         </div>
+    </div>
+    </section>
+    {# if the user is a student #}
+    <div class='d-flex flex-column align-items-center'>
+        {% if app.user.student is defined and app.user.student is not null %}
+            {% if app.user.student.mentoring is defined and app.user.student.mentoring is null %}
+                <p class="center red">Tu n'as pas encore de mentor.</p>
+            {% elseif app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
+                <h2>Ton mentor</h2>
+                <div class="img-profile center">
+                    <p>{{ app.user.student.mentoring.mentor.user.firstname }} {{ app.user.student.mentoring.mentor.user.lastname }}</p>
+                    {% if app.user.student.mentoring.mentor.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
+                    {% else %}
+                        <img src="/upload/pictures/user.png" alt="img profile">
+                    {% endif %}
+                </div>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary m-3">Chat avec ton mentor !</a>
+            {% endif %}
+        {# if the user is a mentor #}
+        {% elseif app.user.mentor is defined and app.user.mentor is not null %}
+            {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null %}
+                <p class="center red">Tu n'as pas encore d'étudiant à mentorer.</p>
+            {% else %}
+                <h2>Votre étudiant :</h2>
+                <div class="img-profile center">
+                    <p>{{ app.user.mentor.mentoring.student.user.firstname }} {{ app.user.mentor.mentoring.student.user.lastname }}</p>
+                    {% if app.user.mentor.mentoring.student.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="student-picture">
+                    {% else %}
+                        <img src="/upload/pictures/user.png" alt="img profile">
+                    {% endif %}
+                </div>
+                <p>{{ app.user.mentor.mentoring.student.user.firstname }} <span class="fw-bold">{{ app.user.mentor.mentoring.student.user.lastname }}</span></p>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary m-3">Discutez avec votre étudiant.</a>
+            {% endif %}
+        {% endif %}
     </div>
 </main>
 {% endblock %}

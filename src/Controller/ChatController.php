@@ -36,14 +36,15 @@ class ChatController extends AbstractController
         $user = $this->checkUser($id);
         $mentoring = $this->checkMentoring($user);
 
-        //load the form
+        //create message form
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
-        //handle the request, etc.
+        //handle form request
         if ($form->isSubmitted() && $form->isValid()) {
             $message->setSender($user);
             if ($user !== null) {
+                //set message to mentoring depending if user is a mentor or a student
                 if ($user->getMentor() !== null) {
                     $mentoring = $user->getMentor()->getMentoring();
                     $message->setMentoring($mentoring);
@@ -70,6 +71,7 @@ class ChatController extends AbstractController
         ]);
     }
 
+    //function to fetch mentoring depending if user is a mentor or a student
     public function checkMentoring(User $user): ?Mentoring
     {
         $mentoring = null;
@@ -84,6 +86,7 @@ class ChatController extends AbstractController
         return $mentoring;
     }
 
+    //function to verify is User is null or not
     public function checkUser(int $id): User
     {
         $user = $this->userRepository->find($id);

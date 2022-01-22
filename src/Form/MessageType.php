@@ -16,6 +16,7 @@ class MessageType extends AbstractType
             ->add('messageText', TextareaType::class, [
                 'attr' => [
                     'placeholder' => 'Ton message',
+                    'class' => 'message-input'
                 ]
             ]);
     }
