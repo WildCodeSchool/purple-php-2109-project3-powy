@@ -8,6 +8,7 @@ use App\Form\EditProfileType;
 use App\Form\TopicType;
 use App\Repository\UserRepository;
 use App\Service\FileUploader;
+use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,7 +106,8 @@ class ProfileController extends AbstractController
         int $id,
         Request $request,
         UserRepository $userRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MatchManager $matchManager
     ): Response {
         //fetch the user and initialize $topic at null
         $user = $userRepository->find($id);
@@ -125,6 +127,12 @@ class ProfileController extends AbstractController
         $topicForm->handleRequest($request);
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
             $entityManager->flush();
+            $student = $user->getStudent();
+            if ($student !== null) {
+                if ($student->getMentoring() === null) {
+                    $matchManager->matchByTopic($student);
+                }
+            }
             $this->addFlash("success", "Les modifications ont bien été enregistrées.");
             return $this->redirectToRoute("profile_index");
         }
