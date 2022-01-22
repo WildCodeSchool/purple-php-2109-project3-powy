@@ -58,7 +58,7 @@ class ChatController extends AbstractController
             return $this->redirectToRoute('chat', ['id' => $user->getId()]);
         }
         //check if this user has a mentoring, if not redirect to profile
-        if (!$mentoring) {
+        if (is_null($mentoring)) {
             //send a message to the user instead of 404 (if user used to have a chat and add the url in favorites)
             $this->addFlash('info', "Vous n'avez pas encore de mentorat.");
             return $this->redirectToRoute("profile_index");
