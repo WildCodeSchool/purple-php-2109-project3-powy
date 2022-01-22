@@ -125,6 +125,7 @@ class ProfileController extends AbstractController
         $topicForm->handleRequest($request);
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
             $entityManager->flush();
+            $this->addFlash("success", "Les modifications ont bien été enregistrées.");
             return $this->redirectToRoute("profile_index");
         }
         //if we didn't get any topics, throw an exception
