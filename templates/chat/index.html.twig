@@ -12,7 +12,6 @@
     {# --------------------------------- the user is a student --------------------------------- #}
     {% elseif app.user.student is not null and mentoring.student is same as app.user.student %}
         <section class="d-flex flex-column justify-content-center">
-            <h1 class="mb-5">Chat avec {{ mentoring.mentor.user.firstname }}</h1>
             <div class="img-profile center">
                 {% if app.user.student.mentoring.mentor.user.picture is not null %}
                 <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
@@ -20,15 +19,16 @@
                     <img src="/upload/pictures/user.png" alt="img profile">
                 {% endif %}
             </div>
+            <h1 class="mb-5">Vous parlez actuellement avec {{ mentoring.mentor.user.firstname }}</h1>
             {% if mentoring.messages is empty %}
                 <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
             {% else %}
                 <div class="d-flex flex-column m-5 gap-3">
                     {% for message in mentoring.messages %}
-                        <div {% if message.sender.student is not null %} class="message-student align-self-end bg-info" {% else %} class="message-mentor align-self-start bg-warning" {% endif %}>
+                        <div {% if message.sender.student is not null %} class="message-student bg-salmon align-self-end p-3 col-md-5" {% else %} class="message-mentor bg-grey align-self-start p-3 col-md-5" {% endif %}>
                             <p>{{ message.messageText }}</p>
-                            <p>Envoyé par {{ message.sender.firstname }} - le {{ message.createdAt|date }}</p>
                         </div>
+                        <p {% if message.sender.student is not null %} class="align-self-end" {% else %} class="align-self-start" {% endif %}>{{ message.createdAt|date }}</p>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -39,7 +39,7 @@
             {{ form_row(messageForm.messageText, {
                 label: ' ',
             }) }}
-            <button type="submit" class="btn btn-secondary">></button>
+            <button type="submit" class=""><img src="{{ asset('build/images/send-message.png') }}" alt="send message"></button>
             {{ form_end(messageForm) }}
         </section>
     {% endif %}
