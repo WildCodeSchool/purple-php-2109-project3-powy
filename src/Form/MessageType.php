@@ -15,8 +15,9 @@ class MessageType extends AbstractType
         $builder
             ->add('messageText', TextareaType::class, [
                 'attr' => [
-                    'placeholder' => 'Ton message',
-                    'class' => 'message-input'
+                    'placeholder' => 'Tape ton message ici',
+                    'cols' => '130',
+                    'rows' => '2'
                 ]
             ]);
     }
