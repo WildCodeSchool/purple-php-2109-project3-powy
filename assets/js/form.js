@@ -10,8 +10,6 @@ const returnStep3 = document.getElementById('return-btn-step3');
 const returnStep4 = document.getElementById('return-btn-step4');
 const returnStep5 = document.getElementById('return-btn-step5');
 
-const btnStepArray = [btnStep2, btnStep3, btnStep4, btnStep5, btnStep6];
-
 // fetch the div
 const divStep1 = document.getElementById('step-1');
 const divStep2 = document.getElementById('step-2');
