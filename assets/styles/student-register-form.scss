@@ -167,7 +167,7 @@ input , select , textarea {
     height:auto;
     flex-direction:column;
     justify-content: center;
-    width:50em;
+    max-width:50em;
     padding:2em;
     margin:3em;
     min-width:28em;
