@@ -6,14 +6,12 @@ use App\Entity\Mentor;
 use App\Entity\Student;
 use App\Entity\User;
 use App\Form\MentorType;
-use App\Form\RegistrationFormType;
 use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -22,7 +20,6 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -76,7 +73,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
                     ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('emails/confirmation_email.html.twig')
                 );
                 $this->addFlash(
                     'warning',
@@ -134,7 +131,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
                     ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('emails/confirmation_email.html.twig')
                 );
                 $this->addFlash(
                     'warning',
@@ -184,7 +181,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('noreply@powy.io', 'powy-registration'))
                     ->to($emailUser)
                     ->subject('Inscription validée 🥳 !')
-                    ->html($this->renderView('registration/registration_email.html.twig', ['user' => $user]));
+                    ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
                     $mailerInterface->send($email);
                 }
             }
