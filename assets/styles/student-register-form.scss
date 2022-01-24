@@ -167,7 +167,7 @@ input , select , textarea {
     height:auto;
     flex-direction:column;
     justify-content: center;
-    width:50em;
+    max-width:50em;
     padding:2em;
     margin:3em;
     min-width:28em;
@@ -196,6 +196,50 @@ input , select , textarea {
         margin-left: 3em;
         height: 8em;
     }
+}
+
+/*step-4 of form*/
+
+.scholarship-text {
+    display: none;
+}
+
+.scholarship {
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    gap: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+
+    label {
+        background-color: $chat-background;
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
+    }
+}
+
+[name="student[scholarship]"]:checked + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px $box-shadow;
+}
+
+[name="student[scholarship]"]:focus + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
+}
+
+[name="student[scholarship]"] {
+    position: fixed;
+    opacity: 0;
 }
 
 /*step-5 of form */
@@ -312,6 +356,13 @@ input , select , textarea {
         padding: 0.2em;
         margin-left: 1em;
         margin-right:1em;
+    }
+}
+
+@media (min-width: 400px) {
+    .scholarship {
+        flex-direction: row;
+        justify-content: center;
     }
 }
 

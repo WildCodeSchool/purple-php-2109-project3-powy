@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat {% endblock %}
+
+{% block body %}
+{% include 'components/_header.html.twig' %}
+{% include 'components/_flashmessages.html.twig' %}
+    <main class="d-flex flex-column align-items-center chat-global">
+        {# --------------------------------- the user is a mentor --------------------------------- #}
+        {% if app.user.mentor is not null and mentoring.mentor is same as app.user.mentor %}
+        <section class="d-flex flex-column align-items-center col-10 mt-3">
+            <div class="picture-chat center">
+                {% if app.user.mentor.mentoring.student.user.picture is not null %}
+                <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="img profile" class="picture-chat">
+                {% else %}
+                    <img src="/upload/pictures/user.png" alt="img profile" class="picture-chat">
+                {% endif %}
+            </div>
+            <h1 class="h3 mt-3 mb-3">Vous parlez actuellement avec {{ mentoring.student.user.firstname }}</h1>
+            <p class="text-center">Ce mentorat prendra fin le {{ mentoring.endingDtae|date('d/m/Y') }}. À cette date, tous les messages seront supprimés.</p>
+            <a href="#form-message-input" class="btn-profile m-3">Envoyer un message</a>
+            {% if mentoring.messages is empty %}
+                <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
+            {% else %}
+                <div class="chat-messages d-flex flex-column col-11 gap-2">
+                    {% for message in mentoring.messages %}
+                        <div {% if message.sender.mentor is not null %} class="message-mentor bg-salmon align-self-end p-3 col-12 col-sm-9 col-md-7" {% else %} class="message-student bg-grey align-self-start p-3 col-12 col-sm-9 col-md-7" {% endif %}>
+                            <p>{{ message.messageText }}</p>
+                        </div>
+                        <p {% if message.sender.mentor is not null %} class="align-self-end" {% else %} class="align-self-start" {% endif %}>{{ message.createdAt|date('d/m/Y à H:i') }}</p>
+                    {% endfor %}
+                </div>
+            {# end of is mentoring message is empty #}
+            {% endif %}
+        </section>
+        {# --------------------------------- the user is a student --------------------------------- #}
+        {% elseif app.user.student is not null and mentoring.student is same as app.user.student %}
+            <section class="d-flex flex-column align-items-center col-10 mt-3">
+                <div class="picture-chat center">
+                    {% if app.user.student.mentoring.mentor.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile" class="picture-chat">
+                    {% else %}
+                        <img src="/upload/pictures/user.png" alt="img profile" class="picture-chat">
+                    {% endif %}
+                </div>
+                <h1 class="mb-5">Tu parles actuellement avec {{ mentoring.mentor.user.firstname }}</h1>
+                <p class="text-center">Ce mentorat prendra fin le {{ mentoring.endingDtae|date('d/m/Y') }}. À cette date, tous les messages seront supprimés.</p>
+                <a href="#form-message-input" class="btn-profile m-3">Envoyer un message</a>
+                {% if mentoring.messages is empty %}
+                    <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
+                {% else %}
+                    <div class="chat-messages d-flex flex-column col-11 gap-2">
+                        {% for message in mentoring.messages %}
+                            <div {% if message.sender.student is not null %} class="message-student bg-salmon align-self-end p-3 col-12 col-sm-9 col-md-7" {% else %} class="message-mentor bg-grey align-self-start p-3 col-12 col-sm-9 col-md-7" {% endif %}>
+                                <p>{{ message.messageText }}</p>
+                            </div>
+                            <p {% if message.sender.student is not null %} class="align-self-end" {% else %} class="align-self-start" {% endif %}>{{ message.createdAt|date('d/m/Y à H:i') }}</p>
+                        {% endfor %}
+                    </div>
+                {# end of if mentoring message is empty #}
+                {% endif %}
+            </section>
+        {# end of if user is a student #}
+        {% endif %}
+        <div id="form-message-input" class="form-message align-self-center">
+            {{ form_start(messageForm) }}
+            {{ form_errors(messageForm) }}
+            <div class=" textarea d-flex flex-row justify-content-center align-items-center">
+                {{ form_row(messageForm.messageText, {
+                    label: ' ',
+                }) }}
+                <button type="submit" class="send-message justify-self-end"></button>
+            </div>
+            {{ form_end(messageForm) }}
+        </div>
+        <a href="{{ path("profile_index") }}" class="btn-profile m-3">Retour au profil</a>
+    </main>
+{% endblock %}
