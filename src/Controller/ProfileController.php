@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
 use App\Form\TopicType;
-use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,16 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileController extends AbstractController
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
 
     /**
      * @Route("/profile", name="profile_index")
@@ -37,12 +29,11 @@ class ProfileController extends AbstractController
      */
     public function profile(): Response
     {
-        // Fetch UserEmail to get the property IsVerfied
-        if ($this->getUser() instanceof UserInterface) {
-            $userEmail = $this->getUser()->getUserIdentifier();
-            $user = $this->userRepository->findOneBy(['email' => $userEmail]);
+        // Fetch User to get the property IsVerfied
+        if ($this->getUser() instanceof User) {
+            $user = $this->getUser();
             // if it's not verified yet, we redirect the user to home with a flash message
-            if ($user === null || ($user !== null && !$user->getIsVerified())) {
+            if ($user == null || ($user !== null && !$user->getIsVerified())) {
                 $this->addFlash(
                     'warning',
                     "Votre adresse email n'a pas encore été confirmée.
@@ -112,13 +103,12 @@ class ProfileController extends AbstractController
      * @IsGranted("ROLE_USER")
      */
     public function editChoice(
-        int $id,
+        User $user,
         Request $request,
         EntityManagerInterface $entityManager,
         MatchManager $matchManager
     ): Response {
         //fetch the user, the topic and the mentoring
-        $user = $this->checkUser($id);
         $topic = $this->checkTopic($user);
         $mentoring = $this->checkMentoring($user);
 
@@ -148,7 +138,7 @@ class ProfileController extends AbstractController
 
         //if we didn't get any topics, throw an exception
         if (is_null($topic)) {
-            throw $this->createNotFoundException("Topics not found for user with the id $id.");
+            throw $this->createNotFoundException("Topics not found for user.");
         }
 
         return $this->renderForm('profile/choices.html.twig', [
@@ -176,18 +166,8 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    //function to verify is User is null or not
-    public function checkUser(int $id): User
-    {
-        $user = $this->userRepository->find($id);
-        if (is_null($user)) {
-            throw $this->createNotFoundException("No user found with id $id.");
-        }
-        return $user;
-    }
-
     //function to fetch topic depending if user is a mentor or a student
-    public function checkTopic(User $user): ?Topic
+    private function checkTopic(User $user): ?Topic
     {
         $topic = null;
         if ($user->getMentor() === null && $user->getStudent() === null) {
@@ -202,7 +182,7 @@ class ProfileController extends AbstractController
     }
 
     //function to check if a mentoring is already active
-    public function checkMentoring(User $user): ?Mentoring
+    private function checkMentoring(User $user): ?Mentoring
     {
         $mentoring = null;
         if ($user->getMentor() === null && $user->getStudent() === null) {
