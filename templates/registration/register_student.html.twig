@@ -24,9 +24,8 @@
                 <p>Sélectionne la case correspondant à ta situation.</p>
             </div>
         {# form 1 #}
-            {{ form_row(studentRegistrationForm.studyLevel, {
-                label: 'Quel est ton niveau actuel ?'
-            }) }}
+        {{ form_label(studentRegistrationForm, 'Quel est ton niveau actuel ?', {'label_attr': {'class': 'studyLevel-text'}}) }}
+        {{ form_widget(studentRegistrationForm.studyLevel) }}
         {# scroll-btn 1 #}
             <div class="scroll-btn-section">
                 <button type="submit" class="scroll-btn">suivant</button>
