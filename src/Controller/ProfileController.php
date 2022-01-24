@@ -72,6 +72,7 @@ class ProfileController extends AbstractController
             }
 
             $entityManager->flush();
+            $this->addFlash("success", "Les modifications ont bien été prises en compte.");
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -88,6 +89,7 @@ class ProfileController extends AbstractController
                 );
                 $user->setPassword($hashedPassword);
                 $entityManager->flush();
+                $this->addFlash("success", "Les modifications ont bien été prises en compte.");
                 return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
             }
         }

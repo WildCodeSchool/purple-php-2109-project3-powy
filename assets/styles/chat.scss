@@ -1,0 +1,83 @@
+.picture-chat {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+
+.chat-messages {
+    margin: 0 1rem 1rem 1rem;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: $chat-background;
+}
+
+.message-student, .message-mentor {
+    border-radius: 20px;
+    box-shadow: 0 4px 4px #c4c4c4;
+}
+
+.bg-salmon {
+    background-color: $chat-user1;
+}
+
+.bg-grey {
+    background-color: $chat-user2;
+}
+
+.form-message {
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 0 3rem 0;
+
+    textarea {
+        padding: 0 1rem 0 2rem;
+        outline: none;
+        border: none;
+        display: inline-block;
+        height: auto;
+        box-sizing: border-box;
+        min-height: 5em;
+        max-width: 100%;
+        width: 96%;
+        cursor: text;
+        overflow: auto;
+        resize: none;
+
+        &::placeholder {
+            text-align: center;
+            font-size: 1.5em;
+        }
+    }
+}
+
+.send-message {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    margin-right: 0.6em;
+    border: none;
+    background-image: url('../images/send-message.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+
+    &:hover, &:focus {
+
+        background-image: url('../images/send-message-active.png');
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .chat-messages {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .chat-messages {
+        margin-left: 8rem;
+        margin-right: 8rem;
+    }
+}

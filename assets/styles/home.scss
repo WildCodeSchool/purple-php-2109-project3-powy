@@ -34,8 +34,8 @@
             &:hover,
             &:focus {
                 box-shadow: 0 2px 4px $dark-background;
-                color: $white;
                 text-decoration: none;
+                color: $middle-background;
             }
         }
     }
@@ -92,10 +92,6 @@
         margin: 0;
         text-align: center;
     }
-}
-
-a:hover{
-    color: $middle-background;
 }
 
 @media screen and (min-width: 768px) {

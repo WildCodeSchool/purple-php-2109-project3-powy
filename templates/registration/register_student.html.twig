@@ -112,9 +112,8 @@
         {# question 4 #}
             <p class="question-text">Es-tu boursier ?</p>
         {# form 4 #}
-            {{ form_row(studentRegistrationForm.scholarship, {
-                label: 'Es-tu boursier ?'
-            }) }}
+            {{ form_label(studentRegistrationForm, 'Es-tu boursier ?', {'label_attr': {'class': 'scholarship-text'}}) }}
+            {{ form_widget(studentRegistrationForm.scholarship) }}
         {# scroll-btn 4 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step3" class="scroll-btn">Retour</button>
