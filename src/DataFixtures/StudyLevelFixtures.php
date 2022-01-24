@@ -9,9 +9,13 @@ use Doctrine\Persistence\ObjectManager;
 class StudyLevelFixtures extends Fixture
 {
     private const STUDYLEVELS = [
-        'Brevet',
-        'Bac',
-        'Licence',
+        'Lycée',
+        'CPGE',
+        'DUT',
+        'École POST-BAC',
+        'Licence Universitaire',
+        'Master Universitaire',
+        'Doctorat',
         'Autre',
     ];
 

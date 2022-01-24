@@ -1,116 +1,10 @@
-.step-1, .step-2, .step-3, .step-4, .step-5, .step-6 {
-    display:flex;
-    flex-direction: column;
-}
-
-//Class being toggle to display all the steps one by one of the forms
-//do not move it to body because the script JS doesn't work anymore (??)
-.hidden {
-    display: none;
-}
-
-h1 {
-    text-align: center;
-}
-
-/* progress-bar */
-.progress {
-    margin-top:1rem;
-    margin-bottom: 3rem;
-    background-color: white;
-    border:solid;
-    border-width:0.1px;
-    margin-left: 1em;
-    margin-right:1em;
-
-}
-
-.progress-bar {
-    background-color: $dark-background;
-}
-
-/* title question bold */
-.question-text {
-    font-weight: bolder;
-    font-size: 1.2em;
-    margin-top:0.3em;
-    margin-right:2em;
-    margin-left:2em;
-}
-
-.indications {
-    margin-left: 2em;
-    margin-right: 2em;
-}
-
-.logo-powy {
-    margin-left: 2em;
-    margin-right:2em;
-}
-
-/* scroll button */ 
-.scroll-btn-section {
-    margin:2em;
-    display: flex;
-    justify-content: right;
-}
-
-.scroll-btn {
-    align-items: center;
-    background-color: $dark-background;
-    border-radius: 10px;
-    color: $white;
-    display: flex;
-    height: 3em;
-    justify-content: center;
-    text-decoration: none;
-    width: 8em;
-    border: none;
-
-    &:hover,
-    &:focus {
-        box-shadow: 0 2px 4px $dark-background;
-    }
-}
-
-/* register btn */
-.register-btn {
-    margin:2em;
-    display: flex;
-    justify-content: right;
-}
-
-.registration-btn {
-    align-items: center;
-    background-color: $dark-background;
-    border-radius: 10px;
-    color: $white;
-    display: flex;
-    height: 3em;
-    justify-content: center;
-    text-decoration: none;
-    width: 8em;
-
-    &:hover,
-    &:focus {
-        box-shadow: 0 2px 4px $dark-background;
-    }
-}
-
-input , select , textarea {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.1em;   
-    margin:0.5em;
-}
-
-.form-6 , .form-3 , .form-5 {
+.form-1-mentor , .form-3-mentor , .form-4-mentor {
     display:flex;
     flex-direction: row;
     justify-content:center;
 }
 
-.fields-3 , .fields-5 , .fields-6 {
+.fields-1-mentor , .fields-3-mentor , .fields-4-mentor {
     background-color: $light-background-secondary;
     border: 0.1px solid lightgray;
     border-radius: 5px;
@@ -119,50 +13,7 @@ input , select , textarea {
 
 /*step-1 of form */
 
-.studyLevel-text {
-    display: none;
-}
-
-.studyLevel {
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-
-    label {
-        background-color: $chat-background;
-        padding: 1rem;
-        border: 1px solid $dark-background;
-        border-radius: 10px;
-        box-shadow: 0 3px 3px $box-shadow;
-        cursor: pointer;
-    }
-}
-
-[name="student[studyLevel]"]:checked + label {
-    background-color: $chat-user1;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: inset 0 3px 3px $box-shadow;
-}
-
-[name="student[studyLevel]"]:focus + label {
-    background-color: $chat-user1;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
-}
-
-[name="student[studyLevel]"] {
-    position: fixed;
-    opacity: 0;
-}
-
-
-
-/*step-3 of form */
-
-.fields-3 {
+.fields-1-mentor {
     display:flex;
     height:auto;
     flex-direction:column;
@@ -198,8 +49,8 @@ input , select , textarea {
     }
 }
 
-/*step-5 of form */
-.fields-5 {
+/*step-3 of form */
+.fields-3-mentor {
     display: grid;
     margin: 2em;
     padding:2em;
@@ -274,9 +125,9 @@ input , select , textarea {
     }
 }
 
-/*step-6 of form */
+/*step-4 of form */
 
-.fields-6 {
+.fields-4-mentor {
     display:flex;
     height:auto;
     flex-direction:column;
@@ -317,8 +168,8 @@ input , select , textarea {
 
 @media (max-width: 800px) {
 
-    /*step-5 of form for tablet and phone */
-    .fields-5 {
+    /*step-3 of form for tablet and phone */
+    .fields-3-mentor {
         grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
         grid-template-columns: 15em;
     }

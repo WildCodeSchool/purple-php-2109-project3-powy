@@ -83,7 +83,7 @@ class LoginController extends AbstractController
                     ->from(new Address('noreply@powy.io', 'Powy'))
                     ->to($emailUser)
                     ->subject('Mot de passe oublié')
-                    ->htmlTemplate('login/changePasswordEmail.html.twig')
+                    ->htmlTemplate('emails/changePasswordEmail.html.twig')
                 );
                 $this->addFlash(
                     'success',
@@ -147,7 +147,7 @@ class LoginController extends AbstractController
                 ->from(new Address('noreply@powy.io', 'Powy'))
                 ->to($emailUser)
                 ->subject('Changement de mot de passe')
-                ->html($this->renderView('profile/password_changed.html.twig', ['user' => $user]));
+                ->html($this->renderView('emails/password_changed.html.twig', ['user' => $user]));
                 $mailerInterface->send($email);
                 $this->addFlash("success", "Ton nouveau mot de passe a bien été enregistré.");
                 return $this->redirectToRoute('login');
