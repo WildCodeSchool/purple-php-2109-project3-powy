@@ -1,0 +1,190 @@
+.form-1-mentor , .form-3-mentor , .form-4-mentor {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+.fields-1-mentor , .fields-3-mentor , .fields-4-mentor {
+    background-color: $light-background-secondary;
+    border: 0.1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+/*step-1 of form */
+
+.fields-1-mentor {
+    display:flex;
+    height:auto;
+    flex-direction:column;
+    justify-content: center;
+    width:50em;
+    padding:2em;
+    margin:3em;
+    min-width:28em;
+
+    .question-field {
+        margin-top:0.5em;   
+    }
+
+    .form-label {
+        margin-left : 3em;
+        margin-top: 1em;
+    }
+
+    select , input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        max-width:25em;
+    }
+
+    textarea {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        height: 8em;
+    }
+}
+
+/*step-3 of form */
+.fields-3-mentor {
+    display: grid;
+    margin: 2em;
+    padding:2em;
+    max-width:50em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-auto-flow:column;
+    gap: 3em 1.5em;
+    grid-template-areas:
+    "gender lastname firstname"
+    "age phone .";
+    grid-area: fields-5;
+}
+
+.gender {
+    grid-area: gender;
+
+    select {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+        height: 2em;
+    }
+}
+
+.lastname {
+    grid-area: lastname;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.firstname {
+    grid-area: firstname;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.age {
+    grid-area: age;
+
+    .form-label {
+        margin-right: 0.5em;
+    }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.phone {
+    grid-area: phone;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+/*step-4 of form */
+
+.fields-4-mentor {
+    display:flex;
+    height:auto;
+    flex-direction:column;
+    justify-content: center;
+    width:30em;
+    padding:3em;
+    margin:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+
+    .form-label {
+        margin-top:0.5em;
+    }
+}
+
+.CGU {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+    align-self:center;
+    max-width: 40em;
+    margin-bottom:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 1em;
+        margin-right:1em;
+    }
+}
+
+@media (max-width: 800px) {
+
+    /*step-3 of form for tablet and phone */
+    .fields-3-mentor {
+        grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
+        grid-template-columns: 15em;
+    }
+
+    .gender , .lastname , .firstname , .age , .phone {
+        display:flex;
+        flex-direction:column;
+
+        select , input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+    }
+}
+
+
