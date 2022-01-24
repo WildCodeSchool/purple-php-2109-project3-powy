@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="btn-profile m-3">
-                    <a href="{{ path("chat", {id: app.user.id}) }}" class="btn btn-secondary m-3">Chat avec mon mentor !</a>
+                    <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile">Chat avec mon mentor</a>
                 </div>
             {% endif %}
         {# if the user is a mentor #}
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile">Chat avec mon étudiant !</a>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile">Chat avec mon étudiant</a>
             {% endif %}
         {% endif %}
     </div>
