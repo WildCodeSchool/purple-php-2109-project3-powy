@@ -32,6 +32,10 @@ class StudentType extends AbstractType
                     'Oui' => true,
                     'Non' => false,
                     'Je ne sais pas' => null,
+                ],
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'scholarship'
                 ]
             ])
             ->add('dreamJob', TextType::class)
