@@ -1,3 +1,4 @@
+/*  Student Form */
 // fetch the buttons
 const btnStep2 = document.getElementById('btn-step2');
 const btnStep3 = document.getElementById('btn-step3');
@@ -68,4 +69,64 @@ returnStep4.addEventListener('click', () => {
 returnStep5.addEventListener('click', () => {
     divStep5.classList.toggle('hidden');
     divStep6.classList.toggle('hidden');
+});
+
+/*  Mentor Form */
+// fetch the buttons
+const btnStepMentor2 = document.getElementById('btn-step2-mentor');
+const btnStepMentor3 = document.getElementById('btn-step3-mentor');
+const btnStepMentor4 = document.getElementById('btn-step4-mentor');
+const btnStepMentor5 = document.getElementById('btn-step5-mentor');
+const returnStepMentor1 = document.getElementById('return-btn-step1-mentor');
+const returnStepMentor2 = document.getElementById('return-btn-step2-mentor');
+const returnStepMentor3 = document.getElementById('return-btn-step3-mentor');
+const returnStepMentor4 = document.getElementById('return-btn-step4-mentor');
+
+// fetch the div
+const divStepMentor1 = document.getElementById('step-1-mentor');
+const divStepMentor2 = document.getElementById('step-2-mentor');
+const divStepMentor3 = document.getElementById('step-3-mentor');
+const divStepMentor4 = document.getElementById('step-4-mentor');
+const divStepMentor5 = document.getElementById('step-5-mentor');
+
+// btn listeners
+btnStepMentor2.addEventListener('click', () => {
+    divStepMentor1.classList.toggle('hidden');
+    divStepMentor2.classList.toggle('hidden');
+});
+
+btnStepMentor3.addEventListener('click', () => {
+    divStepMentor2.classList.toggle('hidden');
+    divStepMentor3.classList.toggle('hidden');
+});
+
+btnStepMentor4.addEventListener('click', () => {
+    divStepMentor3.classList.toggle('hidden');
+    divStepMentor4.classList.toggle('hidden');
+});
+
+btnStepMentor5.addEventListener('click', () => {
+    divStepMentor4.classList.toggle('hidden');
+    divStepMentor5.classList.toggle('hidden');
+});
+
+// return btn listeners
+returnStepMentor1.addEventListener('click', () => {
+    divStepMentor1.classList.toggle('hidden');
+    divStepMentor2.classList.toggle('hidden');
+});
+
+returnStepMentor2.addEventListener('click', () => {
+    divStepMentor2.classList.toggle('hidden');
+    divStepMentor3.classList.toggle('hidden');
+});
+
+returnStepMentor3.addEventListener('click', () => {
+    divStepMentor3.classList.toggle('hidden');
+    divStepMentor4.classList.toggle('hidden');
+});
+
+returnStepMentor4.addEventListener('click', () => {
+    divStepMentor4.classList.toggle('hidden');
+    divStepMentor5.classList.toggle('hidden');
 });
