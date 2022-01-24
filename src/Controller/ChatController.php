@@ -6,7 +6,6 @@ use App\Entity\Mentoring;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -16,23 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ChatController extends AbstractController
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
     /**
      * @Route("/chat/{id}", name="chat", requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
     public function index(
-        int $id,
+        User $user,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
         //check if user and mentoring are null
-        $user = $this->checkUser($id);
         $mentoring = $this->checkMentoring($user);
 
         //create message form
@@ -71,7 +63,7 @@ class ChatController extends AbstractController
     }
 
     //function to fetch mentoring depending if user is a mentor or a student
-    public function checkMentoring(User $user): ?Mentoring
+    private function checkMentoring(User $user): ?Mentoring
     {
         $mentoring = null;
         if ($user->getMentor() === null && $user->getStudent() === null) {
@@ -83,15 +75,5 @@ class ChatController extends AbstractController
             $mentoring = $user->getStudent()->getMentoring();
         }
         return $mentoring;
-    }
-
-    //function to verify is User is null or not
-    public function checkUser(int $id): User
-    {
-        $user = $this->userRepository->find($id);
-        if (is_null($user)) {
-            throw $this->createNotFoundException("No user found with id $id.");
-        }
-        return $user;
     }
 }
