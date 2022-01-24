@@ -6,11 +6,10 @@
     .logo {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
 
         p {
-            font-size: .8rem;
             margin: 0;
+            font-size:0.6rem
         }
 
         a {
@@ -25,8 +24,8 @@
 
         img {
 
-            width: 64px;
-            margin-left: 1rem;
+            width: 53px;
+            margin-left: 0.3rem;
         }
     }
 
@@ -71,7 +70,13 @@
             }
 
             p {
-                font-size: 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            img {
+
+                width: 67px;
+                margin-left: 1rem;
             }
         }
     }
