@@ -39,10 +39,10 @@ class MentoringManager
         if ($mentoring === null) {
             return false;
         }
-        if ($mentoring->getIsAccepted() === null || $mentoring->getIsAccepted() === false) {
+        if ($mentoring->getIsAccepted() === false) {
             return false;
         }
-        if ($mentoring->getEndingDtae() < $todaysDate) {
+        if ($mentoring->getEndingDtae() > $todaysDate) {
             return false;
         }
         return true;
