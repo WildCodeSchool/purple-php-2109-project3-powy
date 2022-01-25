@@ -35,7 +35,12 @@ class MentorType extends AbstractType
             ])
             ->add('company', EntityType::class, [
                 'choice_label' => 'name',
-                'class' => Company::class
+                'class' => Company::class,
+                'placeholder' => "Nom de l'entreprise"
+            ])
+            ->add('companyAdd', TextType::class, [
+                'mapped' => false,
+                'required' => false
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

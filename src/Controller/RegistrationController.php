@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Mentor;
 use App\Entity\School;
 use App\Entity\Student;
@@ -127,9 +128,19 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
-                $user->setRoles(['ROLE_STUDENT']);
+                // if the company wasn't on the list and the mentor added a new name
+                $companyName = $form->get('companyAdd')->getData();
+                $newCompany = new Company();
+                if ($newCompany !== null && is_string($companyName)) {
+                    $newCompany->setName($companyName);
+                    $mentor->setCompany($newCompany);
+                }
+                $user->setRoles(['ROLE_MENTOR']);
                 $entityManager->persist($mentor);
                 $entityManager->persist($user);
+                if ($newCompany->getName() !== null) {
+                    $entityManager->persist($newCompany);
+                }
                 $entityManager->flush();
             }
         // generate a signed url and email it to the user
