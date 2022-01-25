@@ -43,6 +43,11 @@
             <a href="{{ path('edit_choices', {id: app.user.id}) }}" class="btn-profile">Modifier mes choix</a>
             {% include 'profile/_delete_form.html.twig' %}
         </div>
+        <div>
+            {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) %}
+                <p class="center red">Tu n'as pas encore de mentor.</p>
+            {% endif %}
+        </div>
     </section>
     <div class='d-flex flex-column align-items-center'>
         {# if the user is a student #}
