@@ -1,3 +1,12 @@
+// Add input if school 'other'
+document.getElementById('student_school').addEventListener('change', (event) => {
+    const divSchoolAdd = document.getElementById('school-add');
+    if (event.target.childNodes[1].innerText === 'Autre' && divSchoolAdd !== null) {
+        divSchoolAdd.classList.toggle('school-hidden');
+        divSchoolAdd.classList.toggle('question-field-school');
+    }
+});
+
 // Student form
 // fetch the buttons
 const btnStep2 = document.getElementById('btn-step2');

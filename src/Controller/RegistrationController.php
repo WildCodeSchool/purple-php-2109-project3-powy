@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Mentor;
+use App\Entity\School;
 use App\Entity\Student;
 use App\Entity\User;
 use App\Form\MentorType;
@@ -58,9 +59,19 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
+                // if the school wasn't on the list and the student added a new name
+                $schoolName = $form->get('schoolAdd')->getData();
+                $newSchool = new School();
+                if ($schoolName !== null && is_string($schoolName)) {
+                    $newSchool->setName($schoolName);
+                    $student->setSchool($newSchool);
+                }
                 $user->setRoles(['ROLE_STUDENT']);
                 $entityManager->persist($student);
                 $entityManager->persist($user);
+                if ($newSchool->getName() !== null) {
+                    $entityManager->persist($newSchool);
+                }
                 $entityManager->flush();
             }
         // generate a signed url and email it to the user
