@@ -36,23 +36,53 @@ class StudentType extends AbstractType
                 'expanded' => true,
                 'attr' => [
                     'class' => 'scholarship'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner une réponse'
+                    ])
                 ]
             ])
-            ->add('dreamJob', TextType::class)
+            ->add('dreamJob', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner votre niveau.'
+                    ])]
+            ])
             ->add('dreamDescription', TextareaType::class, [
                 'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner une description.'
+                    ])]
             ])
             ->add('professionalSector', EntityType::class, [
                 'choice_label' => 'name',
-                'class' => ProfessionalSector::class
+                'class' => ProfessionalSector::class,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner votre niveau professionel.'
+                    ])]
             ])
-            ->add('school', EntityType::class, ['choice_label' => 'name', 'class' => School::class])
+            ->add('school', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => School::class,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner une école'
+                    ])
+                ]])
             ->add('studyLevel', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
                 'expanded' => true,
                 'attr' => [
                     'class' => 'studyLevel',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner une niveau d\'étude'
+                    ])
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -77,7 +107,12 @@ class StudentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('topic', TopicType::class)
+            ->add('topic', TopicType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner un numéro de téléphone.'
+                    ])]
+            ])
             ->add('user', RegistrationFormType::class)
         ;
     }
