@@ -1,0 +1,390 @@
+.step-1, .step-2, .step-3, .step-4, .step-5, .step-6 {
+    display:flex;
+    flex-direction: column;
+}
+
+//Class being toggle to display all the steps one by one of the forms
+//do not move it to body because the script JS doesn't work anymore (??)
+.hidden {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* progress-bar */
+.progress {
+    margin-top:1rem;
+    margin-bottom: 3rem;
+    background-color: white;
+    border:solid;
+    border-width:0.1px;
+    margin-left: 1em;
+    margin-right:1em;
+
+}
+
+.progress-bar {
+    background-color: $dark-background;
+}
+
+/* title question bold */
+.question-text {
+    font-weight: bolder;
+    font-size: 1.2em;
+    margin-top:0.3em;
+    margin-right:2em;
+    margin-left:2em;
+}
+
+.indications {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.logo-powy {
+    margin-left: 2em;
+    margin-right:2em;
+}
+
+/* scroll button */ 
+.scroll-btn-section {
+    margin:2em;
+    display: flex;
+    justify-content: right;
+}
+
+.scroll-btn {
+    align-items: center;
+    background-color: $dark-background;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 8em;
+    border: none;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+    }
+}
+
+/* register btn */
+.register-btn {
+    margin:2em;
+    display: flex;
+    justify-content: right;
+}
+
+.registration-btn {
+    align-items: center;
+    background-color: $dark-background;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    height: 3em;
+    justify-content: center;
+    text-decoration: none;
+    width: 8em;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 2px 4px $dark-background;
+    }
+}
+
+input , select , textarea {
+    background-color: $white;
+    border-radius: 5px;
+    padding: 0.1em;   
+    margin:0.5em;
+}
+
+.form-6 , .form-3 , .form-5 {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+.fields-3 , .fields-5 , .fields-6 {
+    background-color: $light-background-secondary;
+    border: 0.1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+/*step-1 of form */
+
+.studyLevel-text {
+    display: none;
+}
+
+.studyLevel {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    label {
+        background-color: $chat-background;
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
+    }
+}
+
+[name="student[studyLevel]"]:checked + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px $box-shadow;
+}
+
+[name="student[studyLevel]"]:focus + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
+}
+
+[name="student[studyLevel]"] {
+    position: fixed;
+    opacity: 0;
+}
+
+
+
+/*step-3 of form */
+
+.fields-3 {
+    display:flex;
+    height:auto;
+    flex-direction:column;
+    justify-content: center;
+    max-width:50em;
+    padding:2em;
+    margin:3em;
+    min-width:28em;
+
+    .question-field {
+        margin-top:0.5em;   
+    }
+
+    .form-label {
+        margin-left : 3em;
+        margin-top: 1em;
+    }
+
+    select , input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        max-width:25em;
+    }
+
+    textarea {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        height: 8em;
+    }
+}
+
+/*step-4 of form*/
+
+.scholarship-text {
+    display: none;
+}
+
+.scholarship {
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    gap: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+
+    label {
+        background-color: $chat-background;
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
+    }
+}
+
+[name="student[scholarship]"]:checked + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px $box-shadow;
+}
+
+[name="student[scholarship]"]:focus + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
+}
+
+[name="student[scholarship]"] {
+    position: fixed;
+    opacity: 0;
+}
+
+/*step-5 of form */
+.fields-5 {
+    display: grid;
+    margin: 2em;
+    padding:2em;
+    max-width:50em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-auto-flow:column;
+    gap: 3em 1.5em;
+    grid-template-areas:
+    "gender lastname firstname"
+    "age phone .";
+    grid-area: fields-5;
+}
+
+.gender {
+    grid-area: gender;
+
+    select {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+        height: 2em;
+    }
+}
+
+.lastname {
+    grid-area: lastname;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.firstname {
+    grid-area: firstname;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.age {
+    grid-area: age;
+
+    .form-label {
+        margin-right: 0.5em;
+    }
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+.phone {
+    grid-area: phone;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+}
+
+/*step-6 of form */
+
+.fields-6 {
+    display:flex;
+    height:auto;
+    flex-direction:column;
+    justify-content: center;
+    width:30em;
+    padding:3em;
+    margin:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+
+    .form-label {
+        margin-top:0.5em;
+    }
+}
+
+.CGU {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+    align-self:center;
+    max-width: 40em;
+    margin-bottom:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 1em;
+        margin-right:1em;
+    }
+}
+
+@media (min-width: 400px) {
+    .scholarship {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 800px) {
+
+    /*step-5 of form for tablet and phone */
+    .fields-5 {
+        grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
+        grid-template-columns: 15em;
+    }
+
+    .gender , .lastname , .firstname , .age , .phone {
+        display:flex;
+        flex-direction:column;
+
+        select , input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+    }
+}
+
+

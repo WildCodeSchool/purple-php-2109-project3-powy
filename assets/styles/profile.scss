@@ -42,25 +42,30 @@
 
 .container-btn-profile{
     display: flex;
-    justify-content: center;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
 }
 
-.btn-profile a{
+.btn-profile{
     align-items: center;
     background-color: #1c1c1c;
     border-radius: 10px;
     color: #fff;
     display: flex;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     height: 3em;
     justify-content: center;
     text-decoration: none;
-    width: 15em;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
+    width: 13em;
+    padding: 0.5rem;
+    border: none;
+
+    &:hover, &:focus {
+
+        color: $middle-background;
+    }
 }
 
 .red{
@@ -74,16 +79,28 @@
 
 .img-profile img{
     border-radius: 100%;
-    border: 1px black solid;
     width: 15rem;
     height: 15rem;
 }
 
+.delete-btn {
+
+    &:hover, &:focus {
+        background-color: $alert;
+        color: $white;
+    }
+
+}
+
 @media screen and (min-width: 1024px) {
     .container-btn-profile{
-        display: flex;
-        justify-content: center;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
+        
+    }
+
+    .profile-main {
+        flex-direction: row !important;
+        justify-content: space-around !important;
     }
 }

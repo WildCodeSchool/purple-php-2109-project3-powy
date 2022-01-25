@@ -27,9 +27,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $student->setRoles(['ROLE_STUDENT']);
             $student->setFirstname('Alice' . $i);
             $student->setLastname('Martin' . $i);
-            $student->setGender('Female');
+            $student->setGender('female');
             $student->setAge('22');
             $student->setPhone('0234567890');
+            $student->setIsVerified(true);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $student,
                 'Studentpassword!' . $i
@@ -47,9 +48,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $mentor->setRoles(['ROLE_MENTOR']);
             $mentor->setFirstname('Héloïse' . $i);
             $mentor->setLastname('Durand' . $i);
-            $mentor->setGender('Female');
+            $mentor->setGender('female');
             $mentor->setAge('42');
             $mentor->setPhone('0234567800');
+            $mentor->setIsVerified(true);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $mentor,
                 'Mentorpassword!' . $i
