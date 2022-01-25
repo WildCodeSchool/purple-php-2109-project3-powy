@@ -41,7 +41,7 @@ class Mentoring
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $isAccepted;
+    private ?bool $isAccepted = null;
 
     public function getId(): ?int
     {
