@@ -25,6 +25,8 @@ class MentoringManager
      */
     public function hasMentoring(User $user): bool
     {
+        $todaysDate = new DateTime();
+
         $mentoring = null;
         if ($user->getMentor() === null && $user->getStudent() === null) {
             throw new Exception('User is neither a student or a mentor.');
@@ -36,12 +38,18 @@ class MentoringManager
         }
         if ($mentoring === null) {
             return false;
-        } elseif ($mentoring->getIsAccepted() === null || $mentoring->getIsAccepted() === false) {
+        }
+        if ($mentoring->getIsAccepted() === null || $mentoring->getIsAccepted() === false) {
+            return false;
+        }
+        if ($mentoring->getEndingDtae() < $todaysDate) {
             return false;
         }
         return true;
     }
-
+    /**
+     * To use when a match is accepted by a student
+     */
     public function startMentoring(Mentoring $mentoring): void
     {
         $startingDate = new DateTime();
