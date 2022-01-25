@@ -41,7 +41,7 @@ class MailerManager extends AbstractController
     }
 
     /**
-     * when a mentoring is accepted by student send a confirmation email to the student
+     * when a mentoring is accepted by student send a confirmation email to a mentor or
      */
     public function sendAcceptation(User $user): void
     {
