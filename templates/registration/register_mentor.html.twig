@@ -24,15 +24,20 @@
             <div class="fields-1-mentor">
             {{ form_label(mentorRegistrationForm, 'Quel est ton domaine pro', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.professionalSector) }}
+                {{ form_errors(mentorRegistrationForm.professionalSector) }}
+
 
             {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
+                {{ form_errors(mentorRegistrationForm.company) }}
 
             {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.jobTitle) }}
+                {{ form_errors(mentorRegistrationForm.jobTitle) }}
 
             {{ form_label(mentorRegistrationForm, 'Précisions sur ton poste, ton parcours:', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.careerDescription) }}
+                {{ form_errors(mentorRegistrationForm.careerDescription) }}
             </div>
         </div>
     {# scroll-btn 1 #}
@@ -59,12 +64,15 @@
         {{ form_row(mentorRegistrationForm.topic.topic1, {
             label: 'choix 1'
         }) }}
+        {{ form_errors(mentorRegistrationForm.topic.topic1) }}
         {{ form_row(mentorRegistrationForm.topic.topic2, {
             label: 'choix 2'
         }) }}
+        {{ form_errors(mentorRegistrationForm.topic.topic2) }}
         {{ form_row(mentorRegistrationForm.topic.topic3, {
             label: 'choix 3'
         }) }}
+        {{ form_errors(mentorRegistrationForm.topic.topic3) }}
     {# scroll-btn 2 #}
         <div class="scroll-btn-section gap-2">
             <button type="submit" id="return-btn-step1-mentor" class="scroll-btn">Retour</button>
@@ -92,22 +100,27 @@
                 <div class="gender">
                     {{ form_label(mentorRegistrationForm, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.gender) }}
+                    {{ form_errors(mentorRegistrationForm.user.gender) }}
                 </div>
                 <div class="lastname">
                     {{ form_label(mentorRegistrationForm, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.lastname) }}
+                    {{ form_errors(mentorRegistrationForm.user.lastname) }}
                 </div>
                 <div class="firstname">
                     {{ form_label(mentorRegistrationForm, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.firstname) }}
+                    {{ form_errors(mentorRegistrationForm.user.firstname) }}
                 </div>
                 <div class="age">
                     {{ form_label(mentorRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.age) }}
+                    {{ form_errors(mentorRegistrationForm.user.age) }}
                 </div>
                 <div class="phone">
                     {{ form_label(mentorRegistrationForm, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.phone) }}
+                    {{ form_errors(mentorRegistrationForm.user.phone) }}
                 </div>
             </div>
         </div>
@@ -135,10 +148,12 @@
             <div class="fields-4-mentor">
                 <label class="form-label"> E-mail </label>
                 {{ form_widget(mentorRegistrationForm.user.email) }}
+                {{ form_errors(mentorRegistrationForm.user.email) }}
 
                 {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
 
                 {{ form_widget(mentorRegistrationForm.plainPassword) }}
+                {{ form_errors(mentorRegistrationForm.plainPassword) }}
             </div>
         </div>
     {# scroll-btn 4 #}
