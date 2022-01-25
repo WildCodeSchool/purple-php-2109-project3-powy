@@ -2,11 +2,9 @@
 
 namespace App\Service;
 
-use App\Entity\Mentor;
 use App\Entity\Mentoring;
 use App\Entity\Student;
 use App\Repository\MentorRepository;
-use App\Repository\TopicRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -14,11 +12,16 @@ class MatchManager
 {
     private MentorRepository $mentorRepository;
     private EntityManagerInterface $entityManager;
+    private MailerManager $mailerManager;
 
-    public function __construct(MentorRepository $mentorRepository, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        MentorRepository $mentorRepository,
+        MailerManager $mailerManager,
+        EntityManagerInterface $entityManager
+    ) {
         $this->mentorRepository = $mentorRepository;
         $this->entityManager = $entityManager;
+        $this->mailerManager = $mailerManager;
     }
     /**
      * return an array of mentors with no active mentoring, matching with one of the studentTopics, by priority :
@@ -83,6 +86,8 @@ class MatchManager
             $mentoring->setStudent($studentToMatch);
             $mentoring->setMentor($matchingMentor);
             $this->entityManager->flush();
+            //sending mentoring proposition to student
+            $this->mailerManager->sendProposal($studentToMatch);
         } else {
             throw new Exception("This student already has an active mentoring");
         }

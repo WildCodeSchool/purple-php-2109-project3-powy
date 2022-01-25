@@ -9,6 +9,7 @@ use App\Form\MentorType;
 use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -153,7 +154,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         MailerInterface $mailerInterface,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MatchManager $matchManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
         $id = $request->get('id');
@@ -183,6 +185,10 @@ class RegistrationController extends AbstractController
                     ->subject('Inscription validée 🥳 !')
                     ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
                     $mailerInterface->send($email);
+                    if ($user->getStudent() !== null) {
+                        //try to get a match with a mentor
+                        $matchManager->match($user->getStudent());
+                    }
                 }
             }
         } catch (VerifyEmailExceptionInterface $exception) {
