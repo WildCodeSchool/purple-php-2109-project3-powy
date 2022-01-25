@@ -38,6 +38,11 @@ class Mentoring
      */
     private ?Mentor $mentor;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isAccepted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Mentoring
         }
 
         $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    public function getIsAccepted(): ?bool
+    {
+        return $this->isAccepted;
+    }
+
+    public function setIsAccepted(?bool $isAccepted): self
+    {
+        $this->isAccepted = $isAccepted;
 
         return $this;
     }
