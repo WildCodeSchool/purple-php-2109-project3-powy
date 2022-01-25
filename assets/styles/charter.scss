@@ -1,0 +1,55 @@
+.charter {
+    padding:2em;
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+}
+
+.card1 {
+    padding: 1rem;
+    background-color:$light-background-primary ;
+    text-align:center;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+.card2 {
+    padding: 1rem;
+    background-color:$light-background-primary ;
+    text-align:center;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+.card3 {
+    padding: 1rem;
+    background-color:$light-background-primary ;
+    text-align:center;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+.card4 {
+    padding: 1rem;
+    background-color:$light-background-primary ;
+    text-align:center;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+h4 {
+    font-weight: bolder;
+}
+
+@media screen and (min-width: 1024px) {
+    .powy-enter {
+
+        h1 {
+            font-size: 3rem;
+       }
+   }
+}
