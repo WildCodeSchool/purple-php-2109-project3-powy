@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\Mentoring;
 use App\Entity\Student;
+use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
@@ -35,6 +37,22 @@ class MailerManager extends AbstractController
                 ->htmlTemplate('emails/mentoring_proposal.html.twig');
                 $this->mailerInterface->send($email);
             }
+        }
+    }
+
+    /**
+     * when a mentoring is accepted by student send a confirmation email to the student
+     */
+    public function sendAcceptation(User $user): void
+    {
+        $emailUser = $user->getEmail();
+        if ($emailUser !== null) {
+            $email = (new TemplatedEmail())
+            ->from(new Address('noreply@powy.io', 'powy-registration'))
+            ->to($emailUser)
+            ->subject('Confirmation du mentorat 🥳')
+            ->htmlTemplate('emails/mentoring_confirmation.html.twig');
+            $this->mailerInterface->send($email);
         }
     }
 }
