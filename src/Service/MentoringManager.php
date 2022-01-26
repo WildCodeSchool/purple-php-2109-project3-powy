@@ -21,6 +21,22 @@ class MentoringManager
     }
 
     /**
+     * return mentoring or null depends if a user is a student or a mentor
+     */
+    public function fetchMentoring(User $user): ?Mentoring
+    {
+        $mentoring = null;
+        if (!$this->hasMentoring($user)) {
+            throw new Exception("User doesn't have any active mentoring.");
+        } elseif ($user->getMentor() !== null) {
+            $mentoring = $user->getMentor()->getMentoring();
+        } elseif ($user->getStudent() !== null) {
+            $mentoring = $user->getStudent()->getMentoring();
+        }
+        return $mentoring;
+    }
+
+    /**
      * return if an user (student or mentor) has an active mentoring or not
      */
     public function hasMentoring(User $user): bool

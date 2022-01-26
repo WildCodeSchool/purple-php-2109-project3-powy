@@ -44,13 +44,13 @@
             {% include 'profile/_delete_form.html.twig' %}
         </div>
         <div>
-            {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) %}
+            {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) or (app.user.student.mentoring is defined and app.user.student.mentoring is not null and app.user.student.mentoring.isAccepted == false) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is not null and app.user.mentor.mentoring.isAccepted == false) %}
                 <p class="center red mt-4">Tu n'as pas encore de mentor.</p>
             {% endif %}
         </div>
     </section>
     {# if the user is a student #}
-    {% if app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
+    {% if app.user.student.mentoring.isAccepted is defined and app.user.student.mentoring.isAccepted == true %}
         <div class='d-flex flex-column mentoring-profile'>
             <div class="container">
                 <h2  class="h3 h2-profile">Mon mentor</h2>
@@ -83,7 +83,7 @@
         </div>
     {% endif %}
     {# if the user is a mentor #}
-    {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is not null %}
+    {% if app.user.mentor.mentoring.isAccepted is defined and app.user.mentor.mentoring.isAccepted == true %}
         <div class='d-flex flex-column mentoring-profile'>
             <div class="container">
                 <h2 class="h3 h2-profile">Mon étudiant à mentorer :</h2>
