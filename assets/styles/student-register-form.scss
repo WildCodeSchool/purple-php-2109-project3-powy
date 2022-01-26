@@ -162,9 +162,21 @@ input , select , textarea {
 #student_topic {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
+
+    label {
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
+        width: 10rem;
+        height: 10rem;
+        text-align: center;
+    }
 }
 
 [name="student[topic][]"]:checked + label {
@@ -173,16 +185,42 @@ input , select , textarea {
     box-shadow: inset 0 3px 3px $box-shadow;
 }
 
-// [name="student[topic][]"]:focus + label {
-//     background-color: $chat-user1;
-//     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-//     box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
-// }
-
 [name="student[topic][]"] {
     position: fixed;
     opacity: 0;
+}
+
+#topics-button {
     padding: 1rem;
+    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    
+    &:before {
+        content: url("../images/arrow-clockwise.png");
+        vertical-align: middle;
+        
+    }
+    &:hover {
+
+        transition: 0.4s;
+
+        &:before {
+            content: url("../images/arrow-clockwise-hover.png");
+        }
+    }
+}
+
+.number1 {
+
+}
+
+.number2 {
+
+}
+
+.number3 {
+    
 }
 
 /*step-3 of form */

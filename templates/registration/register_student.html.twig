@@ -9,6 +9,7 @@
 {% block body %}
     {% include "components/_header.html.twig" %}
     {% include "components/_flashmessages.html.twig" %}
+    <main>
             <h1 class="inscription-title">Formulaire d'inscription étudiant :</h1>
             {{ form_start(studentRegistrationForm) }}
             {{ form_errors(studentRegistrationForm) }}
@@ -50,12 +51,10 @@
                 {{ form_row(studentRegistrationForm.topic, {
                     label: ' '
                 }) }}
-                {# {{ form_row(studentRegistrationForm.topic.topic2, {
-                    label: 'choix 2'
-                }) }}
-                {{ form_row(studentRegistrationForm.topic.topic3, {
-                    label: 'choix 3'
-                }) }} #}
+                <button type="submit" id ="topics-button" class="align-self-center mt-5">changer mes choix</button>
+                <input type="text" id="topic1" value="" hidden>
+                <input type="text" id="topic2" value="" hidden>
+                <input type="text" id="topic3" value="" hidden>
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step1" class="scroll-btn">Retour</button>
@@ -199,4 +198,8 @@
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
+    </main>
+    <script>
+
+    </script>
 {% endblock %}
