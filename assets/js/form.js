@@ -1,3 +1,27 @@
+// Add input if school 'other'
+const selectSchool = document.getElementById('student_school');
+if (selectSchool !== null) {
+    selectSchool.addEventListener('change', (event) => {
+        const divSchoolAdd = document.getElementById('school-add');
+        if (event.target.childNodes[1].innerText === 'Autre' && divSchoolAdd !== null) {
+            divSchoolAdd.classList.toggle('hidden');
+            divSchoolAdd.classList.toggle('question-field-school');
+        }
+    });
+}
+
+// Add input if company 'other'
+const selectCompany = document.getElementById('mentor_company');
+if (selectCompany !== null) {
+    selectCompany.addEventListener('change', (event) => {
+        const divCompanyAdd = document.getElementById('company-add');
+        if (event.target.childNodes[1].innerText === 'Autre' && divCompanyAdd !== null) {
+            divCompanyAdd.classList.toggle('hidden');
+            divCompanyAdd.classList.toggle('question-field-school');
+        }
+    });
+}
+
 // Student form
 // fetch the buttons
 const btnStep2 = document.getElementById('btn-step2');

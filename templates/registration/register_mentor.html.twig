@@ -25,10 +25,14 @@
             {{ form_label(mentorRegistrationForm, 'Quel est ton domaine pro', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.professionalSector) }}
 
-            {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle?', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
+            <div id="company-add" class="hidden">
+                {{ form_label(mentorRegistrationForm.companyAdd, 'Précise le nom de ton entreprise :', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(mentorRegistrationForm.companyAdd) }}
+            </div>
 
-            {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé?', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.jobTitle) }}
 
             {{ form_label(mentorRegistrationForm, 'Précisions sur ton poste, ton parcours:', {'label_attr': {'class': 'form-label'}}) }}
