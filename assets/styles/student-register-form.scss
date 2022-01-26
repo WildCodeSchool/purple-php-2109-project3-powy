@@ -3,9 +3,13 @@
     flex-direction: column;
 }
 
-//Class being toggle to display all the steps one by one of the forms
+//Classes being toggle to display all the steps one by one of the forms
 //do not move it to body because the script JS doesn't work anymore (??)
 .hidden {
+    display: none;
+}
+
+.school-hidden {
     display: none;
 }
 
@@ -363,6 +367,11 @@ input , select , textarea {
     .scholarship {
         flex-direction: row;
         justify-content: center;
+    }
+
+    .question-field-school {
+        display: flex;
+        flex-direction: column;
     }
 }
 

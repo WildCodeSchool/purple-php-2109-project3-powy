@@ -1,0 +1,37 @@
+.section-1-cgu {
+    padding-top: 5rem;
+}
+
+h2 {
+    padding-top: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bolder;
+}
+
+.cgu {
+    padding: 2rem;
+}
+
+.cgu-end {
+    padding-bottom:2.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .powy-enter {
+
+        h1 {
+            font-size: 3rem;
+       }
+   }
+}

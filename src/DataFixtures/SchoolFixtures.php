@@ -9,12 +9,12 @@ use Doctrine\Persistence\ObjectManager;
 class SchoolFixtures extends Fixture
 {
     private const SCHOOLS = [
+        'Autre',
         'Ecole1',
         'Ecole2',
         'Ecole3',
         'Ecole4',
-        'Ecole5',
-        'Autre',
+        'Ecole5'
     ];
 
     public function load(ObjectManager $manager): void

@@ -84,6 +84,10 @@
                         {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.school) }}
                         {{ form_errors(studentRegistrationForm.school) }}
+                        <div id="school-add" class="hidden">
+                            {{ form_label(studentRegistrationForm.schoolAdd, 'Précise le nom de ton école', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(studentRegistrationForm.schoolAdd) }}
+                        </div>
                     <div class="question-field">
                         <p class="question-text"> Ton rêve professionnel : </p>
                     </div>
