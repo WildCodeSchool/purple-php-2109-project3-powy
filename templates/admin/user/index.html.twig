@@ -32,8 +32,7 @@
                 <td>{{ user.age }}</td>
                 <td>{{ user.phone }}</td>
                 <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}
