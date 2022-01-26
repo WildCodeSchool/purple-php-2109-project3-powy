@@ -1,3 +1,9 @@
+//Class being toggle to display all the steps one by one of the forms
+//do not move it to body because the script JS doesn't work anymore (??)
+.hidden {
+    display: none;
+}
+
 .form-1-mentor , .form-3-mentor , .form-4-mentor {
     display:flex;
     flex-direction: row;

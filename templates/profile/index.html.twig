@@ -9,43 +9,108 @@
 {% block body %}
 {% include 'components/_header.html.twig' %}
 {% include "components/_flashmessages.html.twig" %}
-<main>
-    <div class="container">
-        <h2 class="center">Mon profil</h2>
-        <div class="img-profile center">
-            {% if app.user.picture == null %}
-                <img src="/upload/pictures/user.png" alt="img profile">
-            {% else %}
-                <img src="/upload/pictures/{{ app.user.picture }}" alt="img profile">
-            {% endif %}
-        </div>
-        <h5 class="center">{{ app.user.firstname }} {{ app.user.lastname }}</h5>
-        <h6 class="center">{{ app.user.age }} ans</h6>
-    </div>
-    <div class="card-profile">
-        <div class="card-body-profile">
-            <p class="title-card-profile">Tes informations de contact</p>
-            <div class="card-information-profile">
-                <img src="{{ asset('build/images/sendemail.png') }}" alt="email profile img">
-                <p class="email-profile">{{ app.user.email }}</p>
+<main class="profile-main d-flex mb-4 justify-content-center flex-wrap">
+    <section class="d-flex flex-column align-items-center col-6 p-3">
+    {# profile picture, name and age #}
+        <div class="container">
+            <h2 class="h3 h2-profile">Mon profil</h2>
+            <div class="img-profile d-flex flex-column align-items-center center">
+                {% if app.user.picture == null %}
+                    <img src="/upload/pictures/user.png" alt="img profile">
+                {% else %}
+                    <img src="/upload/pictures/{{ app.user.picture }}" alt="img profile">
+                {% endif %}
             </div>
-            <div class="card-information-profile">
-                <img src="{{ asset('build/images/phone.png') }}" alt="phone profile img">
-                <p class="phone-profile">{{ app.user.phone }}</p>
+            <p class="center h5">{{ app.user.firstname }} {{ app.user.lastname|upper }}<br>{{ app.user.age }} ans</p>
+        </div>
+        {# profile informations #}
+        <div class="card-profile">
+            <div class="card-body-profile">
+                <p class="title-card-profile">Mes informations de contact</p>
+                <div class="card-information-profile">
+                    <img src="{{ asset('build/images/sendemail.png') }}" alt="email profile img">
+                    <p class="email-profile">{{ app.user.email }}</p>
+                </div>
+                <div class="card-information-profile">
+                    <img src="{{ asset('build/images/phone.png') }}" alt="phone profile img">
+                    <p class="phone-profile">{{ app.user.phone }}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <p class="center red">Tu n'as pas encore de mentor</p>
-    <div class="container-btn-profile">
-        <div class="btn-profile">
-            <a href="{{ path('profile_edit') }}">Modifier mon profil</a>
-        </div>
-        <div class="btn-profile">
-            <a href="#">Modifier mes choix</a>
-        </div>
-        <div class="btn-profile">
+        {# buttons profile edition #}
+        <div class="container-btn-profile mb-5">
+            <a href="{{ path('profile_edit') }}" class="btn-profile">Modifier mon profil</a>
+            <a href="{{ path('edit_choices', {id: app.user.id}) }}" class="btn-profile">Modifier mes choix</a>
             {% include 'profile/_delete_form.html.twig' %}
         </div>
-    </div>
+        <div>
+            {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) %}
+                <p class="center red mt-4">Tu n'as pas encore de mentor.</p>
+            {% endif %}
+        </div>
+    </section>
+    {# if the user is a student #}
+    {% if app.user.student.mentoring is defined and app.user.student.mentoring is not null %}
+        <div class='d-flex flex-column mentoring-profile'>
+            <div class="container">
+                <h2  class="h3 h2-profile">Mon mentor</h2>
+                {# picture mentor #}
+                <div class="img-profile d-flex flex-column align-items-center center">
+                    {% if app.user.student.mentoring.mentor.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.student.mentoring.mentor.user.picture }}" alt="img profile">
+                    {% else %}
+                        <img src="/upload/pictures/user.png" alt="img profile">
+                    {% endif %}
+                </div>
+                {# name + age mentor #}
+                <p class="center h5">{{ app.user.student.mentoring.mentor.user.firstname }} {{ app.user.student.mentoring.mentor.user.lastname|upper }}<br>{{ app.user.student.mentoring.mentor.user.age }} ans</p>
+            </div>
+            {# information mentor #}
+            <div class="card-profile">
+                <div class="card-body-profile">
+                    <p class="title-card-profile">Ses informations de contact</p>
+                    <div class="card-information-profile">
+                        <img src="{{ asset('build/images/sendemail.png') }}" alt="email profile img">
+                        <p class="email-profile">{{ app.user.student.mentoring.mentor.user.email }}</p>
+                    </div>
+                    <div class="card-information-profile">
+                        <img src="{{ asset('build/images/phone.png') }}" alt="phone profile img">
+                        <p class="phone-profile">{{ app.user.student.mentoring.mentor.user.phone }}</p>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center">Chat avec mon mentor</a>
+        </div>
+    {% endif %}
+    {# if the user is a mentor #}
+    {% if app.user.mentor.mentoring is defined and app.user.mentor.mentoring is not null %}
+        <div class='d-flex flex-column mentoring-profile'>
+            <div class="container">
+                <h2 class="h3 h2-profile">Mon étudiant à mentorer :</h2>
+                <div class="img-profile center">
+                    {% if app.user.mentor.mentoring.student.user.picture is not null %}
+                    <img src="/upload/pictures/{{ app.user.mentor.mentoring.student.user.picture }}" alt="student-picture">
+                    {% else %}
+                        <img src="/upload/pictures/user.png" alt="img profile">
+                    {% endif %}
+                </div>
+            </div>
+            <p class="center h5">{{ app.user.mentor.mentoring.student.user.firstname }} {{ app.user.mentor.mentoring.student.user.lastname|upper }}<br>{{ app.user.mentor.mentoring.student.user.age }} ans</p>
+            <div class="card-profile">
+                <div class="card-body-profile w-100">
+                    <p class="title-card-profile">Ses informations de contact</p>
+                    <div class="card-information-profile">
+                        <img src="{{ asset('build/images/sendemail.png') }}" alt="email profile img">
+                        <p class="email-profile">{{ app.user.mentor.mentoring.student.user.email }}</p>
+                    </div>
+                    <div class="card-information-profile">
+                        <img src="{{ asset('build/images/phone.png') }}" alt="phone profile img">
+                        <p class="phone-profile">{{ app.user.mentor.mentoring.student.user.phone }}</p>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center">Chat avec mon étudiant</a>
+        </div>
+    {% endif %}
 </main>
 {% endblock %}

@@ -9,8 +9,12 @@ use Doctrine\Persistence\ObjectManager;
 class CompanyFixtures extends Fixture
 {
     public const COMPANIESNUMBER = 20;
+
     public function load(ObjectManager $manager): void
     {
+        $company = new Company();
+        $company->setName('Autre');
+        $manager->persist($company);
         //creation of 20 compagnies
         for ($i = 0; $i < self::COMPANIESNUMBER; $i++) {
             $company = new Company();

@@ -32,6 +32,10 @@ class StudentType extends AbstractType
                     'Oui' => true,
                     'Non' => false,
                     'Je ne sais pas' => null,
+                ],
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'scholarship'
                 ]
             ])
             ->add('dreamJob', TextType::class)
@@ -42,7 +46,15 @@ class StudentType extends AbstractType
                 'choice_label' => 'name',
                 'class' => ProfessionalSector::class
             ])
-            ->add('school', EntityType::class, ['choice_label' => 'name', 'class' => School::class])
+            ->add('school', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => School::class,
+                'placeholder' => 'Choisis une école'
+            ])
+            ->add('schoolAdd', TextType::class, [
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('studyLevel', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
