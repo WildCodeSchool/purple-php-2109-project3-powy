@@ -2,11 +2,9 @@
 
 namespace App\Service;
 
-use App\Entity\Mentor;
 use App\Entity\Mentoring;
 use App\Entity\Student;
 use App\Repository\MentorRepository;
-use App\Repository\TopicRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -14,11 +12,19 @@ class MatchManager
 {
     private MentorRepository $mentorRepository;
     private EntityManagerInterface $entityManager;
+    private MailerManager $mailerManager;
+    private MentoringManager $mentoringManager;
 
-    public function __construct(MentorRepository $mentorRepository, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        MentorRepository $mentorRepository,
+        MailerManager $mailerManager,
+        EntityManagerInterface $entityManager,
+        MentoringManager $mentoringManager
+    ) {
         $this->mentorRepository = $mentorRepository;
         $this->entityManager = $entityManager;
+        $this->mailerManager = $mailerManager;
+        $this->mentoringManager = $mentoringManager;
     }
     /**
      * return an array of mentors with no active mentoring, matching with one of the studentTopics, by priority :
@@ -60,29 +66,32 @@ class MatchManager
     public function match(Student $studentToMatch): void
     {
         $mentorsBySector = [];
-
+        $user = $studentToMatch->getUser();
         //check if student has already a mentor
-        if ($studentToMatch->getMentoring() === null) {
-            $matchingMentors = $this->matchByTopic($studentToMatch);
-
-            //try to find a Mentor with same professionalSector than student to match
-            foreach ($matchingMentors as $matchingMentor) {
-                if ($matchingMentor->getProfessionalSector() === $studentToMatch->getProfessionalSector()) {
-                    $mentorsBySector[] = $matchingMentor;
+        if ($user !== null) {
+            if ($this->mentoringManager->hasMentoring($user) === false) {
+                $matchingMentors = $this->matchByTopic($studentToMatch);
+                //try to find a Mentor with same professionalSector than student to match
+                foreach ($matchingMentors as $matchingMentor) {
+                    if ($matchingMentor->getProfessionalSector() === $studentToMatch->getProfessionalSector()) {
+                        $mentorsBySector[] = $matchingMentor;
+                    }
                 }
-            }
-            // if no match by professional sector, get the first mentor of the list
-            if (empty($mentorsBySector)) {
-                $matchingMentor = $matchingMentors[0];
-            }
-            //there is a match by sector, get the first mentor of the list
-            $matchingMentor = $mentorsBySector[0];
+                // if no match by professional sector, get the first mentor of the list
+                if (empty($mentorsBySector)) {
+                    $matchingMentor = $matchingMentors[0];
+                }
+                //there is a match by sector, get the first mentor of the list
+                $matchingMentor = $mentorsBySector[0];
 
-            //creation of a new mentoring relation
-            $mentoring = new Mentoring();
-            $mentoring->setStudent($studentToMatch);
-            $mentoring->setMentor($matchingMentor);
-            $this->entityManager->flush();
+                //creation of a new mentoring relation
+                $mentoring = new Mentoring();
+                $mentoring->setStudent($studentToMatch);
+                $mentoring->setMentor($matchingMentor);
+                $this->entityManager->flush();
+                //sending mentoring proposition to student
+                $this->mailerManager->sendProposal($studentToMatch);
+            }
         } else {
             throw new Exception("This student already has an active mentoring");
         }

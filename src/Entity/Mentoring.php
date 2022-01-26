@@ -41,6 +41,11 @@ class Mentoring
     private ?Mentor $mentor;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isAccepted = null;
+
+    /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="mentoring")
      */
     private Collection $messages;
@@ -123,6 +128,17 @@ class Mentoring
         return $this;
     }
 
+    public function getIsAccepted(): ?bool
+    {
+        return $this->isAccepted;
+    }
+
+    public function setIsAccepted(?bool $isAccepted): self
+    {
+        $this->isAccepted = $isAccepted;
+
+        return $this;
+    }
     /**
      * @return Collection|Message[]
      */
