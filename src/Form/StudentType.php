@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Regex;
 
 class StudentType extends AbstractType
@@ -77,7 +78,23 @@ class StudentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('topic', TopicType::class)
+            // ->add('topic', TopicType::class)
+            ->add('topic', ChoiceType::class, [
+                'choices' => Topic::TOPICS,
+                'expanded' => true,
+                'multiple' => true,
+                'constraints' => [
+                    new Count(
+                        null,
+                        1,
+                        3,
+                        null,
+                        "1 à 3 sujets sélectionnables",
+                        'Tu dois sélectionner un sujet au minimum',
+                        'Seulement 3 sujets peuvent être sélectionnés'
+                    )
+                ]
+            ])
             ->add('user', RegistrationFormType::class)
         ;
     }

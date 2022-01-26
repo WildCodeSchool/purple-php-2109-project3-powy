@@ -47,15 +47,15 @@
                 <p>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</p>
             </div>
         {# form 2 #}
-                {{ form_row(studentRegistrationForm.topic.topic1, {
-                    label: 'choix 1'
+                {{ form_row(studentRegistrationForm.topic, {
+                    label: ' '
                 }) }}
-                {{ form_row(studentRegistrationForm.topic.topic2, {
+                {# {{ form_row(studentRegistrationForm.topic.topic2, {
                     label: 'choix 2'
                 }) }}
                 {{ form_row(studentRegistrationForm.topic.topic3, {
                     label: 'choix 3'
-                }) }}
+                }) }} #}
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step1" class="scroll-btn">Retour</button>

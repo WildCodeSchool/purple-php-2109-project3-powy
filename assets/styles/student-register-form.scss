@@ -158,7 +158,32 @@ input , select , textarea {
     opacity: 0;
 }
 
+/*step-2 of form */
+#student_topic {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
 
+[name="student[topic][]"]:checked + label {
+    background-color: $chat-user1;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 3px 3px $box-shadow;
+}
+
+// [name="student[topic][]"]:focus + label {
+//     background-color: $chat-user1;
+//     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+//     box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
+// }
+
+[name="student[topic][]"] {
+    position: fixed;
+    opacity: 0;
+    padding: 1rem;
+}
 
 /*step-3 of form */
 
