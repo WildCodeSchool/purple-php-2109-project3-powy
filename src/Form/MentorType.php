@@ -55,7 +55,7 @@ class MentorType extends AbstractType
                     new NotBlank([
                         'message' => 'Vous devez renseignez une entreprise'
                     ])
-                ]
+                ],
                 'placeholder' => "Nom de l'entreprise"
             ])
             ->add('companyAdd', TextType::class, [
