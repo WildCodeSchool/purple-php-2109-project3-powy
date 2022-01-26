@@ -87,7 +87,7 @@ class MentorType extends AbstractType
             ->add('topic', TopicType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseigner un numéro de téléphone.'
+                        'message' => 'Vous devez renseigner un topic.'
                     ])]
             ])
             ->add('user', RegistrationFormType::class)

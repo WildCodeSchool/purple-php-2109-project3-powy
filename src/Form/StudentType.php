@@ -36,11 +36,6 @@ class StudentType extends AbstractType
                 'expanded' => true,
                 'attr' => [
                     'class' => 'scholarship'
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez renseigner une réponse'
-                    ])
                 ]
             ])
             ->add('dreamJob', TextType::class, [

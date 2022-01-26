@@ -40,11 +40,6 @@ class RegistrationFormType extends AbstractType
                     'Non binaire' => 'non binary',
                     'Ne souhaite pas se prononcer' => null,
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de renseigner un genre',
-                    ])
-                ]
             ])
             ->add('age', NumberType::class, [
                 'constraints' => [
@@ -52,7 +47,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez renseigner un age.'
                     ])]
             ])
-            ->add('phone', TelType::class, [
+            ->add('phone', NumberType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Vous devez renseigner un numéro de téléphone.'
