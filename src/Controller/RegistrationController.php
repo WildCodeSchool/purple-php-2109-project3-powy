@@ -11,6 +11,7 @@ use App\Form\MentorType;
 use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\MailerManager;
 use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -39,7 +40,8 @@ class RegistrationController extends AbstractController
     public function registerStudent(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MailerManager $mailerManager
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -64,26 +66,22 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_STUDENT']);
                 $entityManager->persist($student);
                 $entityManager->persist($user);
+                // if the school wasn't on the list and the student added a new name
+                $school = $form->get('school')->getData();
+                if ($school instanceof School && $school->getName() == 'Autre') {
+                    $schoolName = $form->get('schoolAdd')->getData();
+                    $newSchool = new School();
+                    if ($schoolName !== null && is_string($schoolName)) {
+                        $newSchool->setName($schoolName);
+                        $student->setSchool($newSchool);
+                        $entityManager->persist($newSchool);
+                    }
+                }
                 $entityManager->flush();
             }
-        // generate a signed url and email it to the user
-            $emailUser = $user->getEmail();
-            if (is_string($emailUser)) {
-                $this->emailVerifier->sendEmailConfirmation(
-                    'app_verify_email',
-                    $user,
-                    (new TemplatedEmail())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('emails/confirmation_email.html.twig')
-                );
-                $this->addFlash(
-                    'warning',
-                    'Un email va vous être envoyé afin de finaliser votre inscription.'
-                );
-                return $this->redirectToRoute('login');
-            }
+            // generate a signed url and email it to the user
+            $mailerManager->sendVerifyRegistration($user);
+            $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register_student.html.twig', [

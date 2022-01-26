@@ -90,9 +90,13 @@ h1 {
     justify-content: center;
     text-decoration: none;
     width: 8em;
+    border: none;
 
     &:hover,
     &:focus {
+        background-color: $light-background-secondary;
+        color: $dark-background;
+        font-weight: bold;
         box-shadow: 0 2px 4px $dark-background;
     }
 }

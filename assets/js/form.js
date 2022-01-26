@@ -1,3 +1,21 @@
+// Add input if it's another school
+const selectSchool = document.querySelector('select[id="student_school"]');
+const schoolAddInput = document.querySelector('input[id="student_schoolAdd"]');
+const optionOther = selectSchool.options[1];
+schoolAddInput.style.visibility = 'hidden';
+if (selectSchool !== null) {
+    selectSchool.addEventListener('change', (event) => {
+        for (let i = 0; i < event.target.childNodes.length; i += 1) {
+            if (optionOther.text === 'Autre' && optionOther.value === event.target.value) {
+                schoolAddInput.style.visibility = 'visible';
+                schoolAddInput.value = '';
+            } else {
+                schoolAddInput.style.visibility = 'hidden';
+            }
+        }
+    });
+}
+
 // Student form
 // fetch the buttons
 const btnStep2 = document.getElementById('btn-step2');

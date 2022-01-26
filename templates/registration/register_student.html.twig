@@ -81,6 +81,8 @@
                     </div>
                         {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.school) }}
+                        {{ form_widget(studentRegistrationForm.schoolAdd) }}
+                        {# <input type="text" id="schoolAdd" name="13" placeholder="Merci de préciser le nom de l'établissement" required> #}
                     <div class="question-field">
                         <p class="question-text"> Ton rêve professionnel : </p>
                     </div>
@@ -195,7 +197,7 @@
         {# register-btn#}
             <div class="register-btn gap-2">
                 <button type="submit" id="return-btn-step5" class="scroll-btn">Retour</button>
-                <button type="submit" class="registration-btn">s'inscrire</button>
+                <button type="submit" class="registration-btn">S'inscrire</button>
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
