@@ -66,7 +66,7 @@ class StudentType extends AbstractType
                     new NotBlank([
                         'message' => 'Vous devez renseigner une école'
                     ])
-                ]])
+                ],
                 'placeholder' => 'Choisis une école'
             ])
             ->add('schoolAdd', TextType::class, [
