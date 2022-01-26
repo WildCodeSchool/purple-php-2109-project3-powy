@@ -38,10 +38,6 @@ class MentorType extends AbstractType
                 'class' => Company::class,
                 'placeholder' => "Nom de l'entreprise"
             ])
-            ->add('companyAdd', TextType::class, [
-                'mapped' => false,
-                'required' => false
-            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

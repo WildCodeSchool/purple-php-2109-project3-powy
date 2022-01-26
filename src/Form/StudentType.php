@@ -51,10 +51,6 @@ class StudentType extends AbstractType
                 'class' => School::class,
                 'placeholder' => 'Choisis une école'
             ])
-            ->add('schoolAdd', TextType::class, [
-                'mapped' => false,
-                'required' => false
-            ])
             ->add('studyLevel', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => StudyLevel::class,
