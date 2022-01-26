@@ -96,6 +96,39 @@ h1 {
         box-shadow: 0 2px 4px $dark-background;
     }
 }
+/* tooltip */
+#btnPop , #btnPop2 {
+    background-color:$dark-background;
+    border-radius:50%;
+    color: $white;
+    border : none;
+    font-size: 0.9em;
+    font-weight: bolder;
+    width:1.8em;
+    height:1.8em;
+}
+
+#tooltip {
+    position: absolute;
+    margin:5px;
+    width: 10em;
+    background-color: rgba(0, 0, 0, 0.774);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+#tooltip2 {
+    position: absolute;
+    margin-left:2em;
+    width: 15em;
+    background-color: rgba(0, 0, 0, 0.774);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+}
 
 input , select , textarea {
     background-color: $white;

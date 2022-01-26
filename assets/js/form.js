@@ -166,3 +166,27 @@ if (returnStepMentor4 !== null) {
         divStepMentor5.classList.toggle('hidden');
     });
 }
+//*tooltip
+const btnPop = document.getElementById('btnPop'),
+      tooltip = document.getElementById('tooltip');
+
+btnPop.addEventListener('click', () => {
+  if (tooltip.style.display === "none") {
+      tooltip.style.display = "block";
+  }
+  else{
+    tooltip.style.display  = "none";
+  }
+})
+
+const btnPop2 = document.getElementById('btnPop2'),
+      tooltip2 = document.getElementById('tooltip2');
+
+btnPop2.addEventListener('click', () => {
+  if (tooltip2.style.display === "none") {
+      tooltip2.style.display = "block";
+  }
+  else{
+    tooltip2.style.display  = "none";
+  }
+})
