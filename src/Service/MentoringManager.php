@@ -42,7 +42,7 @@ class MentoringManager
         if ($mentoring->getIsAccepted() === false) {
             return false;
         }
-        if ($mentoring->getEndingDtae() > $todaysDate) {
+        if ($mentoring->getEndingDtae() < $todaysDate) {
             return false;
         }
         return true;
@@ -61,6 +61,18 @@ class MentoringManager
             $mentoringToUpdate->setIsAccepted(true);
             $mentoringToUpdate->setStartingDate($startingDate);
             $mentoringToUpdate->setEndingDtae($endingDate);
+            $this->entityManager->flush();
+        }
+    }
+
+    /**
+     * to use whenever you need to unaccept a mentoring
+     */
+    public function stopMentoring(Mentoring $mentoring): void
+    {
+        $mentoringToUpdate = $this->mentoringRepository->find($mentoring);
+        if ($mentoringToUpdate !== null) {
+            $mentoringToUpdate->setIsAccepted(false);
             $this->entityManager->flush();
         }
     }
