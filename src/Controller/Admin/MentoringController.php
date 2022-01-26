@@ -31,10 +31,10 @@ class MentoringController extends AbstractController
     /**
      * @Route("/mentoring/{id}", name="mentoring_delete")
      */
-    public function delete(Request $request, Mentoring $mentoring, EntityManagerInterface $entityManager): Response
+    public function delete(Mentoring $mentoring, EntityManagerInterface $entityManager): Response
     {
-            $entityManager->remove($mentoring);
-            $entityManager->flush();
+        $entityManager->remove($mentoring);
+        $entityManager->flush();
 
         return $this->redirectToRoute('admin_mentoring');
     }

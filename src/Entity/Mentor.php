@@ -153,4 +153,9 @@ class Mentor
     {
         return [];
     }
+
+    public function __toString()
+    {
+        return $this->jobTitle;
+    }
 }

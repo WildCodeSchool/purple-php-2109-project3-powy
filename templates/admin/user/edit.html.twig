@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+{% include "admin/components/_navbar.html.twig" %}
+<main class="container-profile">
+    <h1 class="h2">Modifier ou supprimer le profil</h1>
+    <div class="card-edit-profile">
+        {{ form_start(form) }}
+        <div class="card-edit-profile-part1">
+            <div class="field">
+                <label for="gender" class="col-sm-2 col-form-label">Genre</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.gender) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="firstname" class="col-sm-2 col-form-label">Prénom</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.firstname) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="lastname" class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.lastname) }}
+                </div>
+            </div>
+        </div>
+        <div class="card-edit-profile-part2">
+            <div class="field">
+                <label for="age" class="col-sm-2 col-form-label">Age</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.age) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.phone) }}
+                </div>
+            </div>
+            <div class="field">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <button type="submit" class="dark-submit-button">Modifier</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+    {{ include('admin/user/_delete_form.html.twig') }}
+    <a class="center" href="{{ path('admin_user_index') }}">Retourner a la liste des utilisateurs</a>
+
+</main>
+
+<script src="{{ asset('build/js/index.js') }}">
+</script>
+
+{% endblock %}
+
