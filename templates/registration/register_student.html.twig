@@ -82,7 +82,6 @@
                         {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.school) }}
                         {{ form_widget(studentRegistrationForm.schoolAdd) }}
-                        {# <input type="text" id="schoolAdd" name="13" placeholder="Merci de préciser le nom de l'établissement" required> #}
                     <div class="question-field">
                         <p class="question-text"> Ton rêve professionnel : </p>
                     </div>
@@ -201,4 +200,24 @@
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
+    <script>
+        // Add input if it's another school
+        const selectSchool = document.querySelector('select[id="student_school"]');
+        const schoolAddInput = document.querySelector('input[id="student_schoolAdd"]');
+        if (selectSchool.options[1] !== null) {}
+        const optionOther = selectSchool.options[1];
+        schoolAddInput.style.visibility = 'hidden';
+        if (selectSchool !== null) {
+            selectSchool.addEventListener('change', (event) => {
+                for (let i = 0; i < event.target.childNodes.length; i += 1) {
+                    if (optionOther.text === 'Autre' && optionOther.value === event.target.value) {
+                        schoolAddInput.style.visibility = 'visible';
+                        schoolAddInput.value = '';
+                    } else {
+                        schoolAddInput.style.visibility = 'hidden';
+                    }
+                }
+            });
+        }
+    </script>
 {% endblock %}

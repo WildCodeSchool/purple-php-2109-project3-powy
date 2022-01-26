@@ -18,6 +18,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
@@ -28,10 +29,17 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
+    private EntityManagerInterface $entityManager;
+    private MailerManager $mailerManager;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        EntityManagerInterface $entityManager,
+        MailerManager $mailerManager
+    ) {
         $this->emailVerifier = $emailVerifier;
+        $this->entityManager = $entityManager;
+        $this->mailerManager = $mailerManager;
     }
 
     /**
@@ -39,9 +47,7 @@ class RegistrationController extends AbstractController
      */
     public function registerStudent(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager,
-        MailerManager $mailerManager
+        UserPasswordHasherInterface $userPasswordHasher
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -64,8 +70,8 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(['ROLE_STUDENT']);
-                $entityManager->persist($student);
-                $entityManager->persist($user);
+                $this->entityManager->persist($student);
+                $this->entityManager->persist($user);
                 // if the school wasn't on the list and the student added a new name
                 $school = $form->get('school')->getData();
                 if ($school instanceof School && $school->getName() == 'Autre') {
@@ -74,13 +80,13 @@ class RegistrationController extends AbstractController
                     if ($schoolName !== null && is_string($schoolName)) {
                         $newSchool->setName($schoolName);
                         $student->setSchool($newSchool);
-                        $entityManager->persist($newSchool);
+                        $this->entityManager->persist($newSchool);
                     }
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
             }
             // generate a signed url and email it to the user
-            $mailerManager->sendVerifyRegistration($user);
+            $this->mailerManager->sendVerifyRegistration($user);
             $this->redirectToRoute('login');
         }
 
@@ -94,8 +100,7 @@ class RegistrationController extends AbstractController
      */
     public function registerMentor(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
+        UserPasswordHasherInterface $userPasswordHasher
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -118,28 +123,23 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(['ROLE_MENTOR']);
-                $entityManager->persist($mentor);
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->entityManager->persist($mentor);
+                $this->entityManager->persist($user);
+                // if the company wasn't on the list and the mentor added a new name
+                $company = $form->get('company')->getData();
+                if ($company instanceof Company && $company->getName() == 'Autre') {
+                    $companyName = $form->get('companyAdd')->getData();
+                    $newCompany = new Company();
+                    if ($companyName !== null && is_string($companyName)) {
+                        $newCompany->setName($companyName);
+                        $mentor->setCompany($newCompany);
+                        $this->entityManager->persist($newCompany);
+                    }
+                }
+                $this->entityManager->flush();
             }
-        // generate a signed url and email it to the user
-            $emailUser = $user->getEmail();
-            if (is_string($emailUser)) {
-                $this->emailVerifier->sendEmailConfirmation(
-                    'app_verify_email',
-                    $user,
-                    (new TemplatedEmail())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('emails/confirmation_email.html.twig')
-                );
-                $this->addFlash(
-                    'warning',
-                    'Un email va vous être envoyé afin de finaliser votre inscription.'
-                );
-                return $this->redirectToRoute('login');
-            }
+            $this->mailerManager->sendVerifyRegistration($user);
+            $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register_mentor.html.twig', [
@@ -154,7 +154,6 @@ class RegistrationController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         MailerInterface $mailerInterface,
-        EntityManagerInterface $entityManager,
         MatchManager $matchManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
@@ -174,8 +173,8 @@ class RegistrationController extends AbstractController
             if ($user instanceof User) {
                 $this->emailVerifier->handleEmailConfirmation($request, $user);
                 $user->setIsVerified(true);
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
                 $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
                 $emailUser = $user->getEmail();
                 if (is_string($emailUser)) {
