@@ -176,18 +176,9 @@ class RegistrationController extends AbstractController
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
                 $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
-                $emailUser = $user->getEmail();
-                if (is_string($emailUser)) {
-                    $email = (new Email())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Inscription validée 🥳 !')
-                    ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
-                    $mailerInterface->send($email);
-                    if ($user->getStudent() !== null) {
-                        //try to get a match with a mentor
-                        $matchManager->match($user->getStudent());
-                    }
+                if ($user->getStudent() !== null) {
+                    //try to get a match with a mentor
+                    $matchManager->match($user->getStudent());
                 }
             }
         } catch (VerifyEmailExceptionInterface $exception) {

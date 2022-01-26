@@ -78,4 +78,17 @@ class MailerManager extends AbstractController
             );
         }
     }
+
+    public function sendConfirmationRegistration(user $user): void
+    {
+        $emailUser = $user->getEmail();
+        if (is_string($emailUser)) {
+            $email = (new Email())
+            ->from(new Address('noreply@powy.io', 'powy-registration'))
+            ->to($emailUser)
+            ->subject('Inscription validée 🥳 !')
+            ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
+            $this->mailerInterface->send($email);
+        }
+    }
 }
