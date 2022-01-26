@@ -18,10 +18,10 @@
             </div>
             <h1 class="h3 mt-3 mb-3">Vous parlez actuellement avec {{ mentoring.student.user.firstname }}</h1>
             <p class="text-center">Ce mentorat prendra fin le {{ mentoring.endingDtae|date('d/m/Y') }}. À cette date, tous les messages seront supprimés.</p>
-            <a href="#form-message-input" class="btn-profile m-3">Envoyer un message</a>
             {% if mentoring.messages is empty %}
                 <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
             {% else %}
+            <a href="#form-message-input" class="btn-profile m-3">Bas de la page</a>
                 <div class="chat-messages d-flex flex-column col-11 gap-2">
                     {% for message in mentoring.messages %}
                         <div {% if message.sender.mentor is not null %} class="message-mentor bg-salmon align-self-end p-3 col-12 col-sm-9 col-md-7" {% else %} class="message-student bg-grey align-self-start p-3 col-12 col-sm-9 col-md-7" {% endif %}>
@@ -45,11 +45,11 @@
                 </div>
                 <h1 class="mb-5">Tu parles actuellement avec {{ mentoring.mentor.user.firstname }}</h1>
                 <p class="text-center">Ce mentorat prendra fin le {{ mentoring.endingDtae|date('d/m/Y') }}. À cette date, tous les messages seront supprimés.</p>
-                <a href="#form-message-input" class="btn-profile m-3">Envoyer un message</a>
                 {% if mentoring.messages is empty %}
                     <p class="text-center ">Vous n'avez échangé aucun message pour le moment :(</p>
                 {% else %}
-                    <div class="chat-messages d-flex flex-column col-11 gap-2">
+                <a href="#form-message-input" class="btn-profile m-3">Bas de la page</a>
+                    <div class="chat-messages d-flex flex-column flex-wrap col-11 gap-2">
                         {% for message in mentoring.messages %}
                             <div {% if message.sender.student is not null %} class="message-student bg-salmon align-self-end p-3 col-12 col-sm-9 col-md-7" {% else %} class="message-mentor bg-grey align-self-start p-3 col-12 col-sm-9 col-md-7" {% endif %}>
                                 <p>{{ message.messageText }}</p>
@@ -73,6 +73,9 @@
             </div>
             {{ form_end(messageForm) }}
         </div>
-        <a href="{{ path("profile_index") }}" class="btn-profile m-3">Retour au profil</a>
+        <div class='buttons-chat d-flex flex-column flex-column-reverse align-items-center'>
+            <a href="{{ path("profile_index") }}" class="btn-profile m-3">Retour au profil</a>
+            <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile m-3">Actualiser le chat</a>
+        </div>
     </main>
 {% endblock %}
