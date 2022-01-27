@@ -45,7 +45,10 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Vous devez renseigner un age.'
-                    ])]
+                    ]),
+                    new Assert\GreaterThan(17, null, "Vous devez être majeur.e")
+                ]
+
             ])
             ->add('phone', NumberType::class, [
                 'constraints' => [
