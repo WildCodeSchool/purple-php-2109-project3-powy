@@ -19,6 +19,17 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
         $mentoring->setEndingDtae(new DateTime('2022-05-20'));
         $mentoring->setStudent($this->getReference('student_1'));
         $mentoring->setMentor($this->getReference('mentor_1'));
+        $mentoring->setIsAccepted(true);
+        $manager->persist($mentoring);
+        $manager->flush();
+
+        $startingDate = new DateTime('2022-01-20');
+        $mentoring = new Mentoring();
+        $mentoring->setStartingDate($startingDate);
+        $mentoring->setEndingDtae(new DateTime('2022-05-20'));
+        $mentoring->setStudent($this->getReference('student_2'));
+        $mentoring->setMentor($this->getReference('mentor_2'));
+        $mentoring->setIsAccepted(false);
         $manager->persist($mentoring);
         $manager->flush();
     }

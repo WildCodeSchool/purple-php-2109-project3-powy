@@ -10,6 +10,7 @@ use App\Form\EditProfileType;
 use App\Form\TopicType;
 use App\Service\FileUploader;
 use App\Service\MatchManager;
+use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,14 +109,14 @@ class ProfileController extends AbstractController
         User $user,
         Request $request,
         EntityManagerInterface $entityManager,
-        MatchManager $matchManager
+        MatchManager $matchManager,
+        MentoringManager $mentoringManager
     ): Response {
-        //fetch the user, the topic and the mentoring
+        //fetch the user, the topic
         $topic = $this->checkTopic($user);
-        $mentoring = $this->checkMentoring($user);
 
         //if there is already a mentoring we prevent the user to change hes/hic choices before the end of it.
-        if ($mentoring  !== null) {
+        if ($mentoringManager->hasMentoring($user) === true) {
             $this->addFlash(
                 "danger",
                 "Le mentorat est en cours. À la fin de celui-ci, vous pourrez modifier vos choix."
@@ -181,20 +182,5 @@ class ProfileController extends AbstractController
             $topic = $user->getStudent()->getTopic();
         }
         return $topic;
-    }
-
-    //function to check if a mentoring is already active
-    private function checkMentoring(User $user): ?Mentoring
-    {
-        $mentoring = null;
-        if ($user->getMentor() === null && $user->getStudent() === null) {
-            throw $this->createNotFoundException('User is neither a student or a mentor.');
-        }
-        if ($user->getMentor() !== null) {
-            $mentoring = $user->getMentor()->getMentoring();
-        } elseif ($user->getStudent() !== null) {
-            $mentoring = $user->getStudent()->getMentoring();
-        }
-        return $mentoring;
     }
 }
