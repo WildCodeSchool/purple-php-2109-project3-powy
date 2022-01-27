@@ -46,7 +46,7 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Vous devez renseigner un age.'
                     ]),
-                    new Assert\GreaterThan(17, null, "Vous devez être majeur.e")
+                    new Assert\GreaterThan(17, null, "Vous devez être majeur(e)")
                 ]
 
             ])
