@@ -4,18 +4,19 @@
     <p>Ton adresse {{ user.email }} a bien été enregistrée &#128170;</p>
 
     {% if user.mentor is defined and user.mentor is not null %}
-        <p>Tu attends un étudiant à mentorer.</p>
+        <p>Tu attends un.e étudiant.e à mentorer.</p>
     {% endif %}
 
     {% if user.student is defined and user.student is not null %}
         {% if user.student.mentoring is defined and user.student.mentoring is not null %}
-            <p>Bravo tu as un mentor qui peut t'aider sur les sujets que tu as demandé !</p>
+            <p>Bravo tu as un.e mentor.e qui peut t'aider sur les sujets que tu as demandé !</p>
         {% else %}
-            <p>Tu attends un mentor.</p>
+            <p>Tu attends un.e mentor.e.</p>
         {% endif %}
     {% endif %}
 
     <p>Connecte-toi à ton compte sur Powy pour consulter et/ou modifier tes informations.</p>
-
+    <br>
+    <p>A bientôt sur Powy!</p>
     <a href="mailto:hello@powy.io">hello@powy.io</a>
 </div>
