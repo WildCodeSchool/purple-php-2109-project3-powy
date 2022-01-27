@@ -5,6 +5,8 @@ namespace App\Service;
 use App\Entity\Mentoring;
 use App\Entity\Student;
 use App\Repository\MentorRepository;
+use App\Repository\StudentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -14,17 +16,20 @@ class MatchManager
     private EntityManagerInterface $entityManager;
     private MailerManager $mailerManager;
     private MentoringManager $mentoringManager;
+    private StudentRepository $studentRepository;
 
     public function __construct(
         MentorRepository $mentorRepository,
         MailerManager $mailerManager,
         EntityManagerInterface $entityManager,
-        MentoringManager $mentoringManager
+        MentoringManager $mentoringManager,
+        StudentRepository $studentRepository
     ) {
         $this->mentorRepository = $mentorRepository;
         $this->entityManager = $entityManager;
         $this->mailerManager = $mailerManager;
         $this->mentoringManager = $mentoringManager;
+        $this->studentRepository = $studentRepository;
     }
     /**
      * return an array of mentors with no active mentoring, matching with one of the studentTopics, by priority :
@@ -93,6 +98,25 @@ class MatchManager
                     $this->entityManager->flush();
                     //sending mentoring proposition to student
                     $this->mailerManager->sendProposal($studentToMatch);
+                }
+            }
+        }
+    }
+
+    /**
+     * look for all students with no active mentoring and try to find one
+     */
+    public function checkForMatches(): void
+    {
+        $students = $this->studentRepository->findAll();
+
+        if ($students !== null) {
+            foreach ($students as $student) {
+                $user = $student->getUser();
+                if ($user !== null) {
+                    if (!$this->mentoringManager->hasMentoring($user)) {
+                        $this->match($student);
+                    }
                 }
             }
         }

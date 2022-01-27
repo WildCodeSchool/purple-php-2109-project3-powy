@@ -85,144 +85,167 @@
                 <p class="question-text">On voudrait en savoir plus sur toi pour mieux t'accompagner.</p>
             {# form 3 #}
         </div>
-        <div class="form-3">
-            <div class="fields-3">
-                <div class="question-field">
-                    <p class="question-text"> Ton parcours scolaire : </p>
-                </div>
-                    {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(studentRegistrationForm.school) }}
-                <div class="question-field">
-                    <p class="question-text"> Ton rêve professionnel : </p>
-                </div>
-                    {{ form_label(studentRegistrationForm, 'Secteur professionnel idéal', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(studentRegistrationForm.professionalSector) }}
+            <div class="form-3">
+                <div class="fields-3">
+                    <div class="question-field">
+                        <p class="question-text"> Ton parcours scolaire : </p>
+                    </div>
+                        {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(studentRegistrationForm.school) }}
+                        {{ form_widget(studentRegistrationForm.schoolAdd) }}
+                        {{ form_errors(studentRegistrationForm.school) }}
+                    <div class="question-field">
+                        <p class="question-text"> Ton rêve professionnel : </p>
+                    </div>
+                        {{ form_label(studentRegistrationForm, 'Secteur professionnel idéal', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(studentRegistrationForm.professionalSector) }}
+                        {{ form_errors(studentRegistrationForm.professionalSector) }}
 
-                    {{ form_label(studentRegistrationForm, 'Ton rêve professionnel :', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(studentRegistrationForm.dreamJob) }}
+                        {{ form_label(studentRegistrationForm, 'Ton rêve professionnel :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(studentRegistrationForm.dreamJob) }}
 
-                    {{ form_label(studentRegistrationForm, 'Précise en quelques mots :', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(studentRegistrationForm.dreamDescription) }}
+                        {{ form_label(studentRegistrationForm, 'Précise en quelques mots :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(studentRegistrationForm.dreamDescription) }}
+                    </div>
+            </div>
+            {# scroll-btn 3 #}
+                <div class="scroll-btn-section gap-2">
+                    <button type="submit" id="return-btn-step2" class="scroll-btn">Retour</button>
+                    <button type="submit" id="btn-step4" class="scroll-btn">Suivant</button>
                 </div>
         </div>
-        {# scroll-btn 3 #}
-            <div class="scroll-btn-section gap-2">
-                <button type="submit" id="return-btn-step2" class="scroll-btn">Retour</button>
-                <button type="submit" id="btn-step4" class="scroll-btn">Suivant</button>
+        <div class="step-4 hidden" id="step-4">
+            <div class ="instructions">
+            {# logo 4 #}
+                <div class="logo-powy">
+                    <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
+                </div>
+            {# progress-bar 4 #}
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {# question 4 #}
+                <p class="question-text">Es-tu boursier ?</p>
             </div>
-    </div>
-    <div class="step-4 hidden" id="step-4">
-        <div class ="instructions">
-        {# logo 4 #}
-            <div class="logo-powy">
-                <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
-            </div>
-        {# progress-bar 4 #}
-            <div class="progress" style="height: 5px;">
-                <div class="progress-bar" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        {# question 4 #}
-            <p class="question-text">Es-tu boursier ?</p>
+            {# form 4 #}
+                {{ form_label(studentRegistrationForm, 'Es-tu boursier ?', {'label_attr': {'class': 'scholarship-text'}}) }}
+                {{ form_widget(studentRegistrationForm.scholarship) }}
+            {# scroll-btn 4 #}
+                <div class="scroll-btn-section gap-2">
+                    <button type="submit" id="return-btn-step3" class="scroll-btn">Retour</button>
+                    <button type="submit" id="btn-step5" class="scroll-btn">Suivant</button>
+                </div>
         </div>
-        {# form 4 #}
-            {{ form_label(studentRegistrationForm, 'Es-tu boursier ?', {'label_attr': {'class': 'scholarship-text'}}) }}
-            {{ form_widget(studentRegistrationForm.scholarship) }}
-        {# scroll-btn 4 #}
-            <div class="scroll-btn-section gap-2">
-                <button type="submit" id="return-btn-step3" class="scroll-btn">Retour</button>
-                <button type="submit" id="btn-step5" class="scroll-btn">Suivant</button>
-            </div>
-    </div>
-    <div class="step-5 hidden" id="step-5">
-        <div class ="instructions">
-        {# logo 5 #}
-            <div class="logo-powy">
-                <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
-            </div>
-        {# progress-bar 5 #}
-            <div class="progress" style="height: 5px;">
-                <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        {# question 5 #}
-            <p class="question-text">Qui es-tu ?</p>
-        {# indication 5 #}
-            <div class="indications">
-            <p>Ces informations seront communiquées à tes futurs mentors.</p>
-            </div>
-        </div>
-        {# form 5 #}
-            <div class="form-5">
-                <div class="fields-5">
-                    <div class="gender">
-                        {{ form_label(studentRegistrationForm, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(studentRegistrationForm.user.gender) }}
-                    </div>
-                    <div class="lastname">
-                        {{ form_label(studentRegistrationForm, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(studentRegistrationForm.user.lastname) }}
-                    </div>
-                    <div class="firstname">
-                        {{ form_label(studentRegistrationForm, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(studentRegistrationForm.user.firstname) }}
-                    </div>
-                    <div class="age">
-
-                        {{ form_label(studentRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
-                        <button id='btnPop' style='cursor:pointer'>?</button>
-                            <tooltip id='tooltip' style='display:none'>
-                                Vous devez être majeur(e) pour pouvoir vous inscrire.
-                            </tooltip>
-                        {{ form_widget(studentRegistrationForm.user.age) }}
-                    </div>
-                    <div class="phone">
-                        {{ form_label(studentRegistrationForm, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(studentRegistrationForm.user.phone) }}
-                    </div>
+        <div class="step-5 hidden" id="step-5">
+            <div class ="instructions">
+            {# logo 5 #}
+                <div class="logo-powy">
+                    <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
+                </div>
+            {# progress-bar 5 #}
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {# question 5 #}
+                <p class="question-text">Qui es-tu ?</p>
+            {# indication 5 #}
+                <div class="indications">
+                <p>Ces informations seront communiquées à tes futurs mentors.</p>
                 </div>
             </div>
-        {# scroll-btn 5 #}
-            <div class="scroll-btn-section gap-2">
-                <button type="submit" id="return-btn-step4" class="scroll-btn">Retour</button>
-                <button type="submit" id="btn-step6" class="scroll-btn">Suivant</button>
-            </div>
-    </div>
-    <div class="step-6 hidden" id="step-6">
-        <div class ="instructions">
-        {# logo 6 #}
-            <div class="logo-powy">
-                <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
-            </div>
-        {# progress-bar 6 #}
-            <div class="progress" style="height: 5px;">
-                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        {# question 6 #}
-            <p class="question-text">Dernière étape : il te suffit de rentrer tes informations de connexion et c'est fini !</p>
-        </div>
-        {# form 6 #}
-            <div class="form-6">
-                <div class="fields-6">
-                        <label class="form-label"> E-mail </label>
-                        {{ form_widget(studentRegistrationForm.user.email) }}
-                        <div class = "btnField">
-                        {{ form_label(studentRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
-                        <button id='btnPop2' style='cursor:pointer'>?</button>
-                               <tooltip id='tooltip2' style='display:none'>
-                                Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
-                            </tooltip>
+            {# form 5 #}
+                <div class="form-5">
+                    <div class="fields-5">
+                        <div class="gender">
+                            {{ form_label(studentRegistrationForm, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(studentRegistrationForm.user.gender) }}
                         </div>
-                        {{ form_widget(studentRegistrationForm.plainPassword) }}
+                        <div class="lastname">
+                            {{ form_label(studentRegistrationForm, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(studentRegistrationForm.user.lastname) }}
+                        </div>
+                        <div class="firstname">
+                            {{ form_label(studentRegistrationForm, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(studentRegistrationForm.user.firstname) }}
+                        </div>
+                        <div class="age">
+
+                            {{ form_label(studentRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
+                            <button id='btnPop' style='cursor:pointer'>?</button>
+                                <tooltip id='tooltip' style='display:none'>
+                                    Vous devez être majeur(e) pour pouvoir vous inscrire.
+                                </tooltip>
+                            {{ form_widget(studentRegistrationForm.user.age) }}
+                        </div>
+                        <div class="phone">
+                            {{ form_label(studentRegistrationForm, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(studentRegistrationForm.user.phone) }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-                <div class="CGU">
-                    {{ form_widget(studentRegistrationForm.user.agreeTerms) }}
-                    {{ form_label(studentRegistrationForm.user.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
+            {# scroll-btn 5 #}
+                <div class="scroll-btn-section gap-2">
+                    <button type="submit" id="return-btn-step4" class="scroll-btn">Retour</button>
+                    <button type="submit" id="btn-step6" class="scroll-btn">Suivant</button>
                 </div>
-        {# register-btn#}
-            <div class="register-btn gap-2">
-                <button type="submit" id="return-btn-step5" class="scroll-btn">Retour</button>
-                <button type="submit" class="registration-btn">s'inscrire</button>
-            </div>
         </div>
-    {{ form_end(studentRegistrationForm) }}
+        <div class="step-6 hidden" id="step-6">
+            <div class ="instructions">
+            {# logo 6 #}
+                <div class="logo-powy">
+                    <img src="{{ asset('build/images/logo-powy.png') }}" alt="logo">
+                </div>
+            {# progress-bar 6 #}
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {# question 6 #}
+                <p class="question-text">Dernière étape : il te suffit de rentrer tes informations de connexion et c'est fini !</p>
+            </div>
+            {# form 6 #}
+                <div class="form-6">
+                    <div class="fields-6">
+                            <label class="form-label"> E-mail </label>
+                            {{ form_widget(studentRegistrationForm.user.email) }}
+                            <div class = "btnField">
+                            {{ form_label(studentRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                            <button id='btnPop2' style='cursor:pointer'>?</button>
+                                <tooltip id='tooltip2' style='display:none'>
+                                    Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
+                                </tooltip>
+                            </div>
+                            {{ form_widget(studentRegistrationForm.plainPassword) }}
+                    </div>
+                </div>
+                    <div class="CGU">
+                        {{ form_widget(studentRegistrationForm.user.agreeTerms) }}
+                        {{ form_label(studentRegistrationForm.user.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
+                    </div>
+            {# register-btn#}
+                <div class="register-btn gap-2">
+                    <button type="submit" id="return-btn-step5" class="scroll-btn">Retour</button>
+                    <button type="submit" class="registration-btn">S'inscrire</button>
+                </div>
+            </div>
+        {{ form_end(studentRegistrationForm) }}
+        <script>
+            // Add input if it's another school
+            const selectSchool = document.querySelector('select[id="student_school"]');
+            const schoolAddInput = document.querySelector('input[id="student_schoolAdd"]');
+            if (selectSchool.options[1] !== null) {}
+            const optionOther = selectSchool.options[1];
+            schoolAddInput.style.visibility = 'hidden';
+            if (selectSchool !== null) {
+                selectSchool.addEventListener('change', (event) => {
+                    for (let i = 0; i < event.target.childNodes.length; i += 1) {
+                        if (optionOther.text === 'Autre' && optionOther.value === event.target.value) {
+                            schoolAddInput.style.visibility = 'visible';
+                            schoolAddInput.value = '';
+                        } else {
+                            schoolAddInput.style.visibility = 'hidden';
+                        }
+                    }
+                });
+            }
+        </script>
 {% endblock %}

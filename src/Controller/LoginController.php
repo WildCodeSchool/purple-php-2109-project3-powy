@@ -7,6 +7,8 @@ use App\Form\EditPasswordType;
 use App\Form\EmailFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\MatchManager;
+use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,10 +25,17 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class LoginController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
+    private MatchManager $matchManager;
+    private MentoringManager $mentoringManager;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        MatchManager $matchManager,
+        MentoringManager $mentoringManager
+    ) {
         $this->emailVerifier = $emailVerifier;
+        $this->matchManager = $matchManager;
+        $this->mentoringManager = $mentoringManager;
     }
     /**
      * @Route("/login", name="login")
@@ -45,6 +54,11 @@ class LoginController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        //run method which end expired mentorings at each connexion
+        $this->mentoringManager->endExpiredMentoring();
+        //run match method at each connexion
+        $this->matchManager->checkForMatches();
 
         return $this->render('login/index.html.twig', [
             'last_username' => $lastUsername,
