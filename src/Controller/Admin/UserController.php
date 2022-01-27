@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,12 +70,23 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"POST"})
+     * @Route("/{id}", name="delete")
      */
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
             $entityManager->remove($user);
             $entityManager->flush();
         return $this->redirectToRoute('admin_user_index');
+    }
+
+    /**
+     * @Route("/list/unactivate", name="unactivate")
+     */
+    public function unactivate(UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findNotVerified();
+        return $this->render('admin/user/list/index.html.twig', [
+            'users' => $user
+        ]);
     }
 }

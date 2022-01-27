@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -31,6 +32,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $student->setAge('22');
             $student->setPhone('0234567890');
             $student->setIsVerified(true);
+            $student->setCreatedAt(new DateTime('now'));
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $student,
                 'Studentpassword!' . $i
@@ -52,6 +54,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $mentor->setAge('42');
             $mentor->setPhone('0234567800');
             $mentor->setIsVerified(true);
+            $mentor->setCreatedAt(new DateTime('now'));
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $mentor,
                 'Mentorpassword!' . $i
@@ -71,6 +74,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setAge('22');
         $admin->setPhone('0234567800');
         $admin->setIsVerified(true);
+        $admin->setCreatedAt(new DateTime('now'));
         $hashedPassword = $this->passwordHasher->hashPassword(
             $admin,
             'Adminpassword!1'
