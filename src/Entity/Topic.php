@@ -18,15 +18,15 @@ class Topic
      * It is used to send integers (keys) in database
      */
     public const TOPICS = [
-        "M'immerger dans un métier" => 1,
-        'Me faire coacher' => 2,
-        'Réussir mes candidatures' => 3,
-        'Développer mes compétences' => 4,
-        'Mieux gérer les outils digitaux pro' => 5,
-        'Mieux communiquer en français' => 6,
-        'Mieux communiquer en anglais' => 7,
-        'Mieux communiquer en espagnol' => 8,
-        'Mieux communiquer en allemand' => 9,
+        "M'immerger dans un métier 🤿" => 1,
+        'Me faire coacher 🏋️' => 2,
+        'Réussir mes candidatures 🎓' => 3,
+        'Développer mes compétences 🚀' => 4,
+        'Mieux gérer les outils digitaux pro 💻' => 5,
+        'Mieux communiquer en français 🇫🇷' => 6,
+        'Mieux communiquer en anglais 🇬🇧' => 7,
+        'Mieux communiquer en espagnol 🇪🇸' => 8,
+        'Mieux communiquer en allemand 🇩🇪' => 9,
     ];
 
     /**
