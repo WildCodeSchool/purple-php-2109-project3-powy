@@ -3,20 +3,21 @@
 namespace App\Service;
 
 use App\Entity\Mentoring;
+use App\Entity\Message;
 use App\Entity\User;
 use App\Repository\MentoringRepository;
+use App\Repository\MessageRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
 class MentoringManager
 {
-    private MentoringRepository $mentoringRepository;
+
     private EntityManagerInterface $entityManager;
 
-    public function __construct(MentoringRepository $mentoringRepository, EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->mentoringRepository = $mentoringRepository;
         $this->entityManager = $entityManager;
     }
 
@@ -72,24 +73,40 @@ class MentoringManager
         $endingDate = new DateTime();
         $endingDate->modify('+4 months');
 
-        $mentoringToUpdate = $this->mentoringRepository->find($mentoring);
-        if ($mentoringToUpdate !== null) {
-            $mentoringToUpdate->setIsAccepted(true);
-            $mentoringToUpdate->setStartingDate($startingDate);
-            $mentoringToUpdate->setEndingDtae($endingDate);
+        if ($mentoring !== null) {
+            $mentoring->setIsAccepted(true);
+            $mentoring->setStartingDate($startingDate);
+            $mentoring->setEndingDtae($endingDate);
             $this->entityManager->flush();
         }
     }
 
     /**
-     * to use whenever you need to unaccept a mentoring
+     * to use whenever you need to stop a mentoring
+     * set ending date to today's date, is accepted to false and remove all messages.
      */
     public function stopMentoring(Mentoring $mentoring): void
     {
-        $mentoringToUpdate = $this->mentoringRepository->find($mentoring);
-        if ($mentoringToUpdate !== null) {
-            $mentoringToUpdate->setIsAccepted(false);
+        if ($mentoring !== null) {
+            $mentoring->setIsAccepted(false);
+            $mentoring->setEndingDtae(new DateTime());
             $this->entityManager->flush();
+            $this->removeMessages($mentoring);
+        }
+    }
+
+    /**
+     * remove all messages for a specific mentoring
+     */
+    public function removeMessages(Mentoring $mentoring): void
+    {
+        $messages = $mentoring->getMessages();
+
+        if ($messages !== null) {
+            foreach ($messages as $message) {
+                $this->entityManager->remove($message);
+                $this->entityManager->flush();
+            }
         }
     }
 }
