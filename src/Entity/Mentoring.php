@@ -50,6 +50,11 @@ class Mentoring
      */
     private Collection $messages;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $mentoringTopic;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -173,5 +178,17 @@ class Mentoring
     public function __sleep()
     {
         return [];
+    }
+
+    public function getMentoringTopic(): ?int
+    {
+        return $this->mentoringTopic;
+    }
+
+    public function setMentoringTopic(?int $mentoringTopic): self
+    {
+        $this->mentoringTopic = $mentoringTopic;
+
+        return $this;
     }
 }

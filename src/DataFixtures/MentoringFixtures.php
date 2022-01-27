@@ -23,6 +23,7 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
             $mentoring->setEndingDtae(new DateTime('2022-05-20'));
             $mentoring->setStudent($this->getReference('student_' . $i));
             $mentoring->setMentor($this->getReference('mentor_' . $i));
+            $mentoring->setMentoringTopic(3);
             $mentoring->setIsAccepted(true);
             $manager->persist($mentoring);
         }
@@ -30,11 +31,11 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
         $mentoring = new Mentoring();
         $mentoring->setStudent($this->getReference('student_5'));
         $mentoring->setMentor($this->getReference('mentor_5'));
+        $mentoring->setMentoringTopic(3);
         $mentoring->setIsAccepted(null);
         $manager->persist($mentoring);
 
-        //set an ended mentoring
-
+        //set a mentoring with a expired date
         $mentoring = new Mentoring();
         $mentoring->setStartingDate(
             new DateTime('2021-01-20')
@@ -44,6 +45,7 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
         );
         $mentoring->setStudent($this->getReference('student_6'));
         $mentoring->setMentor($this->getReference('mentor_6'));
+        $mentoring->setMentoringTopic(3);
         $mentoring->setIsAccepted(true);
         $manager->persist($mentoring);
 
