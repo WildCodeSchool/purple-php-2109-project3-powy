@@ -11,7 +11,7 @@
             <tr>
                 <th>Id</th>
                 <th>Adresse mail</th>
-                <th>Vérifé</th>
+                <th>Inscription validé</th>
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Genre</th>
@@ -25,14 +25,14 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.gender }}</td>
                 <td>{{ user.age }}</td>
                 <td>{{ user.phone }}</td>
                 <td>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i></a>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><img src="{{ asset('build/images/edit.png') }}" alt="edit" class="edit"></a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +42,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-primary" href="{{ path('admin_user_new') }}">Create new</a>
 {% endblock %}

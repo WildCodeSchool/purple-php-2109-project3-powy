@@ -2,7 +2,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Mentoring Administration{% endblock %}
 
 {% block body %}
     {% include "admin/components/_navbar.html.twig" %}
@@ -24,8 +24,8 @@
             <td>{{ mentoring.student.user.firstname }}</td>
             <td>{{ mentoring.student.user.lastname }}</td>
             <td>{{ mentoring.mentor.user.firstname }}</td>
-            <td>{{ mentoring.mentor.user.firstname }}</td>
-            <td><a class="btn btn-danger" href="#">Supprimer</a></td>
+            <td>{{ mentoring.mentor.user.lastname }}</td>
+            <td><a class="btn btn-danger" href="#">Désactivé le mentorat</a></td>
         </tr>
         {% endfor %}
         </tbody>

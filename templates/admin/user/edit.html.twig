@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Profile{% endblock %}
+{% block title %}Modifier ou supprimer le profil{% endblock %}
 
 {% block body %}
 {% include "admin/components/_navbar.html.twig" %}
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="field">
-                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                <label for="phone" class="col-sm-2 col-form-label">Téléphone</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.phone) }}
                 </div>
@@ -56,7 +56,7 @@
 
 
     {{ include('admin/user/_delete_form.html.twig') }}
-    <a class="center" href="{{ path('admin_user_index') }}">Retourner a la liste des utilisateurs</a>
+    <a class="center" href="{{ path('admin_user_index') }}">Retourner à la liste des utilisateurs</a>
 
 </main>
 

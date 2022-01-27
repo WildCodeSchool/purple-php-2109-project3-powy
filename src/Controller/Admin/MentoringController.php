@@ -27,15 +27,4 @@ class MentoringController extends AbstractController
             'mentorings' => $mentoring
         ]);
     }
-
-    /**
-     * @Route("/mentoring/{id}", name="mentoring_delete")
-     */
-    public function delete(Mentoring $mentoring, EntityManagerInterface $entityManager): Response
-    {
-        $entityManager->remove($mentoring);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_mentoring');
-    }
 }
