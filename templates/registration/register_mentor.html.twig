@@ -25,10 +25,10 @@
             {{ form_label(mentorRegistrationForm, 'Quel est ton domaine pro', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.professionalSector) }}
 
-            {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle?', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
 
-            {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé?', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.jobTitle) }}
 
             {{ form_label(mentorRegistrationForm, 'Précisions sur ton poste, ton parcours:', {'label_attr': {'class': 'form-label'}}) }}
@@ -103,6 +103,10 @@
                 </div>
                 <div class="age">
                     {{ form_label(mentorRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
+                    <button id='btnPop' style='cursor:pointer'>?</button>
+                        <tooltip id='tooltip' style='display:none'>
+                            Vous devez être majeur(e) pour pouvoir vous inscrire.
+                        </tooltip>
                     {{ form_widget(mentorRegistrationForm.user.age) }}
                 </div>
                 <div class="phone">
@@ -135,9 +139,13 @@
             <div class="fields-4-mentor">
                 <label class="form-label"> E-mail </label>
                 {{ form_widget(mentorRegistrationForm.user.email) }}
-
-                {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
-
+                <div class = "btnField">
+                    {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                    <button id='btnPop2' style='cursor:pointer'>?</button>
+                        <tooltip id='tooltip2' style='display:none'>
+                            Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
+                        </tooltip>
+                </div>
                 {{ form_widget(mentorRegistrationForm.plainPassword) }}
             </div>
         </div>
