@@ -29,8 +29,8 @@
 
             {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
-                {{ form_errors(mentorRegistrationForm.company) }}
-
+            {{ form_widget(mentorRegistrationForm.companyAdd) }}
+              {{ form_errors(mentorRegistrationForm.company) }}
             {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.jobTitle) }}
                 {{ form_errors(mentorRegistrationForm.jobTitle) }}
@@ -195,4 +195,23 @@
         </div>
     </div>
     {{ form_end(mentorRegistrationForm) }}
+    <script>
+        // Add input if it's another company
+        const selectCompany = document.querySelector('select[id="mentor_company"]');
+        const companyAddInput = document.querySelector('input[id="mentor_companyAdd"]');
+        const optionCompanyOther = selectCompany.options[1];
+        companyAddInput.style.visibility = 'hidden';
+        if (selectCompany !== null) {
+            selectCompany.addEventListener('change', (event) => {
+                for (let i = 0; i < event.target.childNodes.length; i += 1) {
+                    if (optionCompanyOther.text === 'Autre' && optionCompanyOther.value === event.target.value) {
+                        companyAddInput.style.visibility = 'visible';
+                        companyAddInput.value = '';
+                    } else {
+                        companyAddInput.style.visibility = 'hidden';
+                    }
+                }
+            });
+        }
+    </script>
 {% endblock %}
