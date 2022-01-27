@@ -98,22 +98,22 @@
         <div class="form-3-mentor">
             <div class="fields-3-mentor">
                 <div class="gender">
-                    {{ form_label(mentorRegistrationForm, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_label(mentorRegistrationForm, 'Votre Genre', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.gender) }}
                     {{ form_errors(mentorRegistrationForm.user.gender) }}
                 </div>
                 <div class="lastname">
-                    {{ form_label(mentorRegistrationForm, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_label(mentorRegistrationForm, 'Votre Nom', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.lastname) }}
                     {{ form_errors(mentorRegistrationForm.user.lastname) }}
                 </div>
                 <div class="firstname">
-                    {{ form_label(mentorRegistrationForm, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_label(mentorRegistrationForm, 'Votre Prénom', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.firstname) }}
                     {{ form_errors(mentorRegistrationForm.user.firstname) }}
                 </div>
                 <div class="age">
-                    {{ form_label(mentorRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_label(mentorRegistrationForm, 'Votre Âge', {'label_attr': {'class': 'form-label'}}) }}
                     <button id='btnPop' style='cursor:pointer'>?</button>
                         <tooltip id='tooltip' style='display:none'>
                             Vous devez être majeur(e) pour pouvoir vous inscrire.
@@ -122,7 +122,7 @@
                     {{ form_errors(mentorRegistrationForm.user.age) }}
                 </div>
                 <div class="phone">
-                    {{ form_label(mentorRegistrationForm, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_label(mentorRegistrationForm, 'Votre Téléphone', {'label_attr': {'class': 'form-label'}}) }}
                     {{ form_widget(mentorRegistrationForm.user.phone) }}
                     {{ form_errors(mentorRegistrationForm.user.phone) }}
                 </div>
