@@ -30,6 +30,7 @@
             {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
                 {{ form_errors(mentorRegistrationForm.company) }}
+                
             <div id="company-add" class="hidden">
                 {{ form_label(mentorRegistrationForm.companyAdd, 'Précise le nom de ton entreprise :', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(mentorRegistrationForm.companyAdd) }}
@@ -117,6 +118,10 @@
                 </div>
                 <div class="age">
                     {{ form_label(mentorRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
+                    <button id='btnPop' style='cursor:pointer'>?</button>
+                        <tooltip id='tooltip' style='display:none'>
+                            Vous devez être majeur(e) pour pouvoir vous inscrire.
+                        </tooltip>
                     {{ form_widget(mentorRegistrationForm.user.age) }}
                     {{ form_errors(mentorRegistrationForm.user.age) }}
                 </div>
@@ -154,7 +159,13 @@
                 {{ form_errors(mentorRegistrationForm.user.email) }}
 
                 {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
-
+                <div class = "btnField">
+                    {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                    <button id='btnPop2' style='cursor:pointer'>?</button>
+                        <tooltip id='tooltip2' style='display:none'>
+                            Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
+                        </tooltip>
+                </div>
                 {{ form_widget(mentorRegistrationForm.plainPassword) }}
                 {{ form_errors(mentorRegistrationForm.plainPassword) }}
             </div>

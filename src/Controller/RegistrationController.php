@@ -11,6 +11,7 @@ use App\Form\MentorType;
 use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,19 +61,9 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
-                // if the school wasn't on the list and the student added a new name
-                $schoolName = $form->get('schoolAdd')->getData();
-                $newSchool = new School();
-                if ($schoolName !== null && is_string($schoolName)) {
-                    $newSchool->setName($schoolName);
-                    $student->setSchool($newSchool);
-                }
                 $user->setRoles(['ROLE_STUDENT']);
                 $entityManager->persist($student);
                 $entityManager->persist($user);
-                if ($newSchool->getName() !== null) {
-                    $entityManager->persist($newSchool);
-                }
                 $entityManager->flush();
             }
         // generate a signed url and email it to the user
@@ -128,19 +119,9 @@ class RegistrationController extends AbstractController
                         $plainPassword,
                     )
                 );
-                // if the company wasn't on the list and the mentor added a new name
-                $companyName = $form->get('companyAdd')->getData();
-                $newCompany = new Company();
-                if ($newCompany !== null && is_string($companyName)) {
-                    $newCompany->setName($companyName);
-                    $mentor->setCompany($newCompany);
-                }
                 $user->setRoles(['ROLE_MENTOR']);
                 $entityManager->persist($mentor);
                 $entityManager->persist($user);
-                if ($newCompany->getName() !== null) {
-                    $entityManager->persist($newCompany);
-                }
                 $entityManager->flush();
             }
         // generate a signed url and email it to the user
@@ -175,7 +156,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         MailerInterface $mailerInterface,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MatchManager $matchManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
         $id = $request->get('id');
@@ -205,6 +187,10 @@ class RegistrationController extends AbstractController
                     ->subject('Inscription validée 🥳 !')
                     ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
                     $mailerInterface->send($email);
+                    if ($user->getStudent() !== null) {
+                        //try to get a match with a mentor
+                        $matchManager->match($user->getStudent());
+                    }
                 }
             }
         } catch (VerifyEmailExceptionInterface $exception) {

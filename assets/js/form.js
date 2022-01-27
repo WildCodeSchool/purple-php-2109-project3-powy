@@ -1,27 +1,3 @@
-// Add input if school 'other'
-const selectSchool = document.getElementById('student_school');
-if (selectSchool !== null) {
-    selectSchool.addEventListener('change', (event) => {
-        const divSchoolAdd = document.getElementById('school-add');
-        if (event.target.childNodes[1].innerText === 'Autre' && divSchoolAdd !== null) {
-            divSchoolAdd.classList.toggle('hidden');
-            divSchoolAdd.classList.toggle('question-field-school');
-        }
-    });
-}
-
-// Add input if company 'other'
-const selectCompany = document.getElementById('mentor_company');
-if (selectCompany !== null) {
-    selectCompany.addEventListener('change', (event) => {
-        const divCompanyAdd = document.getElementById('company-add');
-        if (event.target.childNodes[1].innerText === 'Autre' && divCompanyAdd !== null) {
-            divCompanyAdd.classList.toggle('hidden');
-            divCompanyAdd.classList.toggle('question-field-school');
-        }
-    });
-}
-
 // Student form
 // fetch the buttons
 const btnStep2 = document.getElementById('btn-step2');
@@ -190,3 +166,25 @@ if (returnStepMentor4 !== null) {
         divStepMentor5.classList.toggle('hidden');
     });
 }
+// tooltip form
+const btnPop = document.getElementById('btnPop');
+const tooltip = document.getElementById('tooltip');
+
+btnPop.addEventListener('click', () => {
+    if (tooltip.style.display === 'none') {
+        tooltip.style.display = 'block';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
+
+const btnPop2 = document.getElementById('btnPop2');
+const tooltip2 = document.getElementById('tooltip2');
+
+btnPop2.addEventListener('click', () => {
+    if (tooltip2.style.display === 'none') {
+        tooltip2.style.display = 'block';
+    } else {
+        tooltip2.style.display = 'none';
+    }
+});
