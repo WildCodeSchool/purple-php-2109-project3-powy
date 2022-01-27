@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    {% include "admin/components/_navbar.html.twig" %}
+Bienvenue {{ user.firstname }} {{ user.lastname }}
+{% endblock %}
