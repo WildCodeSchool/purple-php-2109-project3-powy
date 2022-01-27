@@ -26,6 +26,7 @@
         {# form 1 #}
         {{ form_label(studentRegistrationForm, 'Quel est ton niveau actuel ?', {'label_attr': {'class': 'studyLevel-text'}}) }}
         {{ form_widget(studentRegistrationForm.studyLevel) }}
+        {{ form_errors(studentRegistrationForm.studyLevel) }}
         {# scroll-btn 1 #}
             <div class="scroll-btn-section">
                 <button type="submit" id="btn-step2" class="scroll-btn">Suivant</button>
@@ -56,6 +57,7 @@
                 {{ form_row(studentRegistrationForm.topic.topic3, {
                     label: 'choix 3'
                 }) }}
+                {{ form_errors(studentRegistrationForm.topic) }}
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step1" class="scroll-btn">Retour</button>
@@ -81,17 +83,21 @@
                     </div>
                         {{ form_label(studentRegistrationForm, 'Renseigne ton établissement scolaire :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.school) }}
+                        {{ form_errors(studentRegistrationForm.school) }}
                     <div class="question-field">
                         <p class="question-text"> Ton rêve professionnel : </p>
                     </div>
                         {{ form_label(studentRegistrationForm, 'Secteur professionnel idéal', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.professionalSector) }}
+                        {{ form_errors(studentRegistrationForm.professionalSector) }}
 
                         {{ form_label(studentRegistrationForm, 'Ton rêve professionnel :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.dreamJob) }}
+                        {{ form_errors(studentRegistrationForm.dreamJob) }}
 
                         {{ form_label(studentRegistrationForm, 'Précise en quelques mots :', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.dreamDescription) }}
+                        {{ form_errors(studentRegistrationForm.dreamDescription) }}
                 </div>
             </div>
         {# scroll-btn 3 #}
@@ -114,6 +120,7 @@
         {# form 4 #}
             {{ form_label(studentRegistrationForm, 'Es-tu boursier ?', {'label_attr': {'class': 'scholarship-text'}}) }}
             {{ form_widget(studentRegistrationForm.scholarship) }}
+            {{ form_errors(studentRegistrationForm.scholarship) }}
         {# scroll-btn 4 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step3" class="scroll-btn">Retour</button>
@@ -139,29 +146,34 @@
             <div class="form-5">
                 <div class="fields-5">
                     <div class="gender">
-                        {{ form_label(studentRegistrationForm, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_label(studentRegistrationForm, 'Votre Genre', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.user.gender) }}
+                        {{ form_errors(studentRegistrationForm.user.gender) }}
                     </div>
                     <div class="lastname">
-                        {{ form_label(studentRegistrationForm, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_label(studentRegistrationForm, 'Votre Nom', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.user.lastname) }}
+                        {{ form_errors(studentRegistrationForm.user.lastname) }}
                     </div>
                     <div class="firstname">
-                        {{ form_label(studentRegistrationForm, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_label(studentRegistrationForm, 'Votre Prénom', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.user.firstname) }}
+                        {{ form_errors(studentRegistrationForm.user.firstname) }}
                     </div>
                     <div class="age">
 
-                        {{ form_label(studentRegistrationForm, 'Âge', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_label(studentRegistrationForm, 'Votre Âge', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop' style='cursor:pointer'>?</button>
                             <tooltip id='tooltip' style='display:none'>
                                 Vous devez être majeur(e) pour pouvoir vous inscrire.
                             </tooltip>
                         {{ form_widget(studentRegistrationForm.user.age) }}
+                        {{ form_errors(studentRegistrationForm.user.age) }}
                     </div>
                     <div class="phone">
-                        {{ form_label(studentRegistrationForm, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_label(studentRegistrationForm, 'Votre Téléphone', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(studentRegistrationForm.user.phone) }}
+                        {{ form_errors(studentRegistrationForm.user.phone) }}
                     </div>
                 </div>
             </div>
@@ -187,6 +199,7 @@
                 <div class="fields-6">
                         <label class="form-label"> E-mail </label>
                         {{ form_widget(studentRegistrationForm.user.email) }}
+                        {{ form_errors(studentRegistrationForm.user.email) }}
                         <div class = "btnField">
                         {{ form_label(studentRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop2' style='cursor:pointer'>?</button>
@@ -195,6 +208,7 @@
                             </tooltip>
                         </div>
                         {{ form_widget(studentRegistrationForm.plainPassword) }}
+                        {{ form_errors(studentRegistrationForm.plainPassword) }}
                 </div>
             </div>
                 <div class="CGU">

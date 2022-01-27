@@ -25,17 +25,37 @@ class MentorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('jobTitle', TextType::class)
+            ->add('jobTitle', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner un job.'
+                    ])]
+            ])
             ->add('careerDescription', TextareaType::class, [
                 'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseignez une description'
+                    ])
+                ]
             ])
             ->add('professionalSector', EntityType::class, [
                 'choice_label' => 'name',
-                'class' => ProfessionalSector::class
+                'class' => ProfessionalSector::class,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseignez un secteur professionel'
+                    ])
+                ]
             ])
             ->add('company', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Company::class,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseignez une entreprise'
+                    ])
+                ],
                 'placeholder' => "Nom de l'entreprise"
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -60,7 +80,12 @@ class MentorType extends AbstractType
                     ])
                 ],
             ])
-            ->add('topic', TopicType::class)
+            ->add('topic', TopicType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez renseigner un topic.'
+                    ])]
+            ])
             ->add('user', RegistrationFormType::class)
         ;
     }
