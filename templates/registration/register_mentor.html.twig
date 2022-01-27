@@ -30,11 +30,7 @@
             {{ form_label(mentorRegistrationForm, 'Quelle est ton entreprise actuelle ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.company) }}
                 {{ form_errors(mentorRegistrationForm.company) }}
-                
-            <div id="company-add" class="hidden">
-                {{ form_label(mentorRegistrationForm.companyAdd, 'Précise le nom de ton entreprise :', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(mentorRegistrationForm.companyAdd) }}
-            </div>
+
             {{ form_label(mentorRegistrationForm, 'Quel est ton dernier poste occupé ?', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(mentorRegistrationForm.jobTitle) }}
                 {{ form_errors(mentorRegistrationForm.jobTitle) }}
