@@ -103,6 +103,9 @@ class MatchManager
         }
     }
 
+    /**
+     * look for all students with no active mentoring and try to find one
+     */
     public function checkForMatches(): void
     {
         $students = $this->studentRepository->findAll();

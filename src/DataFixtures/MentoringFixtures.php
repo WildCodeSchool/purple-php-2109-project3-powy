@@ -15,25 +15,36 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+
         //set student 0 to 4 with an accepted mentoring
         for ($i = 0; $i < self::MENTORINGFIXTURES; $i++) {
-            $startingDate = new DateTime('2022-01-20');
             $mentoring = new Mentoring();
-            $mentoring->setStartingDate($startingDate);
+            $mentoring->setStartingDate(new DateTime('2022-01-20'));
             $mentoring->setEndingDtae(new DateTime('2022-05-20'));
             $mentoring->setStudent($this->getReference('student_' . $i));
             $mentoring->setMentor($this->getReference('mentor_' . $i));
             $mentoring->setIsAccepted(true);
             $manager->persist($mentoring);
         }
-        //set student with a pending mentoring
-        $startingDate = new DateTime('2022-01-20');
+        //set a pending mentoring
         $mentoring = new Mentoring();
-        $mentoring->setStartingDate($startingDate);
-        $mentoring->setEndingDtae(new DateTime('2022-05-20'));
         $mentoring->setStudent($this->getReference('student_5'));
         $mentoring->setMentor($this->getReference('mentor_5'));
-        $mentoring->setIsAccepted(false);
+        $mentoring->setIsAccepted(null);
+        $manager->persist($mentoring);
+
+        //set an ended mentoring
+
+        $mentoring = new Mentoring();
+        $mentoring->setStartingDate(
+            new DateTime('2021-01-20')
+        );
+        $mentoring->setEndingDtae(
+            new DateTime('2021-05-20')
+        );
+        $mentoring->setStudent($this->getReference('student_6'));
+        $mentoring->setMentor($this->getReference('mentor_6'));
+        $mentoring->setIsAccepted(true);
         $manager->persist($mentoring);
 
         //flush all user
