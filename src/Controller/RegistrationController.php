@@ -14,14 +14,9 @@ use App\Security\EmailVerifier;
 use App\Service\MailerManager;
 use App\Service\MatchManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -84,10 +79,10 @@ class RegistrationController extends AbstractController
                     }
                 }
                 $this->entityManager->flush();
+                // generate a signed url and email it to the user
+                $this->mailerManager->sendVerifyRegistration($user);
+                return $this->redirectToRoute('login');
             }
-            // generate a signed url and email it to the user
-            $this->mailerManager->sendVerifyRegistration($user);
-            $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register_student.html.twig', [
@@ -137,9 +132,9 @@ class RegistrationController extends AbstractController
                     }
                 }
                 $this->entityManager->flush();
+                $this->mailerManager->sendVerifyRegistration($user);
+                return $this->redirectToRoute('login');
             }
-            $this->mailerManager->sendVerifyRegistration($user);
-            $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register_mentor.html.twig', [
@@ -153,7 +148,6 @@ class RegistrationController extends AbstractController
     public function verifyUserEmail(
         Request $request,
         UserRepository $userRepository,
-        MailerInterface $mailerInterface,
         MatchManager $matchManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
@@ -180,10 +174,10 @@ class RegistrationController extends AbstractController
                     //try to get a match with a mentor
                     $matchManager->match($user->getStudent());
                 }
+                $this->mailerManager->sendConfirmationRegistration($user);
             }
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('error', $exception->getReason());
-
             return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('login');
