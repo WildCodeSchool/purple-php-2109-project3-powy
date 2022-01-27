@@ -25,7 +25,11 @@
             <td>{{ mentoring.student.user.lastname }}</td>
             <td>{{ mentoring.mentor.user.firstname }}</td>
             <td>{{ mentoring.mentor.user.lastname }}</td>
-            <td><a class="btn btn-danger" href="#">Désactivé le mentorat</a></td>
+            {% if mentoring.isAccepted == true %}
+                <td><a class="btn btn-danger" href="{{ path('admin_mentoring_desactivate', {'id': mentoring.id}) }}) }}">Désactiver le mentorat</a></td>
+            {% else %}
+            <td><a class="btn btn-warning" href="#">Le mentorat est désactivé</a></td>
+            {% endif %}
         </tr>
         {% endfor %}
         </tbody>
