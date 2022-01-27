@@ -6,6 +6,7 @@ use App\Entity\Mentoring;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
+use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -22,10 +23,11 @@ class ChatController extends AbstractController
     public function index(
         User $user,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MentoringManager $mentoringManager
     ): Response {
-        //check if user and mentoring are null
-        $mentoring = $this->checkMentoring($user);
+        //fetch Mentoring
+        $mentoring = $mentoringManager->fetchMentoring($user);
 
         //create message form
         $message = new Message();
@@ -44,7 +46,6 @@ class ChatController extends AbstractController
                     $message->setMentoring($mentoring);
                 }
             }
-
             $entityManager->persist($message);
             $entityManager->flush();
             return $this->redirectToRoute('chat', ['id' => $user->getId()]);
@@ -60,20 +61,5 @@ class ChatController extends AbstractController
             'mentoring' => $mentoring,
             'messageForm' => $form->createView(),
         ]);
-    }
-
-    //function to fetch mentoring depending if user is a mentor or a student
-    private function checkMentoring(User $user): ?Mentoring
-    {
-        $mentoring = null;
-        if ($user->getMentor() === null && $user->getStudent() === null) {
-            throw $this->createNotFoundException('User is neither a student or a mentor.');
-        }
-        if ($user->getMentor() !== null) {
-            $mentoring = $user->getMentor()->getMentoring();
-        } elseif ($user->getStudent() !== null) {
-            $mentoring = $user->getStudent()->getMentoring();
-        }
-        return $mentoring;
     }
 }

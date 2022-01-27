@@ -33,6 +33,7 @@ class MatchManager
     public function matchByTopic(Student $studentToMatch): array
     {
         $mentors = [];
+
         if ($studentToMatch->getTopic() !== null) {
             //try matching by topic 1
             $mentors = $this->mentorRepository->findMentorsByTopic($studentToMatch->getTopic()->getTopic1());
@@ -45,6 +46,7 @@ class MatchManager
         ) {
             $mentors = $this->mentorRepository->findMentorsByTopic($studentToMatch->getTopic()->getTopic2());
         }
+
         //if no match, try matching by topic 3
         if (
             empty($mentors)
@@ -53,10 +55,7 @@ class MatchManager
         ) {
             $mentors = $this->mentorRepository->findMentorsByTopic($studentToMatch->getTopic()->getTopic3());
         }
-        //if no match by topic 1, 2 or 3 stop trying
-        if (empty($mentors)) {
-            throw new Exception('There is no mentor with the same Topic');
-        }
+
         return $mentors;
     }
     /**
@@ -70,30 +69,32 @@ class MatchManager
         //check if student has already a mentor
         if ($user !== null) {
             if ($this->mentoringManager->hasMentoring($user) === false) {
+                //try to match by topic
                 $matchingMentors = $this->matchByTopic($studentToMatch);
-                //try to find a Mentor with same professionalSector than student to match
-                foreach ($matchingMentors as $matchingMentor) {
-                    if ($matchingMentor->getProfessionalSector() === $studentToMatch->getProfessionalSector()) {
-                        $mentorsBySector[] = $matchingMentor;
+                //check if there is a match by topic
+                if (!empty($matchingMentors)) {
+                    //try to find a Mentor with same professionalSector than student to match
+                    foreach ($matchingMentors as $matchingMentor) {
+                        if ($matchingMentor->getProfessionalSector() === $studentToMatch->getProfessionalSector()) {
+                            $mentorsBySector[] = $matchingMentor;
+                        }
                     }
-                }
-                // if no match by professional sector, get the first mentor of the list
-                if (empty($mentorsBySector)) {
-                    $matchingMentor = $matchingMentors[0];
-                }
-                //there is a match by sector, get the first mentor of the list
-                $matchingMentor = $mentorsBySector[0];
+                    // if no match by professional sector, get the first mentor of the list
+                    if (empty($mentorsBySector)) {
+                        $matchingMentor = $matchingMentors[0];
+                    }
+                    //there is a match by sector, get the first mentor of the list
+                    $matchingMentor = $mentorsBySector[0];
 
-                //creation of a new mentoring relation
-                $mentoring = new Mentoring();
-                $mentoring->setStudent($studentToMatch);
-                $mentoring->setMentor($matchingMentor);
-                $this->entityManager->flush();
-                //sending mentoring proposition to student
-                $this->mailerManager->sendProposal($studentToMatch);
+                    //creation of a new mentoring relation
+                    $mentoring = new Mentoring();
+                    $mentoring->setStudent($studentToMatch);
+                    $mentoring->setMentor($matchingMentor);
+                    $this->entityManager->flush();
+                    //sending mentoring proposition to student
+                    $this->mailerManager->sendProposal($studentToMatch);
+                }
             }
-        } else {
-            throw new Exception("This student already has an active mentoring");
         }
     }
 }

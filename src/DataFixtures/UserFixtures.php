@@ -62,6 +62,23 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($mentor);
         }
 
+        $admin = new User();
+        $admin->setEmail('admin@monsite.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setFirstname('POWY');
+        $admin->setLastname('ADMIN');
+        $admin->setGender('male');
+        $admin->setAge('22');
+        $admin->setPhone('0234567800');
+        $admin->setIsVerified(true);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $admin,
+            'Adminpassword!1'
+        );
+        $admin->setPassword($hashedPassword);
+        $manager->persist($admin);
+
+
         //flush all users
         $manager->flush();
     }
