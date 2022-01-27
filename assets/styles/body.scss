@@ -1,7 +1,7 @@
 html {
     height: 100%;
 }
-  
+
 body {
     min-height: 100%;
     display: grid;
@@ -13,7 +13,7 @@ body {
     padding-bottom: 10.75rem;
     position: relative;
 }
-  
+
 /*
 buttons available for all pages.
 thoses classes should be used everywhere
@@ -31,14 +31,14 @@ thoses classes should be used everywhere
     text-decoration: none;
     width: 15em;
     margin: auto;
-  
+
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
         text-decoration: none;
     }
 }
-  
+
 .alert-submit-button {
     align-items: center;
     background-color: $alert;
@@ -51,7 +51,7 @@ thoses classes should be used everywhere
     justify-content: center;
     text-decoration: none;
     width: 15em;
-  
+
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
