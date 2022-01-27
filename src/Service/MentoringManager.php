@@ -13,18 +13,12 @@ use Exception;
 
 class MentoringManager
 {
-    private MentoringRepository $mentoringRepository;
-    private EntityManagerInterface $entityManager;
-    private MessageRepository $messageRepository;
 
-    public function __construct(
-        MentoringRepository $mentoringRepository,
-        EntityManagerInterface $entityManager,
-        MessageRepository $messageRepository
-    ) {
-        $this->mentoringRepository = $mentoringRepository;
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
-        $this->messageRepository = $messageRepository;
     }
 
     /**
@@ -63,11 +57,10 @@ class MentoringManager
         $endingDate = new DateTime();
         $endingDate->modify('+4 months');
 
-        $mentoringToUpdate = $this->mentoringRepository->find($mentoring);
-        if ($mentoringToUpdate !== null) {
-            $mentoringToUpdate->setIsAccepted(true);
-            $mentoringToUpdate->setStartingDate($startingDate);
-            $mentoringToUpdate->setEndingDtae($endingDate);
+        if ($mentoring !== null) {
+            $mentoring->setIsAccepted(true);
+            $mentoring->setStartingDate($startingDate);
+            $mentoring->setEndingDtae($endingDate);
             $this->entityManager->flush();
         }
     }
@@ -78,12 +71,11 @@ class MentoringManager
      */
     public function stopMentoring(Mentoring $mentoring): void
     {
-        $mentoringToUpdate = $this->mentoringRepository->find($mentoring);
-        if ($mentoringToUpdate !== null) {
-            $mentoringToUpdate->setIsAccepted(false);
-            $mentoringToUpdate->setEndingDtae(new DateTime());
+        if ($mentoring !== null) {
+            $mentoring->setIsAccepted(false);
+            $mentoring->setEndingDtae(new DateTime());
             $this->entityManager->flush();
-            $this->removeMessages($mentoringToUpdate);
+            $this->removeMessages($mentoring);
         }
     }
 
@@ -92,13 +84,12 @@ class MentoringManager
      */
     public function removeMessages(Mentoring $mentoring): void
     {
-        $messages = $this->messageRepository->findBy(['mentoring' => $mentoring]);
+        $messages = $mentoring->getMessages();
+
         if ($messages !== null) {
-            if (!empty($messages)) {
-                foreach ($messages as $message) {
-                    $this->entityManager->remove($message);
-                    $this->entityManager->flush();
-                }
+            foreach ($messages as $message) {
+                $this->entityManager->remove($message);
+                $this->entityManager->flush();
             }
         }
     }
