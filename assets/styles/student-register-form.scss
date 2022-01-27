@@ -220,10 +220,10 @@ input , select , textarea {
     box-shadow: inset 0 3px 3px $box-shadow;
 }
 
-[name="student[topic][]"] {
-    position: fixed;
-    opacity: 0;
-}
+// [name="student[topic][]"] {
+//     position: fixed;
+//     opacity: 0;
+// }
 
 #topics-button {
     padding: 1rem;
@@ -247,15 +247,15 @@ input , select , textarea {
 }
 
 .number1 {
-
+    color: green;
 }
 
 .number2 {
-
+    color: blue;
 }
 
 .number3 {
-    
+    color: red;
 }
 
 /*step-3 of form */

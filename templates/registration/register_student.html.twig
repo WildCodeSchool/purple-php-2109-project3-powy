@@ -48,6 +48,7 @@
                 <p>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</p>
             </div>
         {# form 2 #}
+                {{ form_label(studentRegistrationForm.topic, 'Your Name', {'label_attr': {'class': 'foo'}}) }}
                 {{ form_row(studentRegistrationForm.topic, {
                     label: ' '
                 }) }}
@@ -209,6 +210,17 @@
     {{ form_end(studentRegistrationForm) }}
     </main>
     <script>
-
+        checkboxes = document.querySelectorAll("[name='student[topic][]']");
+        const choices = [];
+        console.log(checkboxes);
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    choices.push(checkbox.value)
+                } else {
+                    let myIndex = choices.indexOf(1);
+                }
+            })
+        });
     </script>
 {% endblock %}
