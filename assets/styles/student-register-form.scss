@@ -204,8 +204,9 @@ input , select , textarea {
     border: 0.1px solid lightgray;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    padding: 1.5rem;
-    width: 70%;
+    padding: .8rem;
+    width: 80%;
+    max-width: 30rem;
 
     div {
         display: flex;
