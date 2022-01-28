@@ -13,6 +13,7 @@ use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Service\MailerManager;
 use App\Service\MatchManager;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,6 +52,7 @@ class RegistrationController extends AbstractController
         $student = new Student();
         $user = new User();
         $student->setUser($user);
+        $user->setCreatedAt(new DateTime('now'));
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
