@@ -106,6 +106,7 @@ class RegistrationController extends AbstractController
         $mentor = new Mentor();
         $user = new User();
         $mentor->setUser($user);
+        $user->setCreatedAt(new DateTime('now'));
         $form = $this->createForm(MentorType::class, $mentor);
         $form->handleRequest($request);
 
