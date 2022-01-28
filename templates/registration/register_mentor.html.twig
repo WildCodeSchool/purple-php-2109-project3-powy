@@ -65,18 +65,20 @@
             </div>
         </div>
     {# form 2 #}
-        {{ form_row(mentorRegistrationForm.topic.topic1, {
-            label: 'choix 1'
-        }) }}
-        {{ form_errors(mentorRegistrationForm.topic.topic1) }}
-        {{ form_row(mentorRegistrationForm.topic.topic2, {
-            label: 'choix 2'
-        }) }}
-        {{ form_errors(mentorRegistrationForm.topic.topic2) }}
-        {{ form_row(mentorRegistrationForm.topic.topic3, {
-            label: 'choix 3'
-        }) }}
-        {{ form_errors(mentorRegistrationForm.topic.topic3) }}
+        <div class="topics-form align-self-center d-flex flex-column text-center">
+            {{ form_row(mentorRegistrationForm.topic.topic1, {
+                label: '1'
+            }) }}
+            {{ form_errors(mentorRegistrationForm.topic.topic1) }}
+            {{ form_row(mentorRegistrationForm.topic.topic2, {
+                label: '2'
+            }) }}
+            {{ form_errors(mentorRegistrationForm.topic.topic2) }}
+            {{ form_row(mentorRegistrationForm.topic.topic3, {
+                label: '3'
+            }) }}
+            {{ form_errors(mentorRegistrationForm.topic.topic3) }}
+        </div>
     {# scroll-btn 2 #}
         <div class="scroll-btn-section gap-2">
             <button type="submit" id="return-btn-step1-mentor" class="scroll-btn">Retour</button>

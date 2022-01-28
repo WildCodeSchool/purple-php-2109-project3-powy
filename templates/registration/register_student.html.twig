@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block body %}
-    {% include "components/_header.html.twig" %}
-    {% include "components/_flashmessages.html.twig" %}
-            <h1 class="inscription-title">Formulaire d'inscription étudiant :</h1>
-            {{ form_start(studentRegistrationForm) }}
-            {{ form_errors(studentRegistrationForm) }}
+{% include "components/_header.html.twig" %}
+{% include "components/_flashmessages.html.twig" %}
+    <h1 class="inscription-title">Formulaire d'inscription étudiant :</h1>
+    {{ form_start(studentRegistrationForm) }}
+    {{ form_errors(studentRegistrationForm) }}
     <div class="step-1" id="step-1">
         <div class ="instructions">
         {# logo 1 #}
@@ -56,16 +56,18 @@
                 </div>
         </div>
         {# form 2 #}
-                {{ form_row(studentRegistrationForm.topic.topic1, {
-                    label: 'choix 1'
-                }) }}
-                {{ form_row(studentRegistrationForm.topic.topic2, {
-                    label: 'choix 2'
-                }) }}
-                {{ form_row(studentRegistrationForm.topic.topic3, {
-                    label: 'choix 3'
-                }) }}
-                {{ form_errors(studentRegistrationForm.topic) }}
+        <div class="topics-form align-self-center d-flex flex-column text-center">
+            {{ form_row(studentRegistrationForm.topic.topic1, {
+                label: '1'
+            }) }}
+            {{ form_row(studentRegistrationForm.topic.topic2, {
+                label: '2'
+            }) }}
+            {{ form_row(studentRegistrationForm.topic.topic3, {
+                label: '3'
+            }) }}
+            {{ form_errors(studentRegistrationForm.topic) }}
+        </div>
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
                 <button type="submit" id="return-btn-step1" class="scroll-btn">Retour</button>
@@ -239,24 +241,24 @@
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
-    <script>
-        // Add input if it's another school
-        const selectSchool = document.querySelector('select[id="student_school"]');
-        const schoolAddInput = document.querySelector('input[id="student_schoolAdd"]');
-        if (selectSchool.options[1] !== null) {}
-        const optionOther = selectSchool.options[1];
-        schoolAddInput.style.visibility = 'hidden';
-        if (selectSchool !== null) {
-            selectSchool.addEventListener('change', (event) => {
-                for (let i = 0; i < event.target.childNodes.length; i += 1) {
-                    if (optionOther.text === 'Autre' && optionOther.value === event.target.value) {
-                        schoolAddInput.style.visibility = 'visible';
-                        schoolAddInput.value = '';
-                    } else {
-                        schoolAddInput.style.visibility = 'hidden';
-                    }
+<script>
+    // Add input if it's another school
+    const selectSchool = document.querySelector('select[id="student_school"]');
+    const schoolAddInput = document.querySelector('input[id="student_schoolAdd"]');
+    if (selectSchool.options[1] !== null) {}
+    const optionOther = selectSchool.options[1];
+    schoolAddInput.style.visibility = 'hidden';
+    if (selectSchool !== null) {
+        selectSchool.addEventListener('change', (event) => {
+            for (let i = 0; i < event.target.childNodes.length; i += 1) {
+                if (optionOther.text === 'Autre' && optionOther.value === event.target.value) {
+                    schoolAddInput.style.visibility = 'visible';
+                    schoolAddInput.value = '';
+                } else {
+                    schoolAddInput.style.visibility = 'hidden';
                 }
-            });
-        }
-    </script>
+            }
+        });
+    }
+</script>
 {% endblock %}
