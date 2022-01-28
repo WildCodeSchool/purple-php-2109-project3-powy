@@ -1,37 +1,37 @@
 .bold {
     font-weight: bold;
 }
-  
+
 .section-1-student {
     display: flex;
     flex-direction: column;
     background-color:  $light-background-primary;
     padding: 1rem;
 }
-  
+
 .title-header {
     font-size: 1.5rem;
     margin-left: 3rem;
     margin-right: 3rem;
     text-align: center;
 }
-  
+
 .sub-title-header {
     font-size: 1rem;
     margin-left: 3rem;
     margin-right: 3rem;
 }
-  
+
 .sub-title-header span {
     font-weight: bold;
 }
-  
+
 .inscription-btn-section {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-  
+
 .inscription-btn {
     align-items: center;
     background-color: $dark-background;
@@ -42,20 +42,20 @@
     justify-content: center;
     text-decoration: none;
     width: 10em;
-  
+
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
     }
 }
-  
+
 .howto {
     // display: grid;
     // grid-template-columns: repeat(2, 1fr);
     // grid-gap: 10px;
     margin: 1rem;
 }
-  
+
 .accordion-howto {
     background-color: #eee;
     color: #FFF;
@@ -71,12 +71,12 @@
     background-color: $dark-background;
     font-family: $font-text;
 }
-  
+
 .active,
 .accordion-howto:hover {
     background-color: $dark-background;
 }
-  
+
 .panel {
     background-color: #FFF;
     display: none;
@@ -86,20 +86,20 @@
     border: 1px solid $dark-background;
     margin-bottom: 1rem;
 }
-  
+
 .panel p {
     margin-top: 1rem;
     padding: 1rem;
     font-family: $font-text;
 }
-  
+
 .accordion-howto:after {
     content: '\002B';
     font-size: 20px;
     color: white;
     float: right;
 }
-  
+
 .active:after {
     content: '\002D';
 }
@@ -123,19 +123,19 @@
         margin-left: 20rem;
         margin-right: 20rem;
     }
-  
+
     .text-header-student{
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
-  
+
     .title-header {
         font-size: 1.5rem;
         margin-left: 13rem;
         margin-right: 13rem;
         text-align: center;
     }
-  
+
     .sub-title-header {
         font-size: 1rem;
         margin-left: 20rem;

@@ -1,30 +1,31 @@
 form {
     min-width:330px;
 }
-    
+
 .step-1, .step-2, .step-3, .step-4, .step-5, .step-6 {
     display:flex;
     flex-direction: column;
     align-self:center;
     min-width:330px;
 }
-    
+
 //Classes being toggle to display all the steps one by one of the forms
 //do not move it to body because the script JS doesn't work anymore (??)
 .hidden {
     display: none;
 }
-    
+
 h1 {
     text-align: center;
     padding-top:1em;
 }
-    
+
 .instructions {
     display:flex;
     flex-direction:column;
     justify-content:left;
 }
+
 /* progress-bar */
 .progress {
     margin-top:1rem;
@@ -35,11 +36,11 @@ h1 {
     margin-left: 1em;
     margin-right:1em;
 }
-    
+
 .progress-bar {
     background-color: $dark-background;
 }
-    
+
 /* title question bold */
 .question-text {
     font-weight: bolder;
@@ -48,24 +49,24 @@ h1 {
     margin-right:2em;
     margin-left:2em;
 }
-    
+
 .indications {
     margin-left: 2em;
     margin-right: 2em;
 }
-    
+
 .logo-powy {
     margin-left: 2em;
     margin-right:2em;
 }
-    
+
 /* scroll button */ 
 .scroll-btn-section {
     margin:2em;
     display: flex;
     justify-content: right;
 }
-    
+
 .scroll-btn {
     align-items: center;
     background-color: $dark-background;
@@ -77,20 +78,20 @@ h1 {
     text-decoration: none;
     width: 8em;
     border: none;
-    
+
     &:hover,
     &:focus {
-    box-shadow: 0 2px 4px $dark-background;
+        box-shadow: 0 2px 4px $dark-background;
     }
 }
-    
+
 /* register btn */
 .register-btn {
     margin:2em;
     display: flex;
     justify-content: right;
 }
-    
+
 .registration-btn {
     align-items: center;
     background-color: $dark-background;
@@ -102,16 +103,16 @@ h1 {
     text-decoration: none;
     width: 8em;
     border: none;
-    
+
     &:hover,
     &:focus {
-    background-color: $light-background-secondary;
-    color: $dark-background;
-    font-weight: bold;
-    box-shadow: 0 2px 4px $dark-background;
+        background-color: $light-background-secondary;
+        color: $dark-background;
+        font-weight: bold;
+        box-shadow: 0 2px 4px $dark-background;
     }
 }
-    
+
 /* tooltips form*/
 #btnPop , #btnPop2 {
     background-color:$dark-background;
@@ -123,7 +124,7 @@ h1 {
     width:1.8em;
     height:1.8em;
 }
-    
+
 #tooltip {
     position: absolute;
     margin:5px;
@@ -134,7 +135,7 @@ h1 {
     border-radius: 6px;
     padding: 5px;
 }
-    
+
 #tooltip2 {
     position: absolute;
     margin-left:2em;
@@ -145,19 +146,19 @@ h1 {
     border-radius: 6px;
     padding: 5px;
 }
-    
+
 input , select , textarea {
     background-color: $white;
     border-radius: 5px;
     padding: 0.1em; 
     margin:0.5em;
 }
-    
+
 .form-6 , .form-3 , .form-5 {
     display:flex;
     justify-content:center;
 }
-  
+
 /*all fields of all form */
 .fields-3 , .fields-5 , .fields-6 {
     background-color: $light-background-secondary;
@@ -166,13 +167,13 @@ input , select , textarea {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     min-width:330px;
 }
-    
-  /*step-1 of form */
-    
+
+/*step-1 of form */
+
 .studyLevel-text {
     display: none;
 }
-    
+
 .studyLevel {
     
     display: flex;
@@ -180,35 +181,34 @@ input , select , textarea {
     gap: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    
+
     label {
-    background-color: $chat-background;
-    padding: 1rem;
-    border: 1px solid $dark-background;
-    border-radius: 10px;
-    box-shadow: 0 3px 3px $box-shadow;
-    cursor: pointer;
+        background-color: $chat-background;
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
     }
 }
-    
+
 [name="student[studyLevel]"]:checked + label {
     background-color: $chat-user1;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: inset 0 3px 3px $box-shadow;
 }
-    
+
 [name="student[studyLevel]"]:focus + label {
     background-color: $chat-user1;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
 }
-    
+
 [name="student[studyLevel]"] {
     position: fixed;
     opacity: 0;
 }
-    
-    
+
 /*step-3 of form */
     
 .fields-3 {
@@ -220,43 +220,43 @@ input , select , textarea {
     justify-content: center;
     padding:1.5em;
     margin:3em;
-    
+
     .question-field {
-    margin-top:0.5em;
-    margin-left: 0px;
-    
+        margin-top:0.5em;
+        margin-left: 0px;
+
         .question-text {
-        margin-left:0px;
+            margin-left:0px;
         }
     }
-    
+
     .form-label {
-    margin-left : 3em;
-    margin-top: 1em;
+        margin-left : 3em;
+        margin-top: 1em;
     }
-    
+
     select , input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    margin-left: 3em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
     }
-    
+
     textarea {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    margin-left: 3em;
-    height: 8em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        margin-left: 3em;
+        height: 8em;
     }
 }
-    
+
 /*step-4 of form*/
-    
+
 .scholarship-text {
     display: none;
 }
-    
+
 .scholarship {
     display: flex;
     flex-wrap: wrap;
@@ -266,34 +266,34 @@ input , select , textarea {
     margin-left: 2rem;
     margin-right: 2rem;
     text-align: center;
-    
+
     label {
-    background-color: $chat-background;
-    padding: 1rem;
-    border: 1px solid $dark-background;
-    border-radius: 10px;
-    box-shadow: 0 3px 3px $box-shadow;
-    cursor: pointer;
+        background-color: $chat-background;
+        padding: 1rem;
+        border: 1px solid $dark-background;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $box-shadow;
+        cursor: pointer;
     }
 }
-    
+
 [name="student[scholarship]"]:checked + label {
     background-color: $chat-user1;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: inset 0 3px 3px $box-shadow;
 }
-    
+
 [name="student[scholarship]"]:focus + label {
     background-color: $chat-user1;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: inset 0 3px 3px darken($box-shadow, 10%);
 }
-    
+
 [name="student[scholarship]"] {
     position: fixed;
     opacity: 0;
 }
-    
+
 /*step-5 of form */
 .fields-5 {
     display: grid;
@@ -309,69 +309,69 @@ input , select , textarea {
     "age phone .";
     grid-area: fields-5;
 }
-    
+
 .gender {
     grid-area: gender;
-    
+
     select {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
-    height: 2em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+        height: 2em;
     }
 }
-    
+
 .lastname {
     grid-area: lastname;
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
     }
 }
-    
+
 .firstname {
     grid-area: firstname;
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
     }
 }
-    
+
 .age {
     grid-area: age;
-    
+
     .form-label {
-    margin-right: 0.5em;
+        margin-right: 0.5em;
     }
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
     }
 }
-    
+
 .phone {
     grid-area: phone;
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
     }
 }
-    
+
 /*step-6 of form */
-    
+
 .fields-6 {
     display:flex;
     height:auto;
@@ -381,19 +381,19 @@ input , select , textarea {
     min-width:300px;
     padding:3em;
     margin:2em;
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    max-width:25em;
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
     }
-    
+
     .form-label {
-    margin-top:0.5em;
+        margin-top:0.5em;
     }
 }
-    
+
 .CGU {
     display: flex;
     flex-direction: row;
@@ -403,47 +403,45 @@ input , select , textarea {
     max-width: 40em;
     min-width:300px;
     margin-bottom:2em;
-    
+
     input {
-    background-color: $white;
-    border-radius: 5px;
-    padding: 0.2em;
-    margin-left: 1em;
-    margin-right:1em;
-    }
-}
-    
-@media (min-width: 400px) {
-    .scholarship {
-    flex-direction: row;
-    justify-content: center;
-    }
-    
-    .question-field-school {
-    display: flex;
-    flex-direction: column;
-    }
-}
-    
-@media (max-width: 800px) {
-    
-/*step-5 of form for tablet and phone */
-    .fields-5 {
-    grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
-    grid-template-columns: 15em;
-    }
-    
-    .gender , .lastname , .firstname , .age , .phone {
-    display:flex;
-    flex-direction:column;
-    
-        select , input {
         background-color: $white;
         border-radius: 5px;
         padding: 0.2em;
-        max-width:25em;
-        }
+        margin-left: 1em;
+        margin-right:1em;
     }
 }
 
+@media (min-width: 400px) {
+    .scholarship {
+        flex-direction: row;
+        justify-content: center;
+    }
 
+    .question-field-school {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 800px) {
+
+    /*step-5 of form for tablet and phone */
+    .fields-5 {
+        grid-template-areas: "gender" "lastname" "firstname" "age" "phone";
+        grid-template-columns: 15em;
+    }
+
+    .gender , .lastname , .firstname , .age , .phone {
+        display:flex;
+        flex-direction:column;
+
+        select , input {
+            background-color: $white;
+            border-radius: 5px;
+            padding: 0.2em;
+            max-width:25em;
+        }
+    }
+}
