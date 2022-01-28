@@ -166,6 +166,7 @@ if (returnStepMentor4 !== null) {
         divStepMentor5.classList.toggle('hidden');
     });
 }
+
 // tooltip form
 const btnPop = document.getElementById('btnPop');
 const tooltip = document.getElementById('tooltip');

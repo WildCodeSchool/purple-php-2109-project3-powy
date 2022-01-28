@@ -6,6 +6,7 @@ body {
     min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    grid-template-columns:auto;
     box-sizing: border-box;
     font-family: $font-text;
     margin: 0;
