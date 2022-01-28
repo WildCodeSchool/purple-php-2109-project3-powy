@@ -12,10 +12,9 @@
 }
 
 .card-body-profile{
-    width: 60%;
-    min-width: 18rem;
+    width: 20rem;
     height: 10rem;
-    background-color: $light-background-secondary;
+    background-color: $light-background-primary;
     border: 0.1px solid lightgray;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -91,20 +90,17 @@
         background-color: $alert;
         color: $white;
     }
+}
 
+.mentoring-button {
+    margin-top: -1.5rem!important;
 }
 
 .h2-profile {
     padding-top: 0!important;
 }
 
-.mentoring-profile {
-    background-color: lighten($light-background-primary, 7%);
-    border: 0.1px solid lightgray;
-    border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-}
+
 
 @media screen and (min-width: 425px) {
     .mentoring-profile {
@@ -112,7 +108,7 @@
     }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
     .container-btn-profile{
         flex-direction: row;
         align-items: flex-start;
