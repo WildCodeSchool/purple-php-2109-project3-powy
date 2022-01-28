@@ -5,7 +5,7 @@
     <p>Si tu acceptes, tu pourras commencer la discussion avec ton ou ta mentor.e, depuis ton profil en ligne.</p>
     <p>En cas de refus, nous te proposerons une autre personne dès que possible.</p>
     <br>
-    <strong>Sujet du match :</strong>
+    <strong>Sujet du match : {{ user.student.mentoring.mentoringTopic }}</strong>
     <br>
     <strong>Voici quelques informations sur cette personne, pour t'aider dans ton choix</strong>
     <p>Infos persos 🤗 : {{ user.student.mentoring.mentor.user.firstname }} {{ user.student.mentoring.mentor.user.lastname }} {{ user.student.mentoring.mentor.user.age }} ans </p>
