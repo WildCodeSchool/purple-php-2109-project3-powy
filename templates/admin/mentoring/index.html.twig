@@ -31,6 +31,10 @@
             <td><a class="btn btn-warning" href="#">Le mentorat est désactivé</a></td>
             {% endif %}
         </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">Aucun compte à afficher</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
