@@ -123,9 +123,10 @@ class MatchManager
                     // if no match by professional sector, get the first mentor of the list
                     if (empty($mentorsBySector)) {
                         $matchingMentor = $matchingMentors[0];
+                    } else {
+                        //there is a match by sector, get the first mentor of the list
+                        $matchingMentor = $mentorsBySector[0];
                     }
-                    //there is a match by sector, get the first mentor of the list
-                    $matchingMentor = $mentorsBySector[0];
 
                     //creation of a new mentoring relation
                     $mentoring = new Mentoring();
