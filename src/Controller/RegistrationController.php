@@ -11,16 +11,13 @@ use App\Form\MentorType;
 use App\Form\StudentType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\MailerManager;
 use App\Service\MatchManager;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -28,10 +25,17 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
+    private EntityManagerInterface $entityManager;
+    private MailerManager $mailerManager;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        EntityManagerInterface $entityManager,
+        MailerManager $mailerManager
+    ) {
         $this->emailVerifier = $emailVerifier;
+        $this->entityManager = $entityManager;
+        $this->mailerManager = $mailerManager;
     }
 
     /**
@@ -39,8 +43,7 @@ class RegistrationController extends AbstractController
      */
     public function registerStudent(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
+        UserPasswordHasherInterface $userPasswordHasher
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -64,26 +67,22 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(['ROLE_STUDENT']);
-                $entityManager->persist($student);
-                $entityManager->persist($user);
-                $entityManager->flush();
-            }
-        // generate a signed url and email it to the user
-            $emailUser = $user->getEmail();
-            if (is_string($emailUser)) {
-                $this->emailVerifier->sendEmailConfirmation(
-                    'app_verify_email',
-                    $user,
-                    (new TemplatedEmail())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('emails/confirmation_email.html.twig')
-                );
-                $this->addFlash(
-                    'warning',
-                    'Un email va vous être envoyé afin de finaliser votre inscription.'
-                );
+                $this->entityManager->persist($student);
+                $this->entityManager->persist($user);
+                // if the school wasn't on the list and the student added a new name
+                $school = $form->get('school')->getData();
+                if ($school instanceof School && $school->getName() == 'Autre') {
+                    $schoolName = $form->get('schoolAdd')->getData();
+                    $newSchool = new School();
+                    if ($schoolName !== null && is_string($schoolName)) {
+                        $newSchool->setName($schoolName);
+                        $student->setSchool($newSchool);
+                        $this->entityManager->persist($newSchool);
+                    }
+                }
+                $this->entityManager->flush();
+                // generate a signed url and email it to the user
+                $this->mailerManager->sendVerifyRegistration($user);
                 return $this->redirectToRoute('login');
             }
         }
@@ -98,8 +97,7 @@ class RegistrationController extends AbstractController
      */
     public function registerMentor(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
+        UserPasswordHasherInterface $userPasswordHasher
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -122,26 +120,21 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(['ROLE_MENTOR']);
-                $entityManager->persist($mentor);
-                $entityManager->persist($user);
-                $entityManager->flush();
-            }
-        // generate a signed url and email it to the user
-            $emailUser = $user->getEmail();
-            if (is_string($emailUser)) {
-                $this->emailVerifier->sendEmailConfirmation(
-                    'app_verify_email',
-                    $user,
-                    (new TemplatedEmail())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Confirme ton inscription 🙌')
-                    ->htmlTemplate('emails/confirmation_email.html.twig')
-                );
-                $this->addFlash(
-                    'warning',
-                    'Un email va vous être envoyé afin de finaliser votre inscription.'
-                );
+                $this->entityManager->persist($mentor);
+                $this->entityManager->persist($user);
+                // if the company wasn't on the list and the mentor added a new name
+                $company = $form->get('company')->getData();
+                if ($company instanceof Company && $company->getName() == 'Autre') {
+                    $companyName = $form->get('companyAdd')->getData();
+                    $newCompany = new Company();
+                    if ($companyName !== null && is_string($companyName)) {
+                        $newCompany->setName($companyName);
+                        $mentor->setCompany($newCompany);
+                        $this->entityManager->persist($newCompany);
+                    }
+                }
+                $this->entityManager->flush();
+                $this->mailerManager->sendVerifyRegistration($user);
                 return $this->redirectToRoute('login');
             }
         }
@@ -157,8 +150,6 @@ class RegistrationController extends AbstractController
     public function verifyUserEmail(
         Request $request,
         UserRepository $userRepository,
-        MailerInterface $mailerInterface,
-        EntityManagerInterface $entityManager,
         MatchManager $matchManager
     ): Response {
         // get id from the link clicked by the user to confirm his or her address
@@ -178,26 +169,17 @@ class RegistrationController extends AbstractController
             if ($user instanceof User) {
                 $this->emailVerifier->handleEmailConfirmation($request, $user);
                 $user->setIsVerified(true);
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
                 $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
-                $emailUser = $user->getEmail();
-                if (is_string($emailUser)) {
-                    $email = (new Email())
-                    ->from(new Address('noreply@powy.io', 'powy-registration'))
-                    ->to($emailUser)
-                    ->subject('Inscription validée 🥳 !')
-                    ->html($this->renderView('emails/registration_email.html.twig', ['user' => $user]));
-                    $mailerInterface->send($email);
-                    if ($user->getStudent() !== null) {
-                        //try to get a match with a mentor
-                        $matchManager->match($user->getStudent());
-                    }
+                if ($user->getStudent() !== null) {
+                    //try to get a match with a mentor
+                    $matchManager->match($user->getStudent());
                 }
+                $this->mailerManager->sendConfirmationRegistration($user);
             }
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('error', $exception->getReason());
-
             return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('login');

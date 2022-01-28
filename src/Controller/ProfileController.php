@@ -108,21 +108,10 @@ class ProfileController extends AbstractController
     public function editChoice(
         User $user,
         Request $request,
-        EntityManagerInterface $entityManager,
-        MatchManager $matchManager,
-        MentoringManager $mentoringManager
+        EntityManagerInterface $entityManager
     ): Response {
         //fetch the user, the topic
         $topic = $this->checkTopic($user);
-
-        //if there is already a mentoring we prevent the user to change hes/hic choices before the end of it.
-        if ($mentoringManager->hasMentoring($user) === true) {
-            $this->addFlash(
-                "danger",
-                "Le mentorat est en cours. À la fin de celui-ci, vous pourrez modifier vos choix."
-            );
-            return $this->redirectToRoute("profile_index");
-        }
 
         //create the topic form
         $topicForm = $this->createForm(TopicType::class, $topic);
@@ -131,11 +120,10 @@ class ProfileController extends AbstractController
         $topicForm->handleRequest($request);
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
             $entityManager->flush();
-            $student = $user->getStudent();
-            if ($student !== null && $student->getMentoring() === null) {
-                $matchManager->matchByTopic($student);
-            }
-            $this->addFlash("success", "Les modifications ont bien été enregistrées.");
+            $this->addFlash(
+                "success",
+                "Vos nouveaux choix ont bien été enregistrés. Une recherche de mentorat sur ces sujets sera relancée."
+            );
             return $this->redirectToRoute("profile_index");
         }
 
