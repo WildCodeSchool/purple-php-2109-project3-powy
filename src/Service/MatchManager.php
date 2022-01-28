@@ -10,6 +10,13 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
+/**
+ * This will suppress all the PMD warnings in
+ * this class because af cylomatic complexity at 11 on matchByTopic
+ *
+ * @SuppressWarnings(PHPMD)
+ */
+
 class MatchManager
 {
     private MentorRepository $mentorRepository;
