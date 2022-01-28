@@ -33,11 +33,11 @@ class MailerManager extends AbstractController
         if ($user !== null) {
             $emailUser = $user->getEmail();
             if ($emailUser !== null) {
-                $email = (new TemplatedEmail())
+                $email = (new Email())
                 ->from(new Address('noreply@powy.io', 'powy-registration'))
                 ->to($emailUser)
                 ->subject('Proposition de mentorat 🥳')
-                ->htmlTemplate('emails/mentoring_proposal.html.twig');
+                ->html($this->renderView('emails/mentoring_proposal.html.twig', ['user' => $user]));
                 $this->mailerInterface->send($email);
             }
         }
