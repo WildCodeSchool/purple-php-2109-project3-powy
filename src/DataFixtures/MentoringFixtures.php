@@ -11,15 +11,45 @@ use Doctrine\Persistence\ObjectManager;
 
 class MentoringFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const MENTORINGFIXTURES = 5;
+
     public function load(ObjectManager $manager): void
     {
-        $startingDate = new DateTime('2022-01-20');
+
+        //set student 0 to 4 with an accepted mentoring
+        for ($i = 0; $i < self::MENTORINGFIXTURES; $i++) {
+            $mentoring = new Mentoring();
+            $mentoring->setStartingDate(new DateTime('2022-01-20'));
+            $mentoring->setEndingDtae(new DateTime('2022-05-20'));
+            $mentoring->setStudent($this->getReference('student_' . $i));
+            $mentoring->setMentor($this->getReference('mentor_' . $i));
+            $mentoring->setMentoringTopic(3);
+            $mentoring->setIsAccepted(true);
+            $manager->persist($mentoring);
+        }
+        //set a pending mentoring
         $mentoring = new Mentoring();
-        $mentoring->setStartingDate($startingDate);
-        $mentoring->setEndingDtae(new DateTime('2022-05-20'));
-        $mentoring->setStudent($this->getReference('student_1'));
-        $mentoring->setMentor($this->getReference('mentor_1'));
+        $mentoring->setStudent($this->getReference('student_5'));
+        $mentoring->setMentor($this->getReference('mentor_5'));
+        $mentoring->setMentoringTopic(3);
+        $mentoring->setIsAccepted(null);
         $manager->persist($mentoring);
+
+        //set a mentoring with a expired date
+        $mentoring = new Mentoring();
+        $mentoring->setStartingDate(
+            new DateTime('2021-01-20')
+        );
+        $mentoring->setEndingDtae(
+            new DateTime('2021-05-20')
+        );
+        $mentoring->setStudent($this->getReference('student_6'));
+        $mentoring->setMentor($this->getReference('mentor_6'));
+        $mentoring->setMentoringTopic(3);
+        $mentoring->setIsAccepted(true);
+        $manager->persist($mentoring);
+
+        //flush all user
         $manager->flush();
     }
 

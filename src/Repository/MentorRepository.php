@@ -26,7 +26,7 @@ class MentorRepository extends ServiceEntityRepository
     {
         // @phpstan-ignore-next-line
         return $this->createQueryBuilder('m')
-            ->join('App\Entity\Topic', 't')
+            ->join('m.topic', 't')
             ->where('t.topic1 = :topic OR t.topic2 = :topic OR t.topic3 = :topic')
             ->andWhere('m.mentoring is null')
             ->setParameter('topic', $topic)

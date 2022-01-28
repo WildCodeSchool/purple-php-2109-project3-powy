@@ -10,6 +10,7 @@ use App\Form\EditProfileType;
 use App\Form\TopicType;
 use App\Service\FileUploader;
 use App\Service\MatchManager;
+use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,21 +108,10 @@ class ProfileController extends AbstractController
     public function editChoice(
         User $user,
         Request $request,
-        EntityManagerInterface $entityManager,
-        MatchManager $matchManager
+        EntityManagerInterface $entityManager
     ): Response {
-        //fetch the user, the topic and the mentoring
+        //fetch the user, the topic
         $topic = $this->checkTopic($user);
-        $mentoring = $this->checkMentoring($user);
-
-        //if there is already a mentoring we prevent the user to change hes/hic choices before the end of it.
-        if ($mentoring  !== null) {
-            $this->addFlash(
-                "danger",
-                "Le mentorat est en cours. À la fin de celui-ci, vous pourrez modifier vos choix."
-            );
-            return $this->redirectToRoute("profile_index");
-        }
 
         //create the topic form
         $topicForm = $this->createForm(TopicType::class, $topic);
@@ -130,11 +120,10 @@ class ProfileController extends AbstractController
         $topicForm->handleRequest($request);
         if ($topicForm->isSubmitted() && $topicForm->isValid()) {
             $entityManager->flush();
-            $student = $user->getStudent();
-            if ($student !== null && $student->getMentoring() === null) {
-                $matchManager->matchByTopic($student);
-            }
-            $this->addFlash("success", "Les modifications ont bien été enregistrées.");
+            $this->addFlash(
+                "success",
+                "Vos nouveaux choix ont bien été enregistrés. Une recherche de mentorat sur ces sujets sera relancée."
+            );
             return $this->redirectToRoute("profile_index");
         }
 
@@ -181,20 +170,5 @@ class ProfileController extends AbstractController
             $topic = $user->getStudent()->getTopic();
         }
         return $topic;
-    }
-
-    //function to check if a mentoring is already active
-    private function checkMentoring(User $user): ?Mentoring
-    {
-        $mentoring = null;
-        if ($user->getMentor() === null && $user->getStudent() === null) {
-            throw $this->createNotFoundException('User is neither a student or a mentor.');
-        }
-        if ($user->getMentor() !== null) {
-            $mentoring = $user->getMentor()->getMentoring();
-        } elseif ($user->getStudent() !== null) {
-            $mentoring = $user->getStudent()->getMentoring();
-        }
-        return $mentoring;
     }
 }

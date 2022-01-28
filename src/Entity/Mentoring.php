@@ -41,9 +41,19 @@ class Mentoring
     private ?Mentor $mentor;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isAccepted = null;
+
+    /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="mentoring")
      */
     private Collection $messages;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $mentoringTopic;
 
     public function __construct()
     {
@@ -123,6 +133,17 @@ class Mentoring
         return $this;
     }
 
+    public function getIsAccepted(): ?bool
+    {
+        return $this->isAccepted;
+    }
+
+    public function setIsAccepted(?bool $isAccepted): self
+    {
+        $this->isAccepted = $isAccepted;
+
+        return $this;
+    }
     /**
      * @return Collection|Message[]
      */
@@ -157,5 +178,17 @@ class Mentoring
     public function __sleep()
     {
         return [];
+    }
+
+    public function getMentoringTopic(): ?int
+    {
+        return $this->mentoringTopic;
+    }
+
+    public function setMentoringTopic(?int $mentoringTopic): self
+    {
+        $this->mentoringTopic = $mentoringTopic;
+
+        return $this;
     }
 }

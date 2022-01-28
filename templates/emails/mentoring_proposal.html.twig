@@ -1,0 +1,17 @@
+<div style="text-align: center; margin-top: 2rem;">
+    <h1>{{ user.firstname }}, nous avons une proposition de mentor.e pour toi! ✨</h1>
+    <strong>Attention, le mentorat n'est pas encore actif !</strong>
+    <p>Tu dois <a href="{{ url('mentoring_accepted') }}">accepter</a> ou <a href="{{ url('mentoring_refused') }}">refuser</a> cette proposition.</p>
+    <p>Si tu acceptes, tu pourras commencer la discussion avec ton ou ta mentor.e, depuis ton profil en ligne.</p>
+    <p>En cas de refus, nous te proposerons une autre personne dès que possible.</p>
+    <br>
+    <strong>Sujet du match : {{ user.student.mentoring.mentoringTopic }}</strong>
+    <br>
+    <strong>Voici quelques informations sur cette personne, pour t'aider dans ton choix</strong>
+    <p>Infos persos 🤗 : {{ user.student.mentoring.mentor.user.firstname }} {{ user.student.mentoring.mentor.user.lastname }} {{ user.student.mentoring.mentor.user.age }} ans </p>
+    <p>Dernier poste occupé 📜 : {{ user.student.mentoring.mentor.jobTitle }}</p>
+    <p>Description du poste: {{ user.student.mentoring.mentor.careerDescription }}</p>
+    <br>
+    <p>À bientôt sur Powy!</p>
+    <a href="mailto:hello@powy.io">hello@powy.io</a>
+</div>

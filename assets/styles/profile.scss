@@ -8,12 +8,13 @@
     align-items: center;
     margin-bottom: 3rem;
     justify-content: center;
+    
 }
 
 .card-body-profile{
-    width: 30rem;
+    width: 20rem;
     height: 10rem;
-    background-color: $light-background-secondary;
+    background-color: $light-background-primary;
     border: 0.1px solid lightgray;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -89,7 +90,22 @@
         background-color: $alert;
         color: $white;
     }
+}
 
+.mentoring-button {
+    margin-top: -1.5rem!important;
+}
+
+.h2-profile {
+    padding-top: 0!important;
+}
+
+
+
+@media screen and (min-width: 425px) {
+    .mentoring-profile {
+        padding: 1rem;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -97,10 +113,5 @@
         flex-direction: row;
         align-items: flex-start;
         
-    }
-
-    .profile-main {
-        flex-direction: row !important;
-        justify-content: space-around !important;
     }
 }
