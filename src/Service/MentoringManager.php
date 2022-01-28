@@ -15,10 +15,12 @@ class MentoringManager
 {
 
     private EntityManagerInterface $entityManager;
+    private MentoringRepository $mentoringRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, MentoringRepository $mentoringRepository)
     {
         $this->entityManager = $entityManager;
+        $this->mentoringRepository = $mentoringRepository;
     }
 
     /**
@@ -106,6 +108,22 @@ class MentoringManager
             foreach ($messages as $message) {
                 $this->entityManager->remove($message);
                 $this->entityManager->flush();
+            }
+        }
+    }
+
+    /**
+     * end all mentoring with expired date
+     */
+    public function endExpiredMentoring(): void
+    {
+        $mentorings = $this->mentoringRepository->findAll();
+
+        if ($mentorings !== null) {
+            foreach ($mentorings as $mentoring) {
+                if ($mentoring->getEndingDtae() < new DateTime() && $mentoring->getEndingDtae() !== null) {
+                    $this->stopMentoring($mentoring);
+                }
             }
         }
     }
