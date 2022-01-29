@@ -46,10 +46,6 @@ class StudentType extends AbstractType
             ])
             ->add('dreamDescription', TextareaType::class, [
                 'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez renseigner une description.'
-                    ])]
             ])
             ->add('professionalSector', EntityType::class, [
                 'choice_label' => 'name',

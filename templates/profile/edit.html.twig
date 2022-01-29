@@ -14,6 +14,7 @@
                 <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
                 <span class="d-none">{{ form_widget(form.picture) }}</span>
                 <label for="edit_profile_picture">Télécharger une photo</label>
+                {{ form_errors(form.picture) }}
             </a>
         </div>
         <div class="card-edit-profile-part1">
@@ -56,6 +57,13 @@
                 </div>
             </div>
         </div>
+        {# display errors of form at the same place #}
+        {{ form_errors(form.gender) }}
+        {{ form_errors(form.lastname) }}
+        {{ form_errors(form.firstname) }}
+        {{ form_errors(form.age) }}
+        {{ form_errors(form.phone) }}
+        {{ form_errors(form.email) }}
         <div class="field">
             <button type="submit" class="dark-submit-button">Modifier</button>
             {{ form_end(form) }}
