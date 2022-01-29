@@ -29,6 +29,12 @@ class ChatController extends AbstractController
         //fetch Mentoring
         $mentoring = $mentoringManager->fetchMentoring($user);
 
+        if ($this->getUser() instanceof User) {
+            $idUserConnected = $this->getUser()->getId();
+            if ($user->getId() !== $idUserConnected) {
+                return $this->redirectToRoute('chat', ['id' => $idUserConnected]);
+            }
+        }
         //create message form
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
