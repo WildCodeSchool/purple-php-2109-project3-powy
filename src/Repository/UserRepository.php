@@ -37,15 +37,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findNotVerified(): mixed
+    public function findNotVerified(): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.isVerified = false')
-            ->andWhere('u.createdAt < :date')
-            ->setParameter('date', new DateTime('1 hour ago'))
-            ->getQuery()
-            ->getResult()
-        ;
+        $verified = $this->createQueryBuilder('u')
+        ->andWhere('u.isVerified = false')
+        ->andWhere('u.createdAt < :date')
+        ->setParameter('date', new DateTime('1 hour ago'))
+        ->getQuery()
+        ->getResult();
+        if (is_array($verified)) {
+            return $verified;
+        } else {
+            return [];
+        }
     }
 
     /*
