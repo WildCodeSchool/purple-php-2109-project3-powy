@@ -23,7 +23,7 @@ class ProfessionalSector
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *      message = "Veuillez préciser votre secteur professionel.")
+     *      message = "Veuillez préciser votre secteur professionnel.")
      */
     private string $name;
 
