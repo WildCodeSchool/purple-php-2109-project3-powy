@@ -17,14 +17,14 @@
         </thead>
         <tbody>
         {% for mentoring in mentorings %}
-        {% if mentoring.student != null %}
+        {% if mentoring.student is not null %}
             <tr>
                 <th scope="row">{{ mentoring.id }}</th>
                 <td>{{ mentoring.student.user.firstname }}</td>
                 <td>{{ mentoring.student.user.lastname }}</td>
                 <td>{{ mentoring.mentor.user.firstname }}</td>
                 <td>{{ mentoring.mentor.user.lastname }}</td>
-                {% if mentoring.isAccepted == true %}
+                {% if mentoring.isAccepted is same as(true) %}
                     <td><a class="btn btn-danger" href="{{ path('admin_mentoring_desactivate', {'id': mentoring.id}) }}) }}">Désactiver le mentorat</a></td>
                 {% else %}
                 <td><a class="btn btn-warning" href="#">Le mentorat est désactivé</a></td>
