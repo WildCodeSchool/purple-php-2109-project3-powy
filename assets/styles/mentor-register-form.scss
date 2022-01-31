@@ -158,26 +158,25 @@
         margin-top:0.5em;
     }
 }
+    
+.terms {
+    margin-left: 3rem;
 
-.CGU {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items:center;
-    align-self:center;
-    max-width: 40em;
-    min-width:300px;
-    margin-bottom:2em;
+    label {
 
-    input {
-        background-color: $white;
-        border-radius: 5px;
-        padding: 0.2em;
-        margin-left: 1em;
-        margin-right:1em;
+        a {
+
+            text-decoration: none;
+            color: $dark-background;
+            font-weight: bold;
+
+            &:hover, &:focus {
+                color: $middle-background;
+            }
+        }
     }
 }
-    
+
 @media (max-width: 800px) {
     
     /*step-3 of form for tablet and phone */
