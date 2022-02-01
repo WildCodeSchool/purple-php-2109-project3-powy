@@ -12,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 class MentoringFixtures extends Fixture implements DependentFixtureInterface
 {
     public const MENTORINGFIXTURES = 5;
+    public const EXPIREDMENTORINGSFIXTURES = 3;
 
     public function load(ObjectManager $manager): void
     {
@@ -35,19 +36,21 @@ class MentoringFixtures extends Fixture implements DependentFixtureInterface
         $mentoring->setIsAccepted(null);
         $manager->persist($mentoring);
 
-        //set a mentoring with a expired date
-        $mentoring = new Mentoring();
-        $mentoring->setStartingDate(
-            new DateTime('2021-01-20')
-        );
-        $mentoring->setEndingDtae(
-            new DateTime('2021-05-20')
-        );
-        $mentoring->setStudent($this->getReference('student_6'));
-        $mentoring->setMentor($this->getReference('mentor_6'));
-        $mentoring->setMentoringTopic(3);
-        $mentoring->setIsAccepted(true);
-        $manager->persist($mentoring);
+        //set 2 mentorings with an expired date for student 6 et mentor 6
+        for ($i = 0; $i < self::EXPIREDMENTORINGSFIXTURES; $i++) {
+            $mentoring = new Mentoring();
+            $mentoring->setStartingDate(
+                new DateTime('2021-01-20')
+            );
+            $mentoring->setEndingDtae(
+                new DateTime('2021-05-20')
+            );
+            $mentoring->setStudent($this->getReference('student_6'));
+            $mentoring->setMentor($this->getReference('mentor_6'));
+            $mentoring->setMentoringTopic($i + 1);
+            $mentoring->setIsAccepted(true);
+            $manager->persist($mentoring);
+        }
 
         //flush all user
         $manager->flush();

@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Entity\Mentoring;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentRepository;
+use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -61,14 +64,19 @@ class Student
     private ?User $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="student", cascade={"persist", "remove"})
-     */
-    private ?Mentoring $mentoring;
-
-    /**
      * @ORM\OneToOne(targetEntity=Topic::class, inversedBy="student", cascade={"persist", "remove"})
      */
     private ?Topic $topic;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Mentoring::class, mappedBy="student", cascade={"persist", "remove"})
+     */
+    private Collection $mentorings;
+
+    public function __construct()
+    {
+        $this->mentorings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,18 +173,6 @@ class Student
         return $this;
     }
 
-    public function getMentoring(): ?Mentoring
-    {
-        return $this->mentoring;
-    }
-
-    public function setMentoring(?Mentoring $mentoring): self
-    {
-        $this->mentoring = $mentoring;
-
-        return $this;
-    }
-
     public function getTopic(): ?Topic
     {
         return $this->topic;
@@ -185,6 +181,50 @@ class Student
     public function setTopic(?Topic $topic): self
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * return an active mentoring or null
+     * a pending mentoring is considered as an active mentoring
+     */
+    public function getMentoring(): ?Mentoring
+    {
+        foreach ($this->getMentorings() as $mentoring) {
+            if ($mentoring->getIsAccepted() !== false || $mentoring->getEndingDtae() > (new DateTime())) {
+                return $mentoring;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return Collection|Mentoring[]
+     */
+    public function getMentorings(): Collection
+    {
+        return $this->mentorings;
+    }
+
+    public function addMentoring(Mentoring $mentoring): self
+    {
+        if (!$this->mentorings->contains($mentoring)) {
+            $this->mentorings[] = $mentoring;
+            $mentoring->setStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMentoring(Mentoring $mentoring): self
+    {
+        if ($this->mentorings->removeElement($mentoring)) {
+            // set the owning side to null (unless already changed)
+            if ($mentoring->getStudent() === $this) {
+                $mentoring->setStudent(null);
+            }
+        }
 
         return $this;
     }
