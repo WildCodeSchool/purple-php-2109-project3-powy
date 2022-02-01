@@ -61,7 +61,43 @@ final class Version20220131185053 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Art, design"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Audiovisuel, spectacle, cinéma"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Audit, conseil, expertise"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Automobile"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Banque, assurance"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "BTP, architecture"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Chimie, pharmacie"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Commerce, distribution, e-commerce"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Construction aéronautique, ferroviaire et navale"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Culture, artisanat d\'art")');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Droit, justice"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Environnement"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Habillement, mode"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Hôtellerie, restauration, tourisme"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Informatique, numérique et réseaux"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Logistique, transport"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Maintenance, entretien"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Marketing, publicité, communication"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Matériaux, transformations"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Mécanique"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Santé, médical"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Social, services à la personne"');
+        $this->addSql('DELETE FROM professional_sector WHERE name = "Sport et loisirs"');
+        $this->addSql('DELETE FROM study_level WHERE name = "Lycée"');
+        $this->addSql('DELETE FROM study_level WHERE name = "CPGE"');
+        $this->addSql('DELETE FROM study_level WHERE name = "DUT"');
+        $this->addSql('DELETE FROM study_level WHERE name = "École POST-BAC"');
+        $this->addSql('DELETE FROM study_level WHERE name = "Licence Universitaire"');
+        $this->addSql('DELETE FROM study_level WHERE name = "Master Universitaire"');
+        $this->addSql('DELETE FROM study_level WHERE name = "Doctorat"');
+        $this->addSql('DELETE FROM study_level WHERE name = "Autre"');
+        $this->addSql('DELETE FROM school WHERE name = "Autre"');
+        $this->addSql('DELETE FROM school WHERE name = "CNED"');
+        $this->addSql('DELETE FROM school WHERE name = "CNAM"');
+        $this->addSql('DELETE FROM school WHERE name = "Pigier"');
+        $this->addSql('DELETE FROM school WHERE name = "Wild Code School"');
+        $this->addSql('DELETE FROM company WHERE name = "Autre"');
+        $this->addSql('DELETE FROM company WHERE name = "Wild Code School"');
     }
 }
