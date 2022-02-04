@@ -33,11 +33,6 @@ class MentorType extends AbstractType
             ])
             ->add('careerDescription', TextareaType::class, [
                 'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez renseignez une description'
-                    ])
-                ]
             ])
             ->add('professionalSector', EntityType::class, [
                 'choice_label' => 'name',
