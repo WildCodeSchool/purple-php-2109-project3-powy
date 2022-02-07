@@ -6,31 +6,25 @@
 
 {{ include('components/_header.html.twig') }}
 {{ include('components/_flashmessages.html.twig') }}
-    <main class="container-profile">
+    <main class="form">
         <h1 class="h2">Modifier ou supprimer mes choix<br><span class="h4">(par ordre de préférence)</span></h1>
-        <div class="card-edit-profile">
+        <!--div class="card-edit-profile"-->
             {{ form_start(topicForm) }}
-            <div class="card-edit-profile-part1">
-                <div class="field">
-                    <label for="topic1" class="col-sm-3 col-form-label">1</label>
-                    <div class="col-sm-10">
+            <div class="form-edit-choice">
+                <div class="fields-2-mentor">
+                    <label class="choice">Choix 1 :</label>
                         {{ form_widget(topicForm.topic1) }}
-                    </div>
                 </div>
-                <div class="field">
-                    <label for="topic2" class="col-sm-3 col-form-label">2</label>
-                    <div class="col-sm-10">
+                <div class="fields-2-mentor">
+                    <label class="choice">Choix 2 :</label>
                         {{ form_widget(topicForm.topic2) }}
-                    </div>
                 </div>
-                <div class="field">
-                    <label for="topic3" class="col-sm-3 col-form-label">3</label>
-                    <div class="col-sm-10">
+                <div class="fields-2-mentor">
+                    <label class="choice">Choix 3 :</label>
                         {{ form_widget(topicForm.topic3) }}
-                    </div>
                 </div>
             </div>
-            <div class="field">
+            <div class="field-edit-choice">
                 <button type="submit" class="dark-submit-button">Modifier</button>
                 {{ form_end(topicForm) }}
             </div>

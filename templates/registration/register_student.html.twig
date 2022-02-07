@@ -57,17 +57,26 @@
                 </div>
         </div>
         {# form 2 #}
-        <div class="topics-form align-self-center d-flex flex-column text-center">
-            {{ form_row(studentRegistrationForm.topic.topic1, {
-                label: '1'
-            }) }}
-            {{ form_row(studentRegistrationForm.topic.topic2, {
-                label: '2'
-            }) }}
-            {{ form_row(studentRegistrationForm.topic.topic3, {
-                label: '3'
-            }) }}
-            {{ form_errors(studentRegistrationForm.topic) }}
+        <div class="form-2-mentor">
+            <!-- Choice Topic 1 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 1', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 2 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 2', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic2) }}
+                {{ form_errors(studentRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 3 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 3', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic3) }}
+                {{ form_errors(studentRegistrationForm.topic.topic2) }}
+
+                {{ form_errors(studentRegistrationForm.topic.topic3) }}
+            </div>
         </div>
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
