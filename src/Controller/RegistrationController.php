@@ -2,24 +2,27 @@
 
 namespace App\Controller;
 
-use App\Entity\Company;
+use DateTime;
+use App\Entity\User;
 use App\Entity\Mentor;
 use App\Entity\School;
+use App\Entity\Company;
 use App\Entity\Student;
-use App\Entity\User;
 use App\Form\MentorType;
 use App\Form\StudentType;
-use App\Repository\UserRepository;
-use App\Security\EmailVerifier;
-use App\Service\MailerManager;
 use App\Service\MatchManager;
-use DateTime;
+use App\Service\MailerManager;
+use App\Security\EmailVerifier;
+use App\Repository\UserRepository;
+use App\Repository\SchoolRepository;
+use App\Repository\CompanyRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -27,15 +30,21 @@ class RegistrationController extends AbstractController
     private EmailVerifier $emailVerifier;
     private EntityManagerInterface $entityManager;
     private MailerManager $mailerManager;
+    private SchoolRepository $schoolRepository;
+    // private CompanyRepository $companyRepository;
 
     public function __construct(
         EmailVerifier $emailVerifier,
         EntityManagerInterface $entityManager,
-        MailerManager $mailerManager
+        MailerManager $mailerManager,
+        SchoolRepository $schoolRepository
+        // CompanyRepository $companyRepository
     ) {
         $this->emailVerifier = $emailVerifier;
         $this->entityManager = $entityManager;
         $this->mailerManager = $mailerManager;
+        $this->schoolRepository = $schoolRepository;
+        // $this->companyRepository = $companyRepository;
     }
 
     /**
@@ -43,7 +52,8 @@ class RegistrationController extends AbstractController
      */
     public function registerStudent(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher
+        UserPasswordHasherInterface $userPasswordHasher,
+        SchoolRepository $schoolRepository
     ): Response {
         $login = $this->getUser();
         if ($login) {
@@ -70,16 +80,7 @@ class RegistrationController extends AbstractController
                 $this->entityManager->persist($student);
                 $this->entityManager->persist($user);
                 // if the school wasn't on the list and the student added a new name
-                $school = $form->get('school')->getData();
-                if ($school instanceof School && $school->getName() == 'Autre') {
-                    $schoolName = $form->get('schoolAdd')->getData();
-                    $newSchool = new School();
-                    if ($schoolName !== null && is_string($schoolName)) {
-                        $newSchool->setName($schoolName);
-                        $student->setSchool($newSchool);
-                        $this->entityManager->persist($newSchool);
-                    }
-                }
+                $this->setNewSchool($form, $student);
                 $this->entityManager->flush();
                 // generate a signed url and email it to the user
                 $this->mailerManager->sendVerifyRegistration($user);
@@ -184,5 +185,36 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('login');
+    }
+
+    private function setNewSchool(FormInterface $form, Student $student): void
+    {
+        // fetch the school data
+        $school = $form->get('school')->getData();
+        // if school data is "Autre"
+        if ($school instanceof School && $school->getName() == 'Autre') {
+            // fetch the school name (with first letter capitalized) from the add input
+            /* @phpstan-ignore-next-line */
+            $schoolName = ucfirst($form->get('schoolAdd')->getData());
+            $listOfSchools = $this->schoolRepository->findAll();
+            // for all the schools already in the database
+            foreach ($listOfSchools as $alreadyExistedSchool) {
+                // check if the school is already known
+                if (
+                    $alreadyExistedSchool->getName() != null &&
+                    strcasecmp($schoolName, $alreadyExistedSchool->getName()) == 0
+                ) {
+                    // if it exists add the already existed school to the student
+                    $student->setSchool($alreadyExistedSchool);
+                    return;
+                }
+            }
+            // if not set a new school
+            $newSchool = new School();
+            $newSchool->setName(ucfirst(strtolower($schoolName)));
+            $student->setSchool($newSchool);
+            $this->entityManager->persist($newSchool);
+            return;
+        }
     }
 }
