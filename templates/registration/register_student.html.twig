@@ -181,9 +181,9 @@
 
                         {{ form_label(studentRegistrationForm, 'Votre Âge', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop' style='cursor:pointer'>?</button>
-                            <tooltip id='tooltip' style='display:none'>
+                            <a id='tooltip' style='display:none' data-toggle="tooltip">
                                 Vous devez être majeur(e) pour pouvoir vous inscrire.
-                            </tooltip>
+                            </a>
                         {{ form_widget(studentRegistrationForm.user.age) }}
                         {{ form_errors(studentRegistrationForm.user.age) }}
                     </div>
@@ -222,9 +222,9 @@
                         <div class = "btnField">
                         {{ form_label(studentRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop2' style='cursor:pointer'>?</button>
-                            <tooltip id='tooltip2' style='display:none'>
+                            <a id='tooltip2' style='display:none' data-toggle="tooltip">
                                 Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
-                            </tooltip>
+                            </a>
                         </div>
                         {{ form_widget(studentRegistrationForm.plainPassword) }}
                         {{ form_errors(studentRegistrationForm.plainPassword) }}
