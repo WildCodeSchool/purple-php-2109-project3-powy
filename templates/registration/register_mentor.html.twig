@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block body %}
+<main class="form">
     {% include "components/_header.html.twig" %}
     {% include "components/_flashmessages.html.twig" %}
     <h1 class="inscription-title">Formulaire d'inscription mentor</h1>
-    <main class="form">
         {{ form_start(mentorRegistrationForm) }}
         {{ form_errors(mentorRegistrationForm) }}
     <div class="step-1" id="step-1-mentor">
