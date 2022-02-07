@@ -10,6 +10,7 @@
 {% include "components/_header.html.twig" %}
 {% include "components/_flashmessages.html.twig" %}
     <h1 class="inscription-title">Formulaire d'inscription étudiant :</h1>
+<main class="form">
     {{ form_start(studentRegistrationForm) }}
     {{ form_errors(studentRegistrationForm) }}
     <div class="step-1" id="step-1">
@@ -241,6 +242,7 @@
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
+</main>
 <script>
     // Add input if it's another school
     const selectSchool = document.querySelector('select[id="student_school"]');
