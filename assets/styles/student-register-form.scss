@@ -82,6 +82,7 @@ h1 {
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
+        color: $middle-background;
     }
 }
 
