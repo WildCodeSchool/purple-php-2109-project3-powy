@@ -1,20 +1,20 @@
 <header class="header-index">
     <div class="logo">
         <div class="logo-img">
-            <a href="{{ path("home") }}"><h1>Powy</h1></a>
+            <a href="{{ path("home") }}" title="Retour à l'accueil"><h1>Powy</h1></a>
             <img src="{{ asset('build/images/logo.png') }}" alt="logo">
         </div>
         <p>Le pouvoir de transmettre</p>
     </div>
     <div class="connexion-btn">
         {% if app.user %}
-            <a href="{{ path('profile_index') }}"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion"></a>
+            <a href="{{ path('profile_index') }}" title="Aller à la page profil"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion"></a>
             <div>
-                <a href="{{ path('profile_index') }}">Mon compte</a>
-                <a href="/logout">Déconnexion</a>
+                <a href="{{ path('profile_index') }}" title="Aller à la page profil">Mon compte</a>
+                <a href="/logout" title="Se déconnecter">Déconnexion</a>
             </div>
         {% else %}
-            <a href="/login"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion">Mon compte</a>
+            <a href="/login" title="Se connecter"><img src="{{ asset('build/images/silhouette-connexion.png') }}" alt="connexion">Mon compte</a>
         {% endif %}
     </div>
 </header>

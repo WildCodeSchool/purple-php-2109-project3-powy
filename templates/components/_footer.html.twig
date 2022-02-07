@@ -2,14 +2,14 @@
     <div class="footer">
         <div class="footer-contact">
             <img src="{{ asset('build/images/envoyer-email.png') }}" alt="envoyer-email">
-            <a href="mailto:hello@powy.io">hello@powy.io</a>
+            <a href="mailto:hello@powy.io" title="Envoyer un email à Powy">hello@powy.io</a>
         </div>
         <div class="footer-mentions">
             <img src="{{ asset('build/images/livre.png') }}" alt="livre">
-            <a href="{{ path('cgu') }}">Conditions Générales d'Utilisation (CGU)</a>
-            <a href="{{ path('charter') }}">Charte d'engagement bénévole</a>
-            <a href="{{ path('rgpd') }}">Données personnelles (RGPD)</a>
+            <a href="{{ path('cgu') }}" title="Voir les CGU">Conditions Générales d'Utilisation (CGU)</a>
+            <a href="{{ path('charter') }}" title="Voir la charte d'engagement bénévole">Charte d'engagement bénévole</a>
+            <a href="{{ path('rgpd') }}" title="Voir la RGPD">Données personnelles (RGPD)</a>
         </div>
     </div>
-    <p>Développé avec <img src="{{ asset('build/images/coeur.png') }}" alt="coeur-rouge"> par les Wilders</p>
+    <p>Développé avec <img src="{{ asset('build/images/coeur.png') }}" alt="coeur-rouge"> par les <a href="https://www.wildcodeschool.com/fr-FR" target="_blank" title=" voir la page d'accueil de la Wild Code School">Wilders</a></p>
 </footer>
