@@ -38,10 +38,14 @@
             </div>
         </div>
         <div>
-            {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) or (app.user.student.mentoring is defined and app.user.student.mentoring is not null and app.user.student.mentoring.isAccepted == false) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is not null and app.user.mentor.mentoring.isAccepted == false) %}
-                <p class="center red mt-1">Tu n'as pas encore de mentor.</p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_app') }}" class="btn-primary admin-btn" title="Accéder à la page d'administration">Administration</a>
             {% else %}
-                <button class="btn btn-dark mentoring-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Mon mentorat</button>
+                {% if (app.user.student.mentoring is defined and app.user.student.mentoring is null) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is null) or (app.user.student.mentoring is defined and app.user.student.mentoring is not null and app.user.student.mentoring.isAccepted == false) or (app.user.mentor.mentoring is defined and app.user.mentor.mentoring is not null and app.user.mentor.mentoring.isAccepted == false) %}
+                <p class="center red mt-1">Tu n'as pas encore de mentor.</p>
+                {% else %}
+                    <button class="btn btn-dark mentoring-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Mon mentorat</button>
+                {% endif %}
             {% endif %}
         </div>
         {# buttons profile edition #}
@@ -49,9 +53,6 @@
             <a href="{{ path('profile_edit') }}" class="btn-profile" title="Accéder à la page pour modifier son profil">Modifier mon profil</a>
             <a href="{{ path('edit_choices', {id: app.user.id}) }}" class="btn-profile" title="Accéder à la page pour modifier ses choix">Modifier mes choix</a>
             {% include 'profile/_delete_form.html.twig' %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('admin_app') }}" class="btn btn-primary btn-lg" title="Accéder à la page d'administration">Administration</a>
-            {% endif %}
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
