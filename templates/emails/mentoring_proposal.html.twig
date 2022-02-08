@@ -5,12 +5,20 @@
     <p>Si tu acceptes, tu pourras commencer la discussion avec ton ou ta mentor.e, depuis ton profil en ligne.</p>
     <p>En cas de refus, nous te proposerons une autre personne dès que possible.</p>
     <br>
-    <strong>Sujet du match : {{ user.student.mentoring.mentoringTopic }}</strong>
+    <strong>Sujet du match :
+        {% for key, topic in constant('App\\Entity\\Topic::TOPICS') %}
+            {% if topic == user.student.mentoring.mentoringTopic %}
+                {{ key }}
+            {% endif %}
+        {% endfor %}
+    </strong>
     <br>
     <strong>Voici quelques informations sur cette personne, pour t'aider dans ton choix</strong>
+    <br>
     <p>Infos persos 🤗 : {{ user.student.mentoring.mentor.user.firstname }} {{ user.student.mentoring.mentor.user.lastname }} {{ user.student.mentoring.mentor.user.age }} ans </p>
     <p>Dernier poste occupé 📜 : {{ user.student.mentoring.mentor.jobTitle }}</p>
     <p>Description du poste: {{ user.student.mentoring.mentor.careerDescription }}</p>
+    <p>(Plus d'informations directement sur ton <a href="{{ url('login') }}">compte</a>)</p>
     <br>
     <p>À bientôt sur Powy!</p>
     <a href="mailto:hello@powy.io">hello@powy.io</a>
