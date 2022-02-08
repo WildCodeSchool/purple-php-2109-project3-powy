@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Mentoring Administration{% endblock %}
@@ -19,18 +17,20 @@
         </thead>
         <tbody>
         {% for mentoring in mentorings %}
-        <tr>
-            <th scope="row">{{ mentoring.id }}</th>
-            <td>{{ mentoring.student.user.firstname }}</td>
-            <td>{{ mentoring.student.user.lastname }}</td>
-            <td>{{ mentoring.mentor.user.firstname }}</td>
-            <td>{{ mentoring.mentor.user.lastname }}</td>
-            {% if mentoring.isAccepted == true %}
-                <td><a class="btn btn-danger" href="{{ path('admin_mentoring_desactivate', {'id': mentoring.id}) }}) }}">Désactiver le mentorat</a></td>
-            {% else %}
-            <td><a class="btn btn-warning" href="#">Le mentorat est désactivé</a></td>
-            {% endif %}
-        </tr>
+        {% if mentoring.student is not null %}
+            <tr>
+                <th scope="row">{{ mentoring.id }}</th>
+                <td>{{ mentoring.student.user.firstname }}</td>
+                <td>{{ mentoring.student.user.lastname }}</td>
+                <td>{{ mentoring.mentor.user.firstname }}</td>
+                <td>{{ mentoring.mentor.user.lastname }}</td>
+                {% if mentoring.isAccepted is same as(true) %}
+                    <td><a class="btn btn-danger" href="{{ path('admin_mentoring_desactivate', {'id': mentoring.id}) }}) }}">Désactiver le mentorat</a></td>
+                {% else %}
+                <td><a class="btn btn-warning" href="#">Le mentorat est désactivé</a></td>
+                {% endif %}
+            </tr>
+        {% endif %}
         {% else %}
             <tr>
                 <td colspan="12">Aucun compte à afficher</td>
