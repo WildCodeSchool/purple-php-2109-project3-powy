@@ -1,8 +1,5 @@
 <div style="text-align: center; margin-top: 2rem;">
     <h1>Bravo {{ user.firstname }},<br>tu fais maintenant partie de Powy !</h1>
-    {% for key, topic in topics %}
-    <p>{{ key }}</p>
-    {% endfor %}
     <p>Ton adresse {{ user.email }} a bien été enregistrée &#128170;</p>
 
     {% if user.mentor is defined and user.mentor is not null %}
