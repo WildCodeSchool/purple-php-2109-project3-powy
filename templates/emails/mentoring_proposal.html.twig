@@ -16,6 +16,9 @@
     <strong>Voici quelques informations sur cette personne, pour t'aider dans ton choix</strong>
     <br>
     <p>Infos persos 🤗 : {{ user.student.mentoring.mentor.user.firstname }} {{ user.student.mentoring.mentor.user.lastname }} {{ user.student.mentoring.mentor.user.age }} ans </p>
+    {% if user.student.mentoring.mentor.user.picture is not null %}
+        <img src="{{ url('home') }}/upload/pictures/{{ user.student.mentoring.mentor.user.picture }}" alt="mentor picture" style="width: 100px">
+    {% endif %}
     <p>Dernier poste occupé 📜 : {{ user.student.mentoring.mentor.jobTitle }}</p>
     <p>Description du poste: {{ user.student.mentoring.mentor.careerDescription }}</p>
     <p>(Plus d'informations directement sur ton <a href="{{ url('login') }}">compte</a>)</p>
