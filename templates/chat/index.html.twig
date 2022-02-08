@@ -74,8 +74,8 @@
             {{ form_end(messageForm) }}
         </div>
         <div class='buttons-chat d-flex flex-column flex-column-reverse align-items-center'>
-            <a href="{{ path("profile_index") }}" class="btn-profile m-3">Retour au profil</a>
-            <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile m-3">Actualiser le chat</a>
+            <a href="{{ path("profile_index") }}" class="btn-profile m-3" title="Retour au profil">Retour au profil</a>
+            <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile m-3" title="Actualiser le chat">Actualiser le chat</a>
         </div>
     </main>
 {% endblock %}

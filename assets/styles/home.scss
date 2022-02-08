@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    height: 400px;
     margin-top: 2rem;
 
     h1 {
@@ -42,12 +41,11 @@
 
     .people-background {
         background-image: url('../images/groupe-personne.png');
-        background-position: center;
+        background-position: bottom;
         background-repeat: no-repeat;
-        background-size: cover;
-        height: 80%;
-        width: 80%;
-        z-index: -1;
+        background-size: contain;
+        height: 200px;
+        width: 100%;
      }
 }
 
@@ -97,7 +95,6 @@
 @media screen and (min-width: 768px) {
     .powy-enter {
         gap: 5em;
-        height: 600px;
 
         h1 {
             font-size: 2rem;
@@ -113,7 +110,7 @@
         }
 
         .people-background {
-            height: 100%;
+            height: 300px;
         }
     }
 }
@@ -123,6 +120,11 @@
   
         h1 {
             font-size: 3rem;
+        }
+
+        .people-background {
+            background-size: auto;
+            height: 450px;
         }
     }
 }
