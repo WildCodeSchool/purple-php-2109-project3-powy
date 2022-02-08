@@ -46,11 +46,11 @@
         </div>
         {# buttons profile edition #}
         <div class="container-btn-profile mb-4">
-            <a href="{{ path('profile_edit') }}" class="btn-profile">Modifier mon profil</a>
-            <a href="{{ path('edit_choices', {id: app.user.id}) }}" class="btn-profile">Modifier mes choix</a>
+            <a href="{{ path('profile_edit') }}" class="btn-profile" title="Accéder à la page pour modifier son profil">Modifier mon profil</a>
+            <a href="{{ path('edit_choices', {id: app.user.id}) }}" class="btn-profile" title="Accéder à la page pour modifier ses choix">Modifier mes choix</a>
             {% include 'profile/_delete_form.html.twig' %}
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('admin_app') }}" class="btn btn-primary btn-lg">Administration</a>
+                <a href="{{ path('admin_app') }}" class="btn btn-primary btn-lg" title="Accéder à la page d'administration">Administration</a>
             {% endif %}
         </div>
 
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center">Chat avec mon mentor</a>
+                <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center" title="Accéder à la page de chat">Chat avec mon mentor</a>
             </div>
             {% endif %}
             {# if the user is a mentor #}
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center">Chat avec mon étudiant</a>
+                    <a href="{{ path("chat", {id: app.user.id}) }}" class="btn-profile mb-5 align-self-center" title="Accéder à la page de chat">Chat avec mon étudiant</a>
                 </div>
             {% endif %}
         </div>

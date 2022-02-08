@@ -36,6 +36,7 @@ thoses classes should be used everywhere
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
         text-decoration: none;
+        color: $middle-background;
     }
 }
 
