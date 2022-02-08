@@ -9,7 +9,13 @@
     justify-content:center;
 }
 
-.fields-1-mentor , .fields-3-mentor , .fields-4-mentor {
+.form-2-mentor {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+}
+
+.fields-1-mentor , .fields-2-mentor , .fields-3-mentor , .fields-4-mentor {
     background-color: $light-background-secondary;
     border: 0.1px solid lightgray;
     border-radius: 5px;
@@ -56,6 +62,29 @@
         padding: 0.2em;
         margin-left: 3em;
         height: 8em;
+    }
+}
+
+/*step-2 of form */
+.fields-2-mentor {
+    display:flex;
+    height:auto;
+    flex-direction:column;
+    justify-content: center;
+    width:25em;
+    min-width:250px;
+    padding:2em;
+    margin:2em;
+
+    input {
+        background-color: $white;
+        border-radius: 5px;
+        padding: 0.2em;
+        max-width:25em;
+    }
+
+    .form-label {
+        margin-top:0.5em;
     }
 }
 
