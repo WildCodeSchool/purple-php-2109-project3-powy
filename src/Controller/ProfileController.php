@@ -150,11 +150,21 @@ class ProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         Request $request,
         TokenStorageInterface $tokenStorage,
-        MailerManager $mailerManager
+        MailerManager $mailerManager,
+        MentoringManager $mentoringManager
     ): Response {
         $user = $this->getUser();
         $session = $request->getSession();
         if ($user instanceof User) {
+            // check if user is a mentor or a student and then end the mentoring
+            if ($user->getMentor() != null && $user->getMentor()->getMentoring() != null) {
+                $mentoring = $user->getMentor()->getMentoring();
+                $mentoringManager->stopMentoring($mentoring);
+            }
+            if ($user->getStudent() != null && $user->getStudent()->getMentoring() != null) {
+                $mentoring = $user->getStudent()->getMentoring();
+                $mentoringManager->stopMentoring($mentoring);
+            }
             $entityManager->remove($user);
             $entityManager->flush();
             $mailerManager->deleteAccount($user);

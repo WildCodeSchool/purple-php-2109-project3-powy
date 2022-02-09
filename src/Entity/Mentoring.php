@@ -46,12 +46,12 @@ class Mentoring
     private ?int $mentoringTopic;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Student::class, inversedBy="mentorings", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Student::class, inversedBy="mentorings", cascade={"remove"})
      */
     private ?Student $student;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Mentor::class, inversedBy="mentorings", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Mentor::class, inversedBy="mentorings", cascade={"remove"})
      */
     private ?Mentor $mentor;
 
