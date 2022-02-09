@@ -53,7 +53,7 @@ class Mentor
     private ?User $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="mentor", cascade={"persist"}, orphanRemoval=false))
+     * @ORM\OneToOne(targetEntity=Topic::class, inversedBy="mentor", cascade={"persist"}, orphanRemoval=false))
      */
     private ?Topic $topic;
 
