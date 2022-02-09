@@ -157,10 +157,6 @@ class RegistrationController extends AbstractController
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
                 $this->addFlash('success', 'Votre adresse a bien été vérifiée.');
-                if ($user->getStudent() !== null) {
-                    //try to get a match with a mentor
-                    $matchManager->match($user->getStudent());
-                }
                 $this->mailerManager->sendConfirmationRegistration($user);
             }
         } catch (VerifyEmailExceptionInterface $exception) {

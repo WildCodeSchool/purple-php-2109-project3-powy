@@ -29,7 +29,7 @@ class ProfileController extends AbstractController
      * @Route("/profile", name="profile_index")
      * @IsGranted("ROLE_USER")
      */
-    public function profile(): Response
+    public function profile(MatchManager $matchManager): Response
     {
         // Fetch User to get the property IsVerfied
         if ($this->getUser() instanceof User) {
@@ -42,6 +42,10 @@ class ProfileController extends AbstractController
                      Merci de cliquer sur le lien que vous avez reçu pour valider votre inscription."
                 );
                 return $this->redirectToRoute('home');
+            }
+            if ($user->getStudent() !== null) {
+                //if verified and user is a student, try to match
+                $matchManager->match($user->getStudent());
             }
         }
         return $this->render('profile/index.html.twig');

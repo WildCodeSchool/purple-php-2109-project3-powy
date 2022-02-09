@@ -38,6 +38,7 @@ class Topic
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Choice ({1,2,3,4,5,6,7,8,9})
      * @Assert\NotBlank(
      *      message = "Merci de choisir au moins un sujet de mentorat.")
      */
@@ -70,7 +71,7 @@ class Topic
         return $this->id;
     }
 
-    public function getTopic1(): ?int
+    public function getTopic1(): int
     {
         return $this->topic1;
     }

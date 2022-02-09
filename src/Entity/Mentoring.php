@@ -23,22 +23,12 @@ class Mentoring
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $startingDate;
+    private ?DateTimeInterface $startingDate = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $endingDtae;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="mentoring", cascade={"remove"})
-     */
-    private ?Student $student;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="mentoring", cascade={"remove"})
-     */
-    private ?Mentor $mentor;
+    private ?DateTimeInterface $endingDtae = null;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -54,6 +44,16 @@ class Mentoring
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $mentoringTopic;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Student::class, inversedBy="mentorings",  cascade={"persist"})
+     */
+    private ?Student $student;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Mentor::class, inversedBy="mentorings",  cascade={"persist"})
+     */
+    private ?Mentor $mentor;
 
     public function __construct()
     {
@@ -85,50 +85,6 @@ class Mentoring
     public function setEndingDtae(?\DateTimeInterface $endingDtae): self
     {
         $this->endingDtae = $endingDtae;
-
-        return $this;
-    }
-
-    public function getStudent(): ?Student
-    {
-        return $this->student;
-    }
-
-    public function setStudent(?Student $student): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($student === null && $this->student !== null) {
-            $this->student->setMentoring(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($student !== null && $student->getMentoring() !== $this) {
-            $student->setMentoring($this);
-        }
-
-        $this->student = $student;
-
-        return $this;
-    }
-
-    public function getMentor(): ?Mentor
-    {
-        return $this->mentor;
-    }
-
-    public function setMentor(?Mentor $mentor): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($mentor === null && $this->mentor !== null) {
-            $this->mentor->setMentoring(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($mentor !== null && $mentor->getMentoring() !== $this) {
-            $mentor->setMentoring($this);
-        }
-
-        $this->mentor = $mentor;
 
         return $this;
     }
@@ -188,6 +144,30 @@ class Mentoring
     public function setMentoringTopic(?int $mentoringTopic): self
     {
         $this->mentoringTopic = $mentoringTopic;
+
+        return $this;
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
+
+        return $this;
+    }
+
+    public function getMentor(): ?Mentor
+    {
+        return $this->mentor;
+    }
+
+    public function setMentor(?Mentor $mentor): self
+    {
+        $this->mentor = $mentor;
 
         return $this;
     }
