@@ -12,22 +12,22 @@
             {{ form_start(topicForm) }}
             <div class="form-edit-choice">
                 <div class="fields-2-mentor">
-                    <label class="choice">Choix 1 :</label>
+                    <label for="topic_topic1" class="choice">Choix 1 :</label>
                         {{ form_widget(topicForm.topic1) }}
                 </div>
                 <div class="fields-2-mentor">
-                    <label class="choice">Choix 2 :</label>
+                    <label for="topic_topic2" class="choice">Choix 2 :</label>
                         {{ form_widget(topicForm.topic2) }}
                 </div>
                 <div class="fields-2-mentor">
-                    <label class="choice">Choix 3 :</label>
+                    <label for="topic_topic3" class="choice">Choix 3 :</label>
                         {{ form_widget(topicForm.topic3) }}
                 </div>
             </div>
             <div class="field-edit-choice">
                 <button type="submit" class="dark-submit-button">Modifier</button>
-                {{ form_end(topicForm) }}
             </div>
+            {{ form_end(topicForm) }}
         <a href="{{ path("profile_index") }}" class="dark-submit-button" title="Retour au profil">Retour au profil</a>
     </main>
 {% endblock %}
