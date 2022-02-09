@@ -61,6 +61,9 @@ class MailerManager extends AbstractController
         }
     }
 
+    /**
+     * mail send after the registration, with link to confirm e-mail adress
+     */
     public function sendVerifyRegistration(User $user): void
     {
         $emailUser = $user->getEmail();
@@ -81,6 +84,9 @@ class MailerManager extends AbstractController
         }
     }
 
+     /**
+     * mail send after the e-mail adress confirmation
+     */
     public function sendConfirmationRegistration(user $user): void
     {
         $emailUser = $user->getEmail();
@@ -104,6 +110,19 @@ class MailerManager extends AbstractController
             ->to($emailUser)
             ->subject('Suppression de compte')
             ->html($this->renderView('emails/delete_account_email.html.twig', ['user' => $user]));
+            $this->mailerInterface->send($email);
+        }
+    }
+
+    public function sendMentoringEnded(User $user): void
+    {
+        $emailUser = $user->getEmail();
+        if (is_string($emailUser)) {
+            $email = (new Email())
+            ->from(new Address('noreply@powy.io', 'Powy'))
+            ->to($emailUser)
+            ->subject('Suppression de compte')
+            ->html($this->renderView('emails/mentoring_ended_email.html.twig', ['user' => $user]));
             $this->mailerInterface->send($email);
         }
     }
