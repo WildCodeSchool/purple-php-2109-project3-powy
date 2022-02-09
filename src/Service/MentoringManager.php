@@ -131,15 +131,6 @@ class MentoringManager
             foreach ($mentorings as $mentoring) {
                 if ($mentoring->getEndingDtae() < new DateTime() && $mentoring->getEndingDtae() !== null) {
                     $this->stopMentoring($mentoring);
-                    if ($mentoring->getStudent() !== null && $mentoring->getMentor() !== null) {
-                        if (
-                            $mentoring->getStudent()->getUser() !== null &&
-                            $mentoring->getMentor()->getUser() !== null
-                        ) {
-                            $this->mailerManager->sendMentoringEnded($mentoring->getStudent()->getUser());
-                            $this->mailerManager->sendMentoringEnded($mentoring->getMentor()->getUser());
-                        }
-                    }
                 }
             }
         }

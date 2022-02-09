@@ -113,17 +113,4 @@ class MailerManager extends AbstractController
             $this->mailerInterface->send($email);
         }
     }
-
-    public function sendMentoringEnded(User $user): void
-    {
-        $emailUser = $user->getEmail();
-        if (is_string($emailUser)) {
-            $email = (new Email())
-            ->from(new Address('noreply@powy.io', 'Powy'))
-            ->to($emailUser)
-            ->subject('Suppression de compte')
-            ->html($this->renderView('emails/mentoring_ended_email.html.twig', ['user' => $user]));
-            $this->mailerInterface->send($email);
-        }
-    }
 }
