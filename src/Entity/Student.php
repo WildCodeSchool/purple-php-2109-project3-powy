@@ -61,7 +61,7 @@ class Student
     private ?User $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="student", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Mentoring::class, inversedBy="student", cascade={"persist"}, orphanRemoval=false))
      */
     private ?Mentoring $mentoring;
 

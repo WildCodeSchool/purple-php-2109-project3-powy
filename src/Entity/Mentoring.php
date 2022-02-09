@@ -31,12 +31,12 @@ class Mentoring
     private ?DateTimeInterface $endingDtae;
 
     /**
-     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="mentoring", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Student::class, mappedBy="mentoring", cascade={"remove"})
      */
     private ?Student $student;
 
     /**
-     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="mentoring", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Mentor::class, mappedBy="mentoring", cascade={"remove"})
      */
     private ?Mentor $mentor;
 
