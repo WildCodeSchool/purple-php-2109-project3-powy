@@ -10,12 +10,12 @@
     <div class="card-edit-profile">
         {{ form_start(form) }}
         <div class="profil-upload">
-            <a href="" class="card-picture-profile">
+            <div class="card-picture-profile">
                 <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
                 <span class="d-none">{{ form_widget(form.picture) }}</span>
                 <label for="edit_profile_picture">Télécharger une photo</label>
                 {{ form_errors(form.picture) }}
-            </a>
+            </div>
         </div>
         <div class="card-edit-profile-part1">
             <div class="field">
