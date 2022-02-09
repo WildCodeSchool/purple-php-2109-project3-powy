@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+<main class="form">
 {% include "components/_header.html.twig" %}
 {% include "components/_flashmessages.html.twig" %}
     <h1 class="inscription-title">Formulaire d'inscription étudiant :</h1>
@@ -52,21 +53,30 @@
                 <p class="question-text">Sur quels points souhaites-tu t'améliorer ?</p>
             {# indication 2 #}
                 <div class="indications">
-                    <p>Sélectionne <strong>3 sujets</strong> dans l'ordre d'importance.</p>
+                    <p>Sélectionne de <strong>1 à 3 sujet(s)</strong> dans l'ordre d'importance.</p>
                 </div>
         </div>
         {# form 2 #}
-        <div class="topics-form align-self-center d-flex flex-column text-center">
-            {{ form_row(studentRegistrationForm.topic.topic1, {
-                label: '1'
-            }) }}
-            {{ form_row(studentRegistrationForm.topic.topic2, {
-                label: '2'
-            }) }}
-            {{ form_row(studentRegistrationForm.topic.topic3, {
-                label: '3'
-            }) }}
-            {{ form_errors(studentRegistrationForm.topic) }}
+        <div class="form-2-mentor">
+            <!-- Choice Topic 1 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 1', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 2 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 2', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic2) }}
+                {{ form_errors(studentRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 3 -->
+            <div class="fields-2-mentor">
+                {{ form_label(studentRegistrationForm, 'Choix 3', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(studentRegistrationForm.topic.topic3) }}
+                {{ form_errors(studentRegistrationForm.topic.topic2) }}
+
+                {{ form_errors(studentRegistrationForm.topic.topic3) }}
+            </div>
         </div>
         {# scroll-btn 2 #}
             <div class="scroll-btn-section gap-2">
@@ -181,9 +191,9 @@
 
                         {{ form_label(studentRegistrationForm, 'Votre Âge', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop' style='cursor:pointer'>?</button>
-                            <tooltip id='tooltip' style='display:none'>
+                            <a id='tooltip' style='display:none' data-toggle="tooltip">
                                 Vous devez être majeur(e) pour pouvoir vous inscrire.
-                            </tooltip>
+                            </a>
                         {{ form_widget(studentRegistrationForm.user.age) }}
                         {{ form_errors(studentRegistrationForm.user.age) }}
                     </div>
@@ -222,9 +232,9 @@
                         <div class = "btnField">
                         {{ form_label(studentRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
                         <button id='btnPop2' style='cursor:pointer'>?</button>
-                            <tooltip id='tooltip2' style='display:none'>
+                            <a id='tooltip2' style='display:none' data-toggle="tooltip">
                                 Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
-                            </tooltip>
+                            </a>
                         </div>
                         {{ form_widget(studentRegistrationForm.plainPassword) }}
                         {{ form_errors(studentRegistrationForm.plainPassword) }}
@@ -232,7 +242,7 @@
             </div>
                 <div class="CGU">
                     {{ form_widget(studentRegistrationForm.user.agreeTerms) }}
-                    {{ form_label(studentRegistrationForm.user.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
+                    {{ form_label(studentRegistrationForm.user.agreeTerms, 'J\'accepte les  <a href="' ~ path("cgu") ~ '" target="_blank">' ~ "CGU" ~ '</a>' ~ ' ainsi que le fait que mes données soient utilisées dans le cadre de la <a href="' ~ path("rgpd") ~ '" target="_blank">' ~ 'politique de confidentialité.' ~ '</a>') }}
                 </div>
         {# register-btn#}
             <div class="register-btn gap-2">
@@ -241,6 +251,7 @@
             </div>
         </div>
     {{ form_end(studentRegistrationForm) }}
+</main>
 <script>
     // Add input if it's another school
     const selectSchool = document.querySelector('select[id="student_school"]');

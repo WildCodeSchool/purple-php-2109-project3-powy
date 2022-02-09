@@ -10,27 +10,28 @@
     <div class="card-edit-profile">
         {{ form_start(form) }}
         <div class="profil-upload">
-            <a href="" class="card-picture-profile">
+            <div class="card-picture-profile">
                 <img src="{{ asset('build/images/upload-icon.png') }}" alt="" width="35" height="27">
                 <span class="d-none">{{ form_widget(form.picture) }}</span>
                 <label for="edit_profile_picture">Télécharger une photo</label>
-            </a>
+                {{ form_errors(form.picture) }}
+            </div>
         </div>
         <div class="card-edit-profile-part1">
             <div class="field">
-                <label for="gender" class="col-sm-2 col-form-label">Genre</label>
+                <label for="edit_profile_gender" class="col-sm-2 col-form-label">Genre</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.gender) }}
                 </div>
             </div>
             <div class="field">
-                <label for="firstname" class="col-sm-2 col-form-label">Prénom</label>
+                <label for="edit_profile_firstname" class="col-sm-2 col-form-label">Prénom</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.firstname) }}
                 </div>
             </div>
             <div class="field">
-                <label for="lastname" class="col-sm-2 col-form-label">Nom</label>
+                <label for="edit_profile_lastname" class="col-sm-2 col-form-label">Nom</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.lastname) }}
                 </div>
@@ -38,28 +39,35 @@
         </div>
         <div class="card-edit-profile-part2">
             <div class="field">
-                <label for="age" class="col-sm-2 col-form-label">Age</label>
+                <label for="edit_profile_age" class="col-sm-2 col-form-label">Age</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.age) }}
                 </div>
             </div>
             <div class="field">
-                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                <label for="edit_profile_phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.phone) }}
                 </div>
             </div>
             <div class="field">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <label for="edit_profile_email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.email) }}
                 </div>
             </div>
         </div>
+        {# display errors of form at the same place #}
+        {{ form_errors(form.gender) }}
+        {{ form_errors(form.lastname) }}
+        {{ form_errors(form.firstname) }}
+        {{ form_errors(form.age) }}
+        {{ form_errors(form.phone) }}
+        {{ form_errors(form.email) }}
         <div class="field">
             <button type="submit" class="dark-submit-button">Modifier</button>
-            {{ form_end(form) }}
         </div>
+        {{ form_end(form) }}
     </div>
 
     <div class="card-edit-password">
@@ -84,7 +92,7 @@
     </div>
 
     <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
-
+    <a href="{{ path("profile_index") }}" class="dark-submit-button" title="Retour au profil">Retour au profil</a>
 </main>
 
 <script src="{{ asset('build/js/index.js') }}">

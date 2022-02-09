@@ -9,6 +9,7 @@ use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
 use App\Form\TopicType;
 use App\Service\FileUploader;
+use App\Service\MailerManager;
 use App\Service\MatchManager;
 use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,7 @@ class ProfileController extends AbstractController
      * @Route("/profile", name="profile_index")
      * @IsGranted("ROLE_USER")
      */
-    public function profile(): Response
+    public function profile(MatchManager $matchManager): Response
     {
         // Fetch User to get the property IsVerfied
         if ($this->getUser() instanceof User) {
@@ -41,6 +42,10 @@ class ProfileController extends AbstractController
                      Merci de cliquer sur le lien que vous avez reçu pour valider votre inscription."
                 );
                 return $this->redirectToRoute('home');
+            }
+            if ($user->getStudent() !== null) {
+                //if verified and user is a student, try to match
+                $matchManager->match($user->getStudent());
             }
         }
         return $this->render('profile/index.html.twig');
@@ -144,13 +149,25 @@ class ProfileController extends AbstractController
     public function delete(
         EntityManagerInterface $entityManager,
         Request $request,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        MailerManager $mailerManager,
+        MentoringManager $mentoringManager
     ): Response {
         $user = $this->getUser();
         $session = $request->getSession();
-        if ($user != null) {
+        if ($user instanceof User) {
+            // check if user is a mentor or a student and then end the mentoring
+            if ($user->getMentor() != null && $user->getMentor()->getMentoring() != null) {
+                $mentoring = $user->getMentor()->getMentoring();
+                $mentoringManager->stopMentoring($mentoring);
+            }
+            if ($user->getStudent() != null && $user->getStudent()->getMentoring() != null) {
+                $mentoring = $user->getStudent()->getMentoring();
+                $mentoringManager->stopMentoring($mentoring);
+            }
             $entityManager->remove($user);
             $entityManager->flush();
+            $mailerManager->deleteAccount($user);
             $tokenStorage->setToken(null);
             $session->invalidate();
         }

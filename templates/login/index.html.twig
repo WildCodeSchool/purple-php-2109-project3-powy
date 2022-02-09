@@ -18,7 +18,7 @@
                 <input type="text" id="username" class="email" name="_username" placeholder="Adresse mail" value="{{ last_username }}"/>
             </div>
             <div class="form-class">
-                <input type="password" class="password" id="password" name="_password"/>
+                <input type="password" class="password" id="password" name="_password"/ placeholder="Mot de passe">
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <input type="hidden" name="_target_path" value="/profile"/>
@@ -27,10 +27,10 @@
                 <button type="submit" class="btn login">Je me connecte</button>
             </div>
             <div class="forgot">
-                <a href="{{ path('reset_password') }}"><p>Mot de passe oublié ?</p></a>
+                <a href="{{ path('reset_password') }}" title="Accéder au formulaire de perte de mot de passe"><p>Mot de passe oublié ?</p></a>
             </div>
             <div class="not-account">
-                <a href="{{ path('home') }}"><p>Vous n'avez pas de compte</p></a>
+                <a href="{{ path('home') }}" title="Retour à l'accueil pour accéder aux pages mentor et étudiant"><p>Vous n'avez pas de compte</p></a>
             </div>
         </form>
     </div>

@@ -19,11 +19,13 @@ class TopicType extends AbstractType
         ->add('topic2', ChoiceType::class, [
             'required' => false,
             'choices' => Topic::TOPICS,
-            ])
+            'placeholder' => "----Choix de sujet 2----"
+        ])
         ->add('topic3', ChoiceType::class, [
             'required' => false,
             'choices' => Topic::TOPICS,
-            ])
+            'placeholder' => "----Choix de sujet 3----"
+        ])
         ;
     }
 
