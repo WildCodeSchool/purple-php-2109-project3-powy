@@ -25,6 +25,10 @@ footer {
     a {
         color: $white;
         text-decoration: none;
+
+        &:hover, &:focus {
+            color: $middle-background;
+        }
     }
 
     .footer-contact {

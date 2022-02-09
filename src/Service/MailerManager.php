@@ -93,4 +93,18 @@ class MailerManager extends AbstractController
             $this->mailerInterface->send($email);
         }
     }
+
+    // email when user deletes her/his account
+    public function deleteAccount(User $user): void
+    {
+        $emailUser = $user->getEmail();
+        if (is_string($emailUser)) {
+            $email = (new Email())
+            ->from(new Address('noreply@powy.io', 'Powy'))
+            ->to($emailUser)
+            ->subject('Suppression de compte')
+            ->html($this->renderView('emails/delete_account_email.html.twig', ['user' => $user]));
+            $this->mailerInterface->send($email);
+        }
+    }
 }

@@ -3,14 +3,20 @@
 {% block title %}Mot de passe oublié{% endblock %}
 
 {% block body %}
-
    {{ include('components/_header.html.twig') }}
-   {{ include('components/_flashmessages.html.twig') }}
-   {{ form_start(EmailFormType) }}
-   {{ form_errors(EmailFormType) }}
-   {{ form_row(EmailFormType.email, {
-       label: 'Quelle est ton adresse mail ?'
-   }) }}
-   <button type="submit" class="btn">Ok</button>
-    {{ form_end(EmailFormType) }}
+<main>
+    {{ include('components/_flashmessages.html.twig') }}
+    <h1 class="h5 m-5">Entre ton adresse mail pour recevoir un message te permettant de mettre à jour ton mot de passe :</h1>
+    <div class="d-flex flex-column flex-wrap mt-2 p-4 align-content-around">
+        {{ form_start(EmailFormType) }}
+        {{ form_errors(EmailFormType) }}
+        <div class="d-flex flex-column align-items-center">
+            {{ form_row(EmailFormType.email, {
+                label: 'Adresse mail :'
+            }) }}
+            <button type="submit" class="btn">Ok</button>
+        </div>
+        {{ form_end(EmailFormType) }}
+    </div>
+</main>
 {% endblock %}

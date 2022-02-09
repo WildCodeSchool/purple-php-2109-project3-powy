@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+<main class="form">
     {% include "components/_header.html.twig" %}
     {% include "components/_flashmessages.html.twig" %}
     <h1 class="inscription-title">Formulaire d'inscription mentor</h1>
@@ -65,19 +66,26 @@
             </div>
         </div>
     {# form 2 #}
-        <div class="topics-form align-self-center d-flex flex-column text-center">
-            {{ form_row(mentorRegistrationForm.topic.topic1, {
-                label: '1'
-            }) }}
-            {{ form_errors(mentorRegistrationForm.topic.topic1) }}
-            {{ form_row(mentorRegistrationForm.topic.topic2, {
-                label: '2'
-            }) }}
-            {{ form_errors(mentorRegistrationForm.topic.topic2) }}
-            {{ form_row(mentorRegistrationForm.topic.topic3, {
-                label: '3'
-            }) }}
-            {{ form_errors(mentorRegistrationForm.topic.topic3) }}
+        <div class="form-2-mentor">
+            <!-- Choice Topic 1 -->
+            <div class="fields-2-mentor">
+                {{ form_label(mentorRegistrationForm, 'Choix 1', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(mentorRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 2 -->
+            <div class="fields-2-mentor">
+                {{ form_label(mentorRegistrationForm, 'Choix 2', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(mentorRegistrationForm.topic.topic2) }}
+                {{ form_errors(mentorRegistrationForm.topic.topic1) }}
+            </div>
+            <!-- Choice Topic 3 -->
+            <div class="fields-2-mentor">
+                {{ form_label(mentorRegistrationForm, 'Choix 3', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(mentorRegistrationForm.topic.topic3) }}
+                {{ form_errors(mentorRegistrationForm.topic.topic2) }}
+
+                {{ form_errors(mentorRegistrationForm.topic.topic3) }}
+            </div>
         </div>
     {# scroll-btn 2 #}
         <div class="scroll-btn-section gap-2">
@@ -123,9 +131,9 @@
                 <div class="age">
                     {{ form_label(mentorRegistrationForm, 'Votre Âge', {'label_attr': {'class': 'form-label'}}) }}
                     <button id='btnPop' style='cursor:pointer'>?</button>
-                        <tooltip id='tooltip' style='display:none'>
+                        <a id='tooltip' style='display:none' data-toggle="tooltip">
                             Vous devez être majeur(e) pour pouvoir vous inscrire.
-                        </tooltip>
+                        </a>
                     {{ form_widget(mentorRegistrationForm.user.age) }}
                     {{ form_errors(mentorRegistrationForm.user.age) }}
                 </div>
@@ -166,9 +174,9 @@
                 <div class = "btnField">
                     {{ form_label(mentorRegistrationForm, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
                     <button id='btnPop2' style='cursor:pointer'>?</button>
-                        <tooltip id='tooltip2' style='display:none'>
+                        <a id='tooltip2' style='display:none' data-toggle="tooltip">
                             Votre mot de passe doit contenir au moins 8 caratères, 1 majuscule, 1 chiffre et un caractère spécial.
-                        </tooltip>
+                        </a>
                 </div>
                 {{ form_widget(mentorRegistrationForm.plainPassword) }}
                 {{ form_errors(mentorRegistrationForm.plainPassword) }}
@@ -193,12 +201,23 @@
         {# indications 5 #}
             <div class ="question-text">
                 <p>Termine ton inscription en validant les points suivants :</p>
+                <p><small>En cochant ces cases,</small></p>
             </div>
         </div>
-    {# form 5 #}
-        <div class="CGU">
-            {{ form_widget(mentorRegistrationForm.user.agreeTerms) }}
-            {{ form_label(mentorRegistrationForm.user.agreeTerms, 'J\'accepte les CGU ainsi que le fait que mes données soient utilisées dans le cadre de la politique de confidentialité.') }}
+        {# form 5 #}
+        <div class="terms d-flex flex-column">
+            <div>
+                {{ form_widget(mentorRegistrationForm.agreeCriminalRecord) }}
+                {{ form_label(mentorRegistrationForm.agreeCriminalRecord, "J’atteste que je n’ai fait l’objet d’aucune condamnation judiciaire (pas de casier judiciaire).") }}
+            </div>
+            <div>
+                {{ form_widget(mentorRegistrationForm.agreeChart) }}
+                {{ form_label(mentorRegistrationForm.agreeChart, 'J\'accepte la <a href="' ~ path("charter") ~ '" target="_blank">' ~ "charte d'engagement bénévole." ~ '</a>') }}
+            </div>
+            <div>
+                {{ form_widget(mentorRegistrationForm.user.agreeTerms) }}
+                {{ form_label(mentorRegistrationForm.user.agreeTerms, 'J\'accepte les  <a href="' ~ path("cgu") ~ '" target="_blank">' ~ "CGU" ~ '</a>' ~ ' ainsi que le fait que mes données soient utilisées dans le cadre de la   <a href="' ~ path("rgpd") ~ '" target="_blank">' ~ 'politique de confidentialité.' ~ '</a>') }}
+            </div>
         </div>
     {# register-btn #}
         <div class="register-btn gap-2">
@@ -207,6 +226,7 @@
         </div>
     </div>
     {{ form_end(mentorRegistrationForm) }}
+    </main>
     <script>
         // Add input if it's another company
         const selectCompany = document.querySelector('select[id="mentor_company"]');

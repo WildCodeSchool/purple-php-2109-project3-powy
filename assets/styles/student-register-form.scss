@@ -1,4 +1,4 @@
-form {
+.form {
     min-width:330px;
 }
 
@@ -82,6 +82,7 @@ h1 {
     &:hover,
     &:focus {
         box-shadow: 0 2px 4px $dark-background;
+        color: $middle-background;
     }
 }
 
@@ -427,6 +428,20 @@ input , select , textarea {
         padding: 0.2em;
         margin-left: 1em;
         margin-right:1em;
+    }
+
+    label {
+
+        a {
+
+            text-decoration: none;
+            color: $dark-background;
+            font-weight: bold;
+
+            &:hover, &:focus {
+                color: $middle-background;
+            }
+        }
     }
 }
 

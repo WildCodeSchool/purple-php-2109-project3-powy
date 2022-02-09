@@ -76,36 +76,3 @@ h4 {
 .rgpd-end {
     padding-bottom:3rem;
 }
-
-@media screen and (min-width: 768px) {
-    .powy-enter {
-        gap: 5em;
-        height: 600px;
-
-        h1 {
-            font-size: 2rem;
-        }
-
-        .infos-btn {
-            flex-direction: row;
-            gap: 5em;
-
-            a {
-                width: 15em;
-            }
-        }
-
-        .people-background {
-            height: 100%;
-        }
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .powy-enter {
-
-        h1 {
-            font-size: 3rem;
-       }
-   }
-}

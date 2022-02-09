@@ -9,6 +9,7 @@ use App\Form\EditPasswordType;
 use App\Form\EditProfileType;
 use App\Form\TopicType;
 use App\Service\FileUploader;
+use App\Service\MailerManager;
 use App\Service\MatchManager;
 use App\Service\MentoringManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -148,13 +149,15 @@ class ProfileController extends AbstractController
     public function delete(
         EntityManagerInterface $entityManager,
         Request $request,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        MailerManager $mailerManager
     ): Response {
         $user = $this->getUser();
         $session = $request->getSession();
-        if ($user != null) {
+        if ($user instanceof User) {
             $entityManager->remove($user);
             $entityManager->flush();
+            $mailerManager->deleteAccount($user);
             $tokenStorage->setToken(null);
             $session->invalidate();
         }
