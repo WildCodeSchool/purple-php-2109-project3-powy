@@ -72,7 +72,7 @@ class MentoringController extends AbstractController
         $studentUser = $this->getUser();
 
         if ($studentUser === null) {
-            $this->addFlash('danger', 'Veuillez vous connecter avant d\'accepter le mentorat par email');
+            $this->addFlash('danger', 'Veuillez vous connecter avant d\'accepter ou refuser le mentorat par email');
         }
 
         if ($studentUser instanceof User) {

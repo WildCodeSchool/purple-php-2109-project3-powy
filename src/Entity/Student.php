@@ -191,14 +191,22 @@ class Student
      */
     public function getMentoring(): ?Mentoring
     {
-        foreach ($this->getMentorings() as $mentoring) {
-            if ($mentoring->getIsAccepted() !== false || $mentoring->getEndingDtae() > (new DateTime())) {
-                return $mentoring;
+        $mentorings = $this->getMentorings();
+
+        if ($mentorings !== null) {
+            foreach ($this->getMentorings() as $mentoring) {
+                //get accepted mentorings which are ongoing
+                if ($mentoring->getIsAccepted() === true && $mentoring->getEndingDtae() > (new DateTime())) {
+                    return $mentoring;
+                }
+                //get pending mentorings (student never accepted or refused the mentoring by mail)
+                if ($mentoring->getIsAccepted() === null && $mentoring->getEndingDtae() === null) {
+                    return $mentoring;
+                }
             }
         }
         return null;
     }
-
     /**
      * @return Collection|Mentoring[]
      */

@@ -26,10 +26,9 @@ class MailerManager extends AbstractController
     /**
      * After a match this method send an email to a student to propose a mentoring.
      */
-    public function sendProposal(Student $student): void
+    public function sendProposal(Student $student, Mentoring $mentoring): void
     {
         $user = $student->getUser();
-
         if ($user !== null) {
             $emailUser = $user->getEmail();
             if ($emailUser !== null) {
@@ -37,7 +36,10 @@ class MailerManager extends AbstractController
                 ->from(new Address('noreply@powy.io', 'powy-registration'))
                 ->to($emailUser)
                 ->subject('Proposition de mentorat 🥳')
-                ->html($this->renderView('emails/mentoring_proposal.html.twig', ['user' => $user]));
+                ->html($this->renderView('emails/mentoring_proposal.html.twig', [
+                    'user' => $user,
+                    'mentoring' => $mentoring
+                ]));
                 $this->mailerInterface->send($email);
             }
         }
