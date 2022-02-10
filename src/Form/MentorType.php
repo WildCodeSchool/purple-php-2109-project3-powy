@@ -30,7 +30,7 @@ class MentorType extends AbstractType
             ->add('jobTitle', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseigner un job.'
+                        'message' => 'Vous devez renseigner un métier.'
                     ])]
             ])
             ->add('careerDescription', TextareaType::class, [
@@ -41,7 +41,7 @@ class MentorType extends AbstractType
                 'class' => ProfessionalSector::class,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseignez un secteur professionel'
+                        'message' => 'Vous devez renseignez un secteur professionel.'
                     ])
                 ]
             ])
@@ -50,7 +50,7 @@ class MentorType extends AbstractType
                 'class' => Company::class,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseignez une entreprise'
+                        'message' => 'Vous devez renseignez une entreprise.'
                     ])
                 ],
                 'placeholder' => "Nom de l'entreprise"
@@ -59,7 +59,7 @@ class MentorType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Merci de préciser le nom de l'entreprise"
+                    'placeholder' => "Merci de préciser le nom de l'entreprise."
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -73,7 +73,7 @@ class MentorType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caratères.',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="field">
-                <label for="edit_profile_phone" class="col-sm-2 col-form-label">Phone</label>
+                <label for="edit_profile_phone" class="col-sm-2 col-form-label">Téléphone</label>
                 <div class="col-sm-10">
                     {{ form_widget(form.phone) }}
                 </div>
@@ -90,9 +90,10 @@
         </div>
         {{ form_end(form) }}
     </div>
-
-    <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
-    <a href="{{ path("profile_index") }}" class="dark-submit-button" title="Retour au profil">Retour au profil</a>
+    <div class="d-flex align-items-center">
+        <button type="submit" class="alert-submit-button">Supprimer mon compte</button>
+        <a href="{{ path("profile_index") }}" class="dark-submit-button m-3" title="Retour au profil">Retour au profil</a>
+    </div>
 </main>
 
 <script src="{{ asset('build/js/index.js') }}">

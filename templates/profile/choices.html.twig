@@ -6,7 +6,7 @@
 
 {{ include('components/_header.html.twig') }}
 {{ include('components/_flashmessages.html.twig') }}
-    <main class="form">
+    <main class="form d-flex flex-column">
         <h1 class="h2">Modifier ou supprimer mes choix<br><span class="h4">(par ordre de préférence)</span></h1>
         <!--div class="card-edit-profile"-->
             {{ form_start(topicForm) }}
@@ -28,6 +28,6 @@
                 <button type="submit" class="dark-submit-button">Modifier</button>
             </div>
             {{ form_end(topicForm) }}
-        <a href="{{ path("profile_index") }}" class="dark-submit-button" title="Retour au profil">Retour au profil</a>
+            <a href="{{ path("profile_index") }}" class="dark-submit-button m-3 align-self-center" title="Retour au profil">Retour au profil</a>
     </main>
 {% endblock %}

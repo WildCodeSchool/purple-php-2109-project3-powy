@@ -41,7 +41,7 @@ class StudentType extends AbstractType
             ->add('dreamJob', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseigner votre niveau.'
+                        'message' => 'Vous devez renseigner votre métier visé.'
                     ])]
             ])
             ->add('dreamDescription', TextareaType::class, [
@@ -60,7 +60,7 @@ class StudentType extends AbstractType
                 'class' => School::class,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseigner une école'
+                        'message' => 'Vous devez renseigner une école.'
                     ])
                 ],
                 'placeholder' => 'Choisis une école'
@@ -69,7 +69,7 @@ class StudentType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Merci de préciser le nom de l'établissement"
+                    'placeholder' => "Merci de préciser le nom de l'établissement."
                 ]
             ])
             ->add('studyLevel', EntityType::class, [
@@ -81,7 +81,7 @@ class StudentType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez renseigner une niveau d\'étude'
+                        'message' => 'Vous devez renseigner une niveau d\'étude.'
                     ])
                 ]
             ])
@@ -96,7 +96,7 @@ class StudentType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caratères.',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
